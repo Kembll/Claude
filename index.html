@@ -1,0 +1,500 @@
+<title>Прицел</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prata&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --ink:#0E0D11;
+    --ink-2:#131218;
+    --surface:#16151B;
+    --surface-2:#1C1A22;
+    --line:rgba(237,233,227,.10);
+    --line-strong:rgba(237,233,227,.18);
+    --text:#EDE9E3;
+    --muted:#98928A;
+    --copper:#D9A05B;
+    --copper-soft:#EFC98A;
+    --copper-deep:#B27C3E;
+    --display:'Prata',Georgia,'Times New Roman',serif;
+    --body:'Golos Text',-apple-system,'Segoe UI',Arial,sans-serif;
+    --mono:'JetBrains Mono','SF Mono',Consolas,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--copper);color:var(--ink)}
+  a{color:inherit;text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--copper);outline-offset:3px;border-radius:2px}
+
+  .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(14,13,17,.82);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{display:flex;align-items:center;gap:12px;font-family:var(--display);font-size:20px;letter-spacing:.04em}
+  .logo svg{display:block}
+  .nav-links{display:flex;gap:36px;font-size:14px;color:var(--muted)}
+  .nav-links a{transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{
+    font-family:var(--mono);font-size:13px;letter-spacing:.06em;
+    color:var(--copper);border:1px solid var(--copper-deep);
+    padding:9px 20px;border-radius:2px;transition:background .2s,color .2s;
+  }
+  .nav-cta:hover{background:var(--copper);color:var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:180px 0 96px;overflow:hidden;border-bottom:1px solid var(--line)}
+  #reticle{
+    position:absolute;top:50%;right:-140px;transform:translateY(-50%);
+    width:720px;height:720px;pointer-events:none;opacity:.9;
+  }
+  .hero-inner{position:relative;z-index:2;max-width:720px}
+  .eyebrow{
+    font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--copper);display:flex;align-items:center;gap:14px;margin-bottom:28px;
+  }
+  .eyebrow::before{content:'';width:36px;height:1px;background:var(--copper-deep)}
+  h1{
+    font-family:var(--display);font-weight:400;
+    font-size:clamp(40px,6vw,72px);line-height:1.08;text-wrap:balance;margin-bottom:28px;
+  }
+  h1 em{font-style:normal;color:var(--copper)}
+  .hero-sub{font-size:19px;color:var(--muted);max-width:56ch;margin-bottom:44px}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .btn{
+    display:inline-block;font-family:var(--body);font-weight:600;font-size:16px;
+    padding:16px 36px;border-radius:2px;border:1px solid transparent;cursor:pointer;
+    transition:transform .2s,background .2s,border-color .2s;
+  }
+  .btn-primary{background:var(--copper);color:var(--ink)}
+  .btn-primary:hover{background:var(--copper-soft);transform:translateY(-2px)}
+  .btn-ghost{border-color:var(--line-strong);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--copper)}
+  .hero-stats{
+    display:flex;gap:0;margin-top:72px;border-top:1px solid var(--line);
+  }
+  .stat{padding:24px 40px 0 0;margin-right:40px;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:none}
+  .stat b{
+    display:block;font-family:var(--mono);font-weight:500;
+    font-size:32px;color:var(--text);font-variant-numeric:tabular-nums;
+  }
+  .stat span{font-size:13px;color:var(--muted)}
+
+  /* ---------- sections ---------- */
+  section{padding:104px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:32px;margin-bottom:64px;flex-wrap:wrap}
+  h2{
+    font-family:var(--display);font-weight:400;
+    font-size:clamp(30px,3.6vw,44px);line-height:1.15;text-wrap:balance;max-width:20ch;
+  }
+  .sec-label{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--copper)}
+
+  /* для кого */
+  .aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+  .aud{background:var(--ink);padding:36px 32px 40px}
+  .aud:hover{background:var(--ink-2)}
+  .aud h3{font-family:var(--body);font-weight:600;font-size:19px;margin:20px 0 12px}
+  .aud p{font-size:15px;color:var(--muted)}
+  .aud .mark{
+    width:40px;height:40px;border:1px solid var(--copper-deep);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:13px;color:var(--copper);
+  }
+
+  /* программа */
+  .track{display:flex;flex-direction:column}
+  .module{
+    display:grid;grid-template-columns:120px 1fr 340px;gap:40px;
+    padding:36px 0;border-top:1px solid var(--line);align-items:start;
+  }
+  .module:first-child{border-top:none}
+  .module:hover .m-num{color:var(--copper)}
+  .m-num{
+    font-family:var(--mono);font-size:15px;color:var(--muted);
+    letter-spacing:.08em;transition:color .2s;padding-top:4px;
+  }
+  .m-body h3{font-family:var(--display);font-weight:400;font-size:23px;margin-bottom:10px}
+  .m-body p{font-size:15px;color:var(--muted);max-width:52ch}
+  .m-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+  .tag{
+    font-family:var(--mono);font-size:12px;color:var(--muted);
+    border:1px solid var(--line);padding:5px 12px;border-radius:100px;white-space:nowrap;
+  }
+
+  /* навыки */
+  .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line)}
+  .skill{background:var(--ink);padding:32px;display:flex;gap:20px;align-items:baseline}
+  .skill:hover{background:var(--ink-2)}
+  .skill i{font-style:normal;color:var(--copper);font-family:var(--mono);font-size:14px;flex-shrink:0}
+  .skill p{font-size:16px}
+  .skill p span{display:block;font-size:14px;color:var(--muted);margin-top:6px}
+
+  /* формат */
+  .format-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px}
+  .fmt b{
+    display:block;font-family:var(--display);font-weight:400;font-size:21px;margin-bottom:12px;
+    padding-top:20px;border-top:1px solid var(--copper-deep);
+  }
+  .fmt p{font-size:15px;color:var(--muted)}
+
+  /* тарифы */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
+  .plan{
+    border:1px solid var(--line);border-radius:4px;padding:40px 36px;
+    display:flex;flex-direction:column;background:var(--ink-2);
+  }
+  .plan.featured{border-color:var(--copper-deep);background:var(--surface);position:relative}
+  .plan.featured::before{
+    content:'выбор потока';position:absolute;top:-11px;left:36px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+    background:var(--copper);color:var(--ink);padding:3px 12px;border-radius:100px;
+  }
+  .plan h3{font-family:var(--display);font-weight:400;font-size:24px;margin-bottom:6px}
+  .plan .who{font-size:14px;color:var(--muted);margin-bottom:28px}
+  .price{font-family:var(--mono);font-size:34px;font-weight:500;margin-bottom:4px;font-variant-numeric:tabular-nums}
+  .price s{font-size:17px;color:var(--muted);font-weight:400;margin-left:10px}
+  .per{font-size:13px;color:var(--muted);margin-bottom:28px}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;flex-grow:1}
+  .plan li{font-size:15px;color:var(--text);padding-left:24px;position:relative}
+  .plan li::before{content:'—';position:absolute;left:0;color:var(--copper)}
+  .plan li.off{color:var(--muted)}
+  .plan li.off::before{color:var(--muted);opacity:.5}
+  .plan .btn{text-align:center}
+
+  /* финальный CTA */
+  .final{position:relative;text-align:center;padding:140px 0}
+  .final h2{max-width:none;margin:0 auto 20px}
+  .final p{color:var(--muted);max-width:52ch;margin:0 auto 44px}
+  .final .note{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:24px}
+
+  footer{padding:40px 0;font-size:13px;color:var(--muted)}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .btn-primary:hover{transform:none}
+  }
+
+  @media (max-width:960px){
+    .nav-links{display:none}
+    #reticle{opacity:.35;right:-280px}
+    .aud-grid,.skills,.plans{grid-template-columns:1fr}
+    .format-grid{grid-template-columns:repeat(2,1fr)}
+    .module{grid-template-columns:64px 1fr}
+    .m-tags{grid-column:2;justify-content:flex-start;margin-top:12px}
+    .hero-stats{flex-wrap:wrap;gap:24px}
+    .stat{border-right:none;padding-right:0;margin-right:0}
+  }
+</style>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="Прицел — на главную">
+      <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <circle cx="13" cy="13" r="11" stroke="#D9A05B" stroke-width="1.4"/>
+        <circle cx="13" cy="13" r="2.4" fill="#D9A05B"/>
+        <path d="M13 0v5M13 21v5M0 13h5M21 13h5" stroke="#D9A05B" stroke-width="1.4"/>
+      </svg>
+      Прицел
+    </a>
+    <nav class="nav-links" aria-label="Разделы">
+      <a href="#program">Программа</a>
+      <a href="#skills">Результат</a>
+      <a href="#format">Формат</a>
+      <a href="#plans">Тарифы</a>
+    </nav>
+    <a class="nav-cta" href="#plans">Занять место</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <div class="hero">
+    <canvas id="reticle" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <div class="hero-inner">
+        <p class="eyebrow">Онлайн-курс · поток №7 · старт 15 сентября</p>
+        <h1>Таргет — профессия, в которой попадают <em>в цель</em>, а не в бюджет</h1>
+        <p class="hero-sub">За 8 недель — от первого рекламного кабинета до первых платящих клиентов. Настройка, аналитика, креативы и продажа своих услуг: всё на реальных проектах, а не на слайдах.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#plans">Записаться на поток</a>
+          <a class="btn btn-ghost" href="#program">Смотреть программу</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b>8</b><span>недель обучения</span></div>
+          <div class="stat"><b>6</b><span>модулей и 24 урока</span></div>
+          <div class="stat"><b>70%</b><span>времени — практика</span></div>
+          <div class="stat"><b>2</b><span>кейса в портфолио</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="audience">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Курс собран для трёх ситуаций</h2>
+        <span class="sec-label">Для кого</span>
+      </div>
+      <div class="aud-grid reveal">
+        <div class="aud">
+          <div class="mark">01</div>
+          <h3>Начинаете с нуля</h3>
+          <p>Никогда не открывали рекламный кабинет. Начнём с устройства аукциона и первых настроек — без «это же очевидно» и пропущенных шагов.</p>
+        </div>
+        <div class="aud">
+          <div class="mark">02</div>
+          <h3>Ведёте свой проект</h3>
+          <p>У вас бизнес или блог, и бюджет уходит подрядчикам. Научитесь запускать рекламу сами и понимать, за что платите.</p>
+        </div>
+        <div class="aud">
+          <div class="mark">03</div>
+          <h3>Меняете профессию</h3>
+          <p>SMM, дизайн, продажи — смежный опыт есть, системы нет. Соберёте недостающие навыки и упакуете их в услугу с прайсом.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="program">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Траектория: новичок → специалист</h2>
+        <span class="sec-label">Программа</span>
+      </div>
+      <div class="track">
+        <div class="module reveal">
+          <div class="m-num">Модуль 01</div>
+          <div class="m-body">
+            <h3>Как устроен таргет</h3>
+            <p>Аукцион, алгоритмы, площадки: VK Реклама, Telegram Ads, myTarget. Где чья аудитория и почему реклама «не работает» у 8 из 10 новичков.</p>
+          </div>
+          <div class="m-tags"><span class="tag">теория</span><span class="tag">1 неделя</span></div>
+        </div>
+        <div class="module reveal">
+          <div class="m-num">Модуль 02</div>
+          <div class="m-body">
+            <h3>Аудитории и стратегия</h3>
+            <p>Сегментация, боли и мотивы, карта аудиторий. Составите медиаплан и стратегию запуска для реального проекта — своего или из банка курса.</p>
+          </div>
+          <div class="m-tags"><span class="tag">практика</span><span class="tag">1 неделя</span></div>
+        </div>
+        <div class="module reveal">
+          <div class="m-num">Модуль 03</div>
+          <div class="m-body">
+            <h3>Креативы, которые кликают</h3>
+            <p>Офферы, тексты, статика и видео. Соберёте 10 креативов по формулам, проверите их на тестовом бюджете и разберёте результат с куратором.</p>
+          </div>
+          <div class="m-tags"><span class="tag">практика</span><span class="tag">1 неделя</span></div>
+        </div>
+        <div class="module reveal">
+          <div class="m-num">Модуль 04</div>
+          <div class="m-body">
+            <h3>Запуск и оптимизация</h3>
+            <p>Настройка кампаний руками, тесты гипотез, масштабирование связок. Живой бюджет, живые лиды — первый кейс в портфолио.</p>
+          </div>
+          <div class="m-tags"><span class="tag">кейс №1</span><span class="tag">2 недели</span></div>
+        </div>
+        <div class="module reveal">
+          <div class="m-num">Модуль 05</div>
+          <div class="m-body">
+            <h3>Аналитика и отчётность</h3>
+            <p>CPL, CAC, ROMI без паники. Метрика, пиксели, UTM. Научитесь читать цифры и защищать результат перед клиентом на языке денег.</p>
+          </div>
+          <div class="m-tags"><span class="tag">практика</span><span class="tag">1 неделя</span></div>
+        </div>
+        <div class="module reveal">
+          <div class="m-num">Модуль 06</div>
+          <div class="m-body">
+            <h3>Продажа своих услуг</h3>
+            <p>Позиционирование, прайс, договор, поиск первых клиентов. Упакуете кейсы, пройдёте тестовое собеседование и получите план на первые 3 месяца.</p>
+          </div>
+          <div class="m-tags"><span class="tag">кейс №2</span><span class="tag">2 недели</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Что вы умеете на выходе</h2>
+        <span class="sec-label">Результат</span>
+      </div>
+      <div class="skills reveal">
+        <div class="skill"><i>→</i><p>Запускать кампании в VK Рекламе и Telegram Ads<span>от брифа до открутки — руками, без «настройщиков»</span></p></div>
+        <div class="skill"><i>→</i><p>Собирать и сегментировать аудитории<span>парсинг, look-alike, ретаргетинг по базе</span></p></div>
+        <div class="skill"><i>→</i><p>Делать креативы с прогнозируемым CTR<span>формулы офферов и тестовые связки</span></p></div>
+        <div class="skill"><i>→</i><p>Считать юнит-экономику рекламы<span>CPL, CAC, ROMI — и объяснять их клиенту</span></p></div>
+        <div class="skill"><i>→</i><p>Вести отчётность, за которую не стыдно<span>дашборды и выводы вместо скриншотов кабинета</span></p></div>
+        <div class="skill"><i>→</i><p>Продавать свои услуги от 30 000 ₽/проект<span>упаковка, прайс, первые клиенты за 3 месяца</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="format">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Формат: живой, но в вашем темпе</h2>
+        <span class="sec-label">Как проходит</span>
+      </div>
+      <div class="format-grid reveal">
+        <div class="fmt"><b>Уроки в записи</b><p>Короткие видео по 15–20 минут. Доступ — навсегда, обновления программы бесплатно.</p></div>
+        <div class="fmt"><b>Живые разборы</b><p>Каждую неделю — созвон с куратором: разбор ваших кампаний и креативов в прямом эфире.</p></div>
+        <div class="fmt"><b>Практика на бюджете</b><p>Настоящие запуски с тестовым бюджетом. Ошибаться можно — до того, как появится клиент.</p></div>
+        <div class="fmt"><b>Чат потока</b><p>Кураторы отвечают в течение дня. После выпуска — закрытое комьюнити специалистов.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="plans">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <h2>Тарифы седьмого потока</h2>
+        <span class="sec-label">Стоимость</span>
+      </div>
+      <div class="plans reveal">
+        <div class="plan">
+          <h3>Сам</h3>
+          <p class="who">Смотрю уроки, иду в своём темпе</p>
+          <p class="price">24 900 ₽<s>32 900 ₽</s></p>
+          <p class="per">или 4 платежа по 6 225 ₽</p>
+          <ul>
+            <li>24 урока и все шаблоны</li>
+            <li>Доступ навсегда + обновления</li>
+            <li>Чат потока</li>
+            <li class="off">Проверка домашних заданий</li>
+            <li class="off">Живые разборы с куратором</li>
+          </ul>
+          <a class="btn btn-ghost" href="#top">Выбрать «Сам»</a>
+        </div>
+        <div class="plan featured">
+          <h3>С куратором</h3>
+          <p class="who">Полная траектория до специалиста</p>
+          <p class="price">44 900 ₽<s>56 900 ₽</s></p>
+          <p class="per">или 6 платежей по 7 483 ₽</p>
+          <ul>
+            <li>Всё из тарифа «Сам»</li>
+            <li>Проверка всех домашних заданий</li>
+            <li>8 живых разборов ваших запусков</li>
+            <li>2 кейса в портфолио</li>
+            <li>Сертификат специалиста</li>
+          </ul>
+          <a class="btn btn-primary" href="#top">Выбрать «С куратором»</a>
+        </div>
+        <div class="plan">
+          <h3>До результата</h3>
+          <p class="who">С поддержкой до первого клиента</p>
+          <p class="price">79 900 ₽<s>94 900 ₽</s></p>
+          <p class="per">или 6 платежей по 13 317 ₽</p>
+          <ul>
+            <li>Всё из тарифа «С куратором»</li>
+            <li>4 личные сессии один на один</li>
+            <li>Упаковка и аудит вашего профиля</li>
+            <li>Сопровождение первого клиента</li>
+            <li>3 месяца поддержки после выпуска</li>
+          </ul>
+          <a class="btn btn-ghost" href="#top">Выбрать «До результата»</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final" id="cta">
+    <div class="wrap">
+      <div class="reveal">
+        <p class="sec-label" style="display:block;margin-bottom:24px">Поток №7 · старт 15 сентября</p>
+        <h2>В группе 30 мест. Осталось 11</h2>
+        <p>Оставьте заявку — вышлем полную программу в PDF и пригласим на бесплатный вводный урок «Первая кампания за вечер».</p>
+        <a class="btn btn-primary" href="#plans">Занять место на потоке</a>
+        <p class="note">Рассрочка без переплат · возврат в течение 14 дней</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 «Прицел» — курс по таргетированной рекламе</span>
+    <span>hello@pricel.school · Оферта · Политика конфиденциальности</span>
+  </div>
+</footer>
+
+<script>
+  // Прицельная сетка в хиро: медленно дышащие концентрические окружности
+  (function(){
+    const cv=document.getElementById('reticle');
+    const ctx=cv.getContext('2d');
+    const dpr=Math.min(window.devicePixelRatio||1,2);
+    const S=720;
+    cv.width=S*dpr;cv.height=S*dpr;ctx.scale(dpr,dpr);
+    const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let t=0;
+    function draw(){
+      ctx.clearRect(0,0,S,S);
+      const cx=S/2,cy=S/2;
+      // окружности
+      for(let i=1;i<=5;i++){
+        const base=i*64;
+        const r=base+(reduce?0:Math.sin(t/90+i)*4);
+        ctx.beginPath();
+        ctx.arc(cx,cy,r,0,Math.PI*2);
+        ctx.strokeStyle=i===3?'rgba(217,160,91,.35)':'rgba(237,233,227,'+(0.10-i*0.012)+')';
+        ctx.lineWidth=1;
+        ctx.stroke();
+      }
+      // перекрестие
+      ctx.strokeStyle='rgba(217,160,91,.28)';
+      ctx.beginPath();
+      ctx.moveTo(cx-340,cy);ctx.lineTo(cx-30,cy);
+      ctx.moveTo(cx+30,cy);ctx.lineTo(cx+340,cy);
+      ctx.moveTo(cx,cy-340);ctx.lineTo(cx,cy-30);
+      ctx.moveTo(cx,cy+30);ctx.lineTo(cx,cy+340);
+      ctx.stroke();
+      // деления на средней окружности
+      const rt=192+(reduce?0:Math.sin(t/90+3)*4);
+      for(let a=0;a<36;a++){
+        const ang=a*Math.PI/18+(reduce?0:t/2600);
+        const inner=rt-(a%9===0?14:6);
+        ctx.beginPath();
+        ctx.moveTo(cx+Math.cos(ang)*inner,cy+Math.sin(ang)*inner);
+        ctx.lineTo(cx+Math.cos(ang)*rt,cy+Math.sin(ang)*rt);
+        ctx.strokeStyle='rgba(217,160,91,.30)';
+        ctx.stroke();
+      }
+      // центр
+      ctx.beginPath();ctx.arc(cx,cy,3.5,0,Math.PI*2);
+      ctx.fillStyle='rgba(217,160,91,.85)';ctx.fill();
+      if(!reduce){t++;requestAnimationFrame(draw)}
+    }
+    draw();
+  })();
+
+  // появление секций при скролле
+  (function(){
+    const els=document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return}
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}});
+    },{threshold:.12});
+    els.forEach(e=>io.observe(e));
+  })();
+</script>
