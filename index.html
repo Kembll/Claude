@@ -1,11 +1,11 @@
-<title>Прицел</title>
+<title>Таргетология</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
   :root{
-    --bg:#EEF4FB;
-    --bg-2:#E3EDF9;
+    --bg:#E9F1FA;
     --surface:#FFFFFF;
+    --glass:rgba(255,255,255,.72);
     --ink:#0C2340;
     --muted:#52677F;
     --blue:#0077FF;
@@ -13,330 +13,301 @@
     --blue-ink:#003E8F;
     --blue-soft:#D9E9FF;
     --blue-faint:#EAF3FF;
-    --line:#D4E1F0;
+    --line:#CDDDF0;
     --bar-rest:#C4D4E6;
     --display:'Unbounded','Arial Black',sans-serif;
     --body:'Onest',-apple-system,'Segoe UI',Arial,sans-serif;
     --mono:'JetBrains Mono','SF Mono',Consolas,monospace;
-    --shadow:0 24px 60px -24px rgba(12,35,64,.18);
+    --shadow:0 24px 60px -24px rgba(12,35,64,.20);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{
-    background:var(--bg);
     color:var(--ink);
     font-family:var(--body);
     font-size:17px;line-height:1.65;
     -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(1100px 620px at 85% -8%, rgba(0,119,255,.16), transparent 60%),
+      radial-gradient(900px 560px at -10% 32%, rgba(46,147,255,.13), transparent 58%),
+      radial-gradient(1000px 700px at 108% 78%, rgba(0,85,196,.12), transparent 60%),
+      linear-gradient(180deg,#E9F1FA 0%,#DDEAF8 48%,#E7F0FA 100%);
+  }
+  /* точечная сетка поверх фона */
+  body::before{
+    content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:radial-gradient(rgba(0,85,196,.13) 1px,transparent 1.4px);
+    background-size:26px 26px;
+    mask-image:linear-gradient(180deg,rgba(0,0,0,.9),rgba(0,0,0,.35));
   }
   ::selection{background:var(--blue);color:#fff}
   a{color:inherit;text-decoration:none}
-  a:focus-visible,button:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:4px}
-  .wrap{max-width:1200px;margin:0 auto;padding:0 32px}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
 
   /* ---------- header ---------- */
   header{
     position:fixed;inset:0 0 auto;z-index:50;
-    background:rgba(238,244,251,.85);
-    backdrop-filter:blur(16px);
-    border-bottom:1px solid var(--line);
+    background:rgba(233,241,250,.78);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(205,221,240,.8);
   }
   .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
-  .logo{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:500;font-size:17px;letter-spacing:.02em}
-  .nav-links{display:flex;gap:34px;font-size:14.5px;font-weight:500;color:var(--muted)}
-  .nav-links a{transition:color .2s}
-  .nav-links a:hover{color:var(--blue)}
+  .logo{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:500;font-size:16px;letter-spacing:.02em}
+  .nav-links{display:flex;gap:8px;font-size:14.5px;font-weight:500;color:var(--muted)}
+  .nav-links a{
+    position:relative;padding:9px 16px;border-radius:100px;
+    transition:color .25s,background .25s,transform .25s;
+  }
+  .nav-links a::after{
+    content:'';position:absolute;left:16px;right:16px;bottom:5px;height:2px;border-radius:2px;
+    background:linear-gradient(90deg,var(--blue),#37A6FF);
+    transform:scaleX(0);transform-origin:left;transition:transform .3s cubic-bezier(.2,.7,.2,1);
+  }
+  .nav-links a:hover{color:var(--blue-deep);background:rgba(255,255,255,.7);transform:translateY(-1px)}
+  .nav-links a:hover::after{transform:scaleX(1)}
   .nav-cta{
+    position:relative;overflow:hidden;
     font-size:14px;font-weight:600;color:#fff;
-    background:var(--blue);padding:11px 22px;border-radius:12px;
-    transition:background .2s,transform .2s;
+    background:linear-gradient(120deg,var(--blue),#2E93FF);
+    padding:11px 22px;border-radius:12px;
+    transition:transform .25s,box-shadow .25s;
+    box-shadow:0 10px 24px -10px rgba(0,119,255,.55);
   }
-  .nav-cta:hover{background:var(--blue-deep);transform:translateY(-1px)}
+  .nav-cta::before{
+    content:'';position:absolute;top:0;bottom:0;width:56px;left:-80px;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+    transform:skewX(-20deg);
+  }
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 16px 32px -12px rgba(0,119,255,.65)}
+  .nav-cta:hover::before{animation:shine .7s ease}
+  @keyframes shine{to{left:130%}}
 
-  /* ---------- hero ---------- */
-  .hero{position:relative;padding:168px 0 110px;overflow:hidden}
-  .hero::before{
-    content:'';position:absolute;top:-320px;right:-260px;width:900px;height:900px;border-radius:50%;
-    background:radial-gradient(circle,rgba(0,119,255,.16),rgba(0,119,255,0) 62%);
+  /* ---------- общие ---------- */
+  section{padding:96px 0}
+  .sec-head{max-width:680px;margin-bottom:52px}
+  .sec-label{
+    display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--blue-deep);background:rgba(217,233,255,.9);border:1px solid rgba(0,119,255,.18);
+    border-radius:100px;padding:6px 16px;margin-bottom:18px;
   }
-  .hero::after{
-    content:'';position:absolute;bottom:-380px;left:-240px;width:760px;height:760px;border-radius:50%;
-    background:radial-gradient(circle,rgba(0,119,255,.10),rgba(0,119,255,0) 60%);
-  }
-  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
-  .chip{
-    display:inline-flex;align-items:center;gap:9px;
-    background:var(--surface);border:1px solid var(--line);border-radius:100px;
-    padding:8px 18px;font-size:13.5px;font-weight:500;color:var(--blue-deep);margin-bottom:28px;
-  }
-  .chip::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);
-    box-shadow:0 0 0 4px rgba(0,119,255,.15)}
-  h1{
-    font-family:var(--display);font-weight:500;
-    font-size:clamp(30px,4.4vw,52px);line-height:1.16;letter-spacing:-.01em;
-    text-wrap:balance;margin-bottom:26px;
-  }
-  h1 .grad{
-    background:linear-gradient(100deg,var(--blue) 10%,#37A6FF 55%,var(--blue-deep));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .hero-sub{font-size:18px;color:var(--muted);max-width:52ch;margin-bottom:40px}
-  .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+  h2{font-family:var(--display);font-weight:500;font-size:clamp(23px,2.9vw,35px);line-height:1.24;letter-spacing:-.01em;text-wrap:balance}
+  .sec-head p{color:var(--muted);margin-top:16px;max-width:58ch}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow)}
   .btn{
-    display:inline-block;font-weight:600;font-size:16px;
+    display:inline-block;font-weight:600;font-size:16px;font-family:var(--body);
     padding:16px 32px;border-radius:14px;border:1px solid transparent;cursor:pointer;
     transition:transform .2s,background .2s,border-color .2s,box-shadow .2s;
   }
   .btn-primary{
+    position:relative;overflow:hidden;
     background:linear-gradient(120deg,var(--blue),#2E93FF);color:#fff;
     box-shadow:0 14px 30px -12px rgba(0,119,255,.55);
   }
+  .btn-primary::before{
+    content:'';position:absolute;top:0;bottom:0;width:56px;left:-80px;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);
+    transform:skewX(-20deg);
+  }
   .btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 36px -12px rgba(0,119,255,.6)}
-  .btn-ghost{border-color:var(--line);background:var(--surface);color:var(--ink)}
-  .btn-ghost:hover{border-color:var(--blue);color:var(--blue-deep)}
+  .btn-primary:hover::before{animation:shine .7s ease}
+  .btn-ghost{border-color:var(--line);background:var(--glass);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue-deep);transform:translateY(-1px)}
+  .btn-light{background:#fff;color:var(--blue-deep)}
+  .btn-light:hover{transform:translateY(-2px)}
 
-  /* hero mockups */
-  .mockups{position:relative;min-height:520px}
-  .card{
-    background:var(--surface);border:1px solid var(--line);border-radius:20px;
-    box-shadow:var(--shadow);
+  /* ================= блок 1: hero ================= */
+  .hero{position:relative;padding:170px 0 84px;overflow:hidden}
+  .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center}
+  .chip{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--glass);border:1px solid var(--line);border-radius:100px;
+    padding:8px 18px;font-size:13.5px;font-weight:500;color:var(--blue-deep);margin-bottom:26px;
+    backdrop-filter:blur(6px);
   }
-  .dash{
-    position:absolute;top:0;left:0;right:56px;padding:26px 26px 22px;
+  .chip::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);
+    box-shadow:0 0 0 4px rgba(0,119,255,.15)}
+  h1{font-family:var(--display);font-weight:500;font-size:clamp(29px,4.2vw,50px);line-height:1.16;letter-spacing:-.01em;text-wrap:balance;margin-bottom:24px}
+  h1 .grad{background:linear-gradient(100deg,var(--blue) 10%,#37A6FF 55%,var(--blue-deep));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-sub{font-size:18px;color:var(--muted);max-width:50ch;margin-bottom:36px}
+  .hero-sub b{color:var(--ink);font-weight:600}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:44px}
+  .guarantee{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--muted)}
+  .guarantee svg{flex-shrink:0}
+  .hero-stats{display:flex;flex-wrap:wrap;gap:14px}
+  .stat{
+    background:var(--glass);border:1px solid var(--line);border-radius:16px;
+    padding:14px 22px;backdrop-filter:blur(6px);
   }
-  .dash-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-  .dash-head b{font-weight:600;font-size:15px}
-  .dash-head span{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
-  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
-  .kpi{background:var(--blue-faint);border-radius:12px;padding:12px 14px}
-  .kpi span{font-size:11.5px;color:var(--muted);display:block}
-  .kpi b{font-family:var(--mono);font-weight:500;font-size:19px;font-variant-numeric:tabular-nums}
-  .kpi b i{font-style:normal;font-size:11.5px;color:var(--blue-deep)}
-  .spark{display:block;width:100%;height:96px}
-  .dash-foot{display:flex;justify-content:space-between;font-size:11.5px;color:var(--muted);margin-top:6px;font-family:var(--mono)}
-  .vkpost{
-    position:absolute;bottom:0;right:0;width:316px;padding:18px;
-    transform:rotate(2.5deg);
-  }
-  .vk-top{display:flex;align-items:center;gap:11px;margin-bottom:12px}
-  .ava{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#54B0FF);
-    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:15px}
-  .vk-top b{display:block;font-size:14px;font-weight:600;line-height:1.25}
-  .vk-top span{font-size:12px;color:var(--muted)}
-  .vk-text{font-size:13.5px;line-height:1.5;margin-bottom:12px}
-  .vk-img{
-    height:150px;border-radius:12px;position:relative;overflow:hidden;margin-bottom:12px;
-    background:linear-gradient(135deg,#0055C4,#0077FF 55%,#66B5FF);
-  }
-  .vk-img::before{
-    content:'';position:absolute;width:220px;height:220px;border-radius:50%;
-    border:1.5px solid rgba(255,255,255,.35);top:-70px;right:-70px;
-  }
-  .vk-img::after{
-    content:'';position:absolute;width:120px;height:120px;border-radius:50%;
-    border:1.5px solid rgba(255,255,255,.3);bottom:-40px;left:-30px;
-  }
-  .vk-img p{
-    position:absolute;inset:auto 16px 14px 16px;color:#fff;
-    font-family:var(--display);font-weight:500;font-size:15px;line-height:1.3;
-  }
-  .vk-btn{display:block;text-align:center;background:var(--blue);color:#fff;font-size:13.5px;
-    font-weight:600;border-radius:10px;padding:10px}
-  .badge{
-    position:absolute;top:-14px;right:-10px;background:var(--ink);color:#fff;
-    font-family:var(--mono);font-size:11.5px;padding:7px 14px;border-radius:100px;
-    box-shadow:0 10px 24px -10px rgba(12,35,64,.5);
-  }
+  .stat b{font-family:var(--mono);font-weight:500;font-size:22px;display:block;font-variant-numeric:tabular-nums}
+  .stat b i{font-style:normal;color:var(--blue);font-size:15px}
+  .stat span{font-size:12.5px;color:var(--muted)}
 
-  /* ---------- stats strip ---------- */
-  .strip{border-block:1px solid var(--line);background:var(--surface)}
-  .strip-in{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;padding:34px 0}
-  .stat b{font-family:var(--mono);font-weight:500;font-size:30px;font-variant-numeric:tabular-nums;display:block}
-  .stat b i{font-style:normal;color:var(--blue);font-size:20px}
-  .stat span{font-size:13.5px;color:var(--muted)}
+  .mockups{position:relative;min-height:500px}
+  .dash{position:absolute;top:0;left:0;right:56px;padding:24px 24px 20px}
+  .dash-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+  .dash-head b{font-weight:600;font-size:14.5px}
+  .dash-head span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin-bottom:16px}
+  .kpi{background:var(--blue-faint);border-radius:12px;padding:11px 13px}
+  .kpi span{font-size:11px;color:var(--muted);display:block}
+  .kpi b{font-family:var(--mono);font-weight:500;font-size:18px;font-variant-numeric:tabular-nums}
+  .kpi b i{font-style:normal;font-size:11px;color:var(--blue-deep)}
+  .spark{display:block;width:100%;height:90px}
+  .dash-foot{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-top:6px;font-family:var(--mono)}
+  .vkpost{position:absolute;bottom:0;right:0;width:306px;padding:17px;transform:rotate(2.5deg)}
+  .vk-top{display:flex;align-items:center;gap:11px;margin-bottom:11px}
+  .ava{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue),#54B0FF);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:14px}
+  .vk-top b{display:block;font-size:13.5px;font-weight:600;line-height:1.25}
+  .vk-top span{font-size:11.5px;color:var(--muted)}
+  .vk-text{font-size:13px;line-height:1.5;margin-bottom:11px}
+  .vk-img{height:142px;border-radius:12px;position:relative;overflow:hidden;margin-bottom:11px;
+    background:linear-gradient(135deg,#0055C4,#0077FF 55%,#66B5FF)}
+  .vk-img::before{content:'';position:absolute;width:210px;height:210px;border-radius:50%;
+    border:1.5px solid rgba(255,255,255,.35);top:-66px;right:-66px}
+  .vk-img::after{content:'';position:absolute;width:110px;height:110px;border-radius:50%;
+    border:1.5px solid rgba(255,255,255,.3);bottom:-36px;left:-28px}
+  .vk-img p{position:absolute;inset:auto 15px 13px 15px;color:#fff;
+    font-family:var(--display);font-weight:500;font-size:14px;line-height:1.3}
+  .vk-btn{display:block;text-align:center;background:var(--blue);color:#fff;font-size:13px;
+    font-weight:600;border-radius:10px;padding:9px}
+  .badge{position:absolute;top:-14px;right:-8px;background:var(--ink);color:#fff;
+    font-family:var(--mono);font-size:11px;padding:7px 14px;border-radius:100px;
+    box-shadow:0 10px 24px -10px rgba(12,35,64,.5)}
 
-  /* ---------- sections ---------- */
-  section{padding:104px 0}
-  .sec-head{max-width:640px;margin-bottom:56px}
-  .sec-label{
-    display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--blue-deep);background:var(--blue-soft);border-radius:100px;padding:6px 16px;margin-bottom:18px;
-  }
-  h2{
-    font-family:var(--display);font-weight:500;
-    font-size:clamp(24px,3vw,36px);line-height:1.22;letter-spacing:-.01em;text-wrap:balance;
-  }
-  .sec-head p{color:var(--muted);margin-top:16px;max-width:56ch}
-
-  /* ---------- инфографика ---------- */
-  .viz-note{font-size:12.5px;color:var(--muted);margin-top:14px}
-  .viz-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-  .viz{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px 30px 26px;box-shadow:var(--shadow)}
-  .viz.wide{grid-column:1/-1}
-  .viz h3{font-size:17px;font-weight:600;margin-bottom:4px}
-  .viz .sub{font-size:13.5px;color:var(--muted);margin-bottom:24px}
-
-  /* горизонтальные бары — аудитория */
-  .hbar{display:grid;grid-template-columns:120px 1fr 76px;align-items:center;gap:14px;margin-bottom:14px}
-  .hbar:last-child{margin-bottom:0}
-  .hbar span{font-size:14px;color:var(--muted)}
-  .hbar .lbl-strong{color:var(--ink);font-weight:600}
-  .hbar .track{height:26px;background:var(--blue-faint);border-radius:6px;overflow:hidden}
-  .hbar .fill{
-    height:100%;border-radius:0 4px 4px 0;background:var(--bar-rest);
-    width:0;transition:width 1s cubic-bezier(.2,.7,.2,1);
-  }
-  .hbar .fill.vk{background:linear-gradient(90deg,var(--blue-deep),var(--blue))}
-  .hbar b{font-family:var(--mono);font-weight:500;font-size:14.5px;font-variant-numeric:tabular-nums;text-align:right}
-
-  /* воронка */
-  .funnel{display:flex;flex-direction:column;gap:10px}
-  .fstage{display:grid;grid-template-columns:1fr;position:relative}
-  .fstage .bar{
-    height:52px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;
-    padding:0 18px;color:#fff;min-width:190px;
-    width:0;transition:width 1s cubic-bezier(.2,.7,.2,1);
-  }
-  .fstage:nth-child(1) .bar{background:#8FC1FF;color:var(--blue-ink)}
-  .fstage:nth-child(2) .bar{background:#4D9DFF;color:#fff}
-  .fstage:nth-child(3) .bar{background:var(--blue)}
-  .fstage:nth-child(4) .bar{background:var(--blue-deep)}
-  .fstage .bar span{font-size:13.5px;font-weight:500}
-  .fstage .bar b{font-family:var(--mono);font-weight:500;font-size:15px;font-variant-numeric:tabular-nums}
-  .fstage .conv{
-    position:absolute;right:0;top:50%;transform:translateY(-50%);
-    font-family:var(--mono);font-size:12px;color:var(--muted);
-  }
-
-  /* зарплаты */
-  .cols{display:flex;align-items:flex-end;gap:28px;height:240px;padding-top:8px}
-  .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:10px;height:100%;justify-content:flex-end}
-  .col b{font-family:var(--mono);font-weight:500;font-size:15.5px;font-variant-numeric:tabular-nums}
-  .col .pillar{
-    width:100%;max-width:110px;border-radius:8px 8px 0 0;
-    background:linear-gradient(180deg,var(--blue) 0%,var(--blue-deep) 100%);
-    height:0;transition:height 1s cubic-bezier(.2,.7,.2,1);
-  }
+  /* ================= блок 2: выгоды + цифры ================= */
+  .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:22px}
+  .value{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:30px 28px;
+    box-shadow:var(--shadow);transition:transform .25s}
+  .value:hover{transform:translateY(-4px)}
+  .value i{font-style:normal;display:flex;width:42px;height:42px;border-radius:13px;margin-bottom:18px;
+    background:linear-gradient(135deg,var(--blue),#37A6FF);color:#fff;
+    align-items:center;justify-content:center;font-size:17px}
+  .value h3{font-size:17.5px;font-weight:600;margin-bottom:8px}
+  .value p{font-size:14.5px;color:var(--muted)}
+  .value p b{color:var(--ink)}
+  .viz-row{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .viz{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px 28px 24px;box-shadow:var(--shadow)}
+  .viz h3{font-size:16.5px;font-weight:600;margin-bottom:4px}
+  .viz .sub{font-size:13px;color:var(--muted);margin-bottom:22px}
+  .viz-note{font-size:12px;color:var(--muted);margin-top:12px}
+  .cols{display:flex;align-items:flex-end;gap:26px;height:210px;padding-top:6px}
+  .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:9px;height:100%;justify-content:flex-end}
+  .col b{font-family:var(--mono);font-weight:500;font-size:14.5px;font-variant-numeric:tabular-nums}
+  .col .pillar{width:100%;max-width:104px;border-radius:8px 8px 0 0;height:0;
+    background:linear-gradient(180deg,var(--blue),var(--blue-deep));
+    transition:height 1s cubic-bezier(.2,.7,.2,1)}
   .col:nth-child(1) .pillar{background:#8FC1FF}
   .col:nth-child(2) .pillar{background:#3D90FF}
-  .col span{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);width:100%;text-align:center;padding-top:10px}
+  .col span{font-size:13px;color:var(--muted);border-top:1px solid var(--line);width:100%;text-align:center;padding-top:9px}
+  .funnel{display:flex;flex-direction:column;gap:9px}
+  .fstage{position:relative}
+  .fstage .bar{height:46px;border-radius:8px;display:flex;align-items:center;justify-content:space-between;
+    padding:0 16px;color:#fff;min-width:180px;width:0;transition:width 1s cubic-bezier(.2,.7,.2,1)}
+  .fstage:nth-child(1) .bar{background:#8FC1FF;color:var(--blue-ink)}
+  .fstage:nth-child(2) .bar{background:#4D9DFF}
+  .fstage:nth-child(3) .bar{background:var(--blue)}
+  .fstage:nth-child(4) .bar{background:var(--blue-deep)}
+  .fstage .bar span{font-size:13px;font-weight:500}
+  .fstage .bar b{font-family:var(--mono);font-weight:500;font-size:14px;font-variant-numeric:tabular-nums}
+  .fstage .conv{position:absolute;right:0;top:50%;transform:translateY(-50%);
+    font-family:var(--mono);font-size:11.5px;color:var(--muted)}
 
-  /* ---------- для кого ---------- */
-  .aud-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-  .aud{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:34px 30px;transition:transform .25s,box-shadow .25s}
-  .aud:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
-  .aud .mark{
-    width:44px;height:44px;border-radius:14px;background:var(--blue-soft);color:var(--blue-deep);
-    display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:14px;margin-bottom:22px;
-  }
-  .aud h3{font-size:18.5px;font-weight:600;margin-bottom:10px}
-  .aud p{font-size:15px;color:var(--muted)}
+  /* ================= блок 3: программа ================= */
+  .prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .prog{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px 26px;
+    box-shadow:var(--shadow);position:relative;transition:transform .25s}
+  .prog:hover{transform:translateY(-4px)}
+  .prog .num{font-family:var(--mono);font-size:12.5px;color:var(--blue);margin-bottom:14px;display:block}
+  .prog h3{font-size:17px;font-weight:600;margin-bottom:8px}
+  .prog p{font-size:14px;color:var(--muted);margin-bottom:14px}
+  .prog .res{font-size:13px;font-weight:600;color:var(--blue-deep);background:var(--blue-faint);
+    border-radius:10px;padding:9px 13px;display:block}
+  .prog .res::before{content:'→ ';color:var(--blue)}
 
-  /* ---------- программа ---------- */
-  #program{background:var(--surface);border-block:1px solid var(--line)}
-  .module{
-    display:grid;grid-template-columns:110px 1fr 320px;gap:36px;align-items:start;
-    padding:32px 0;border-top:1px solid var(--line);
-  }
-  .module:first-of-type{border-top:none}
-  .m-num{font-family:var(--mono);font-size:14px;color:var(--blue);padding-top:5px}
-  .m-body h3{font-family:var(--display);font-weight:500;font-size:19px;margin-bottom:8px}
-  .m-body p{font-size:15px;color:var(--muted);max-width:54ch}
-  .m-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
-  .tag{font-size:12.5px;font-weight:500;color:var(--blue-deep);background:var(--blue-faint);
-    padding:6px 14px;border-radius:100px;white-space:nowrap}
-
-  /* ---------- креативы ---------- */
-  .cre-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
-  .cre{padding:18px;position:relative;transition:transform .25s}
-  .cre:hover{transform:translateY(-4px)}
-  .cre .vk-img.v2{background:linear-gradient(150deg,#123B7A,#0055C4 60%,#2E93FF)}
-  .cre .vk-img.v3{background:linear-gradient(150deg,#00479F,#0077FF 50%,#8FD0FF)}
-  .cre .meta{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
-  .cre .meta span{font-size:12px;color:var(--muted)}
-  .ctr{
-    font-family:var(--mono);font-size:12px;color:var(--blue-deep);
-    background:var(--blue-soft);border-radius:100px;padding:5px 12px;
-  }
-
-  /* ---------- навыки ---------- */
-  .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
-  .skill{display:flex;gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 26px}
-  .skill i{
-    font-style:normal;flex-shrink:0;width:30px;height:30px;border-radius:9px;
-    background:linear-gradient(135deg,var(--blue),#37A6FF);color:#fff;
-    display:flex;align-items:center;justify-content:center;font-size:14px;
-  }
-  .skill p{font-size:16px;font-weight:500}
-  .skill p span{display:block;font-size:14px;font-weight:400;color:var(--muted);margin-top:5px}
-
-  /* ---------- формат ---------- */
-  .format-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
-  .fmt{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px 26px}
-  .fmt b{display:block;font-size:17px;font-weight:600;margin-bottom:10px}
-  .fmt b::before{content:'';display:block;width:34px;height:4px;border-radius:100px;
-    background:linear-gradient(90deg,var(--blue),#37A6FF);margin-bottom:16px}
-  .fmt p{font-size:14.5px;color:var(--muted)}
-
-  /* ---------- тарифы ---------- */
-  #plans{background:var(--surface);border-block:1px solid var(--line)}
-  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
-  .plan{border:1px solid var(--line);border-radius:20px;padding:38px 34px;display:flex;flex-direction:column;background:var(--bg)}
-  .plan.featured{
-    background:linear-gradient(165deg,#0C2A55,#003E8F 55%,#0055C4);color:#fff;
-    border-color:transparent;position:relative;box-shadow:0 30px 60px -24px rgba(0,85,196,.45);
-  }
-  .plan.featured::before{
-    content:'выбор потока';position:absolute;top:-13px;left:34px;
+  /* ================= блок 4: тарифы ================= */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .plan{border:1px solid var(--line);border-radius:20px;padding:36px 32px;display:flex;flex-direction:column;
+    background:var(--surface);box-shadow:var(--shadow)}
+  .plan.featured{background:linear-gradient(165deg,#0C2A55,#003E8F 55%,#0055C4);color:#fff;
+    border-color:transparent;position:relative;box-shadow:0 30px 60px -24px rgba(0,85,196,.5)}
+  .plan.featured::before{content:'выбор потока';position:absolute;top:-13px;left:32px;
     font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
-    background:var(--blue);color:#fff;padding:5px 14px;border-radius:100px;
-  }
-  .plan h3{font-family:var(--display);font-weight:500;font-size:20px;margin-bottom:6px}
-  .plan .who{font-size:14px;color:var(--muted);margin-bottom:26px}
+    background:var(--blue);color:#fff;padding:5px 14px;border-radius:100px}
+  .plan h3{font-family:var(--display);font-weight:500;font-size:19px;margin-bottom:6px}
+  .plan .who{font-size:13.5px;color:var(--muted);margin-bottom:24px}
   .plan.featured .who{color:#A9C8F2}
-  .price{font-family:var(--mono);font-weight:500;font-size:30px;margin-bottom:4px;font-variant-numeric:tabular-nums}
-  .price s{font-size:16px;color:var(--muted);font-weight:400;margin-left:10px}
+  .price{font-family:var(--mono);font-weight:500;font-size:29px;margin-bottom:4px;font-variant-numeric:tabular-nums}
+  .price s{font-size:15px;color:var(--muted);font-weight:400;margin-left:10px}
   .plan.featured .price s{color:#8FB4E6}
-  .per{font-size:13px;color:var(--muted);margin-bottom:26px}
+  .per{font-size:13px;color:var(--muted);margin-bottom:24px}
   .plan.featured .per{color:#A9C8F2}
-  .plan ul{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:34px;flex-grow:1}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:30px;flex-grow:1}
   .plan li{font-size:14.5px;padding-left:26px;position:relative}
   .plan li::before{content:'✓';position:absolute;left:0;color:var(--blue);font-weight:600}
   .plan.featured li::before{color:#7CC0FF}
   .plan li.off{color:var(--muted);opacity:.75}
   .plan li.off::before{content:'—';color:var(--muted)}
-  .plan .btn{text-align:center}
-  .btn-light{background:#fff;color:var(--blue-deep)}
-  .btn-light:hover{transform:translateY(-2px)}
+  .plan .btn{text-align:center;width:100%}
 
-  /* ---------- финал ---------- */
-  .final{position:relative;overflow:hidden;text-align:center}
+  /* ================= блок 5: финал с формой ================= */
   .final .panel{
     position:relative;background:linear-gradient(150deg,#0C2A55,#0055C4 65%,#2E93FF);
-    border-radius:28px;padding:88px 48px;color:#fff;overflow:hidden;
+    border-radius:28px;padding:72px 64px;color:#fff;overflow:hidden;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
   }
-  .final .panel::before,.final .panel::after{
-    content:'';position:absolute;border-radius:50%;border:1.5px solid rgba(255,255,255,.18);
-  }
+  .final .panel::before,.final .panel::after{content:'';position:absolute;border-radius:50%;
+    border:1.5px solid rgba(255,255,255,.16)}
   .final .panel::before{width:520px;height:520px;top:-220px;right:-160px}
   .final .panel::after{width:340px;height:340px;bottom:-160px;left:-100px}
-  .final h2{color:#fff;max-width:none}
-  .final .f-label{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
-    color:#BFDCFF;background:rgba(255,255,255,.12);border-radius:100px;padding:6px 16px;margin-bottom:22px}
-  .final p{color:#C9DEF8;max-width:52ch;margin:18px auto 40px}
-  .final .btn-light{position:relative;z-index:2}
-  .final .note{font-size:13px;color:#A9C8F2;margin-top:22px}
+  .final h2{color:#fff}
+  .f-label{display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+    color:#BFDCFF;background:rgba(255,255,255,.12);border-radius:100px;padding:6px 16px;margin-bottom:20px}
+  .final .lead{color:#C9DEF8;margin-top:16px;max-width:44ch}
+  .final ul{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:10px}
+  .final li{font-size:14.5px;color:#DDEBFC;padding-left:26px;position:relative}
+  .final li::before{content:'✓';position:absolute;left:0;color:#7CC0FF;font-weight:600}
+  .form-card{position:relative;z-index:2;background:#fff;border-radius:20px;padding:34px 32px;color:var(--ink);
+    box-shadow:0 30px 60px -20px rgba(4,20,45,.5)}
+  .form-card h3{font-family:var(--display);font-weight:500;font-size:19px;margin-bottom:6px}
+  .form-card .fp{font-size:13.5px;color:var(--muted);margin-bottom:22px}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+  .field input{
+    width:100%;font-family:var(--body);font-size:15.5px;color:var(--ink);
+    background:var(--blue-faint);border:1.5px solid transparent;border-radius:12px;padding:13px 16px;
+    transition:border-color .2s,background .2s;
+  }
+  .field input::placeholder{color:#8AA0B8}
+  .field input:focus{border-color:var(--blue);background:#fff;outline:none}
+  .field input.err{border-color:#E23D5B}
+  .form-note{font-size:12px;color:var(--muted);margin-top:14px}
+  .form-ok{display:none;text-align:center;padding:28px 6px}
+  .form-ok .ok-ic{width:56px;height:56px;border-radius:50%;background:var(--blue-faint);color:var(--blue);
+    display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 16px}
+  .form-ok b{font-size:17px;display:block;margin-bottom:6px}
+  .form-ok p{font-size:14px;color:var(--muted)}
 
-  footer{padding:44px 0;font-size:13.5px;color:var(--muted)}
+  footer{padding:42px 0;font-size:13.5px;color:var(--muted)}
   .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
 
+  /* ---------- модалка ---------- */
+  .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px}
+  .modal.open{display:flex}
+  .modal-bg{position:absolute;inset:0;background:rgba(9,25,48,.55);backdrop-filter:blur(6px)}
+  .modal .form-card{width:100%;max-width:420px;animation:pop .35s cubic-bezier(.2,.9,.3,1.2)}
+  @keyframes pop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+  .modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border:none;cursor:pointer;
+    border-radius:10px;background:var(--blue-faint);color:var(--muted);font-size:16px;line-height:1;
+    transition:background .2s,color .2s}
+  .modal-close:hover{background:var(--blue-soft);color:var(--ink)}
+
   /* tooltip */
-  #tip{
-    position:fixed;z-index:99;pointer-events:none;opacity:0;transition:opacity .15s;
+  #tip{position:fixed;z-index:99;pointer-events:none;opacity:0;transition:opacity .15s;
     background:var(--ink);color:#fff;font-size:12.5px;font-family:var(--mono);
-    padding:7px 12px;border-radius:8px;transform:translate(-50%,calc(-100% - 10px));
-    white-space:nowrap;
-  }
+    padding:7px 12px;border-radius:8px;transform:translate(-50%,calc(-100% - 10px));white-space:nowrap}
   #tip.on{opacity:1}
 
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
@@ -344,60 +315,70 @@
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .reveal{opacity:1;transform:none;transition:none}
-    .hbar .fill,.fstage .bar,.col .pillar{transition:none}
-    .btn:hover,.aud:hover,.cre:hover{transform:none}
+    .fstage .bar,.col .pillar{transition:none}
+    .btn:hover,.value:hover,.prog:hover,.nav-links a:hover{transform:none}
+    .nav-cta:hover::before,.btn-primary:hover::before{animation:none}
+    .modal .form-card{animation:none}
   }
 
   @media (max-width:1020px){
     .nav-links{display:none}
-    .hero-grid{grid-template-columns:1fr;gap:56px}
-    .mockups{min-height:480px;max-width:560px}
-    .viz-grid,.skills,.plans,.aud-grid,.cre-grid{grid-template-columns:1fr}
-    .format-grid{grid-template-columns:repeat(2,1fr)}
-    .strip-in{grid-template-columns:repeat(2,1fr)}
-    .module{grid-template-columns:64px 1fr}
-    .m-tags{grid-column:2;justify-content:flex-start;margin-top:10px}
+    .hero-grid{grid-template-columns:1fr;gap:52px}
+    .mockups{min-height:470px;max-width:560px}
+    .value-grid,.prog-grid,.plans,.viz-row{grid-template-columns:1fr}
+    .final .panel{grid-template-columns:1fr;padding:56px 36px}
   }
   @media (max-width:560px){
-    .format-grid{grid-template-columns:1fr}
-    .hbar{grid-template-columns:88px 1fr 62px}
     .dash{right:0}
     .vkpost{position:relative;margin-top:20px;transform:none;width:100%}
     .mockups{min-height:0}
+    .final .panel{padding:44px 24px}
   }
 </style>
 
 <header>
   <div class="wrap nav">
-    <a class="logo" href="#top" aria-label="Прицел — на главную">
+    <a class="logo" href="#top" aria-label="Таргетология — на главную">
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
         <rect width="30" height="30" rx="9" fill="#0077FF"/>
         <circle cx="15" cy="15" r="7" stroke="#fff" stroke-width="1.6"/>
         <circle cx="15" cy="15" r="2.2" fill="#fff"/>
       </svg>
-      Прицел
+      Таргетология
     </a>
     <nav class="nav-links" aria-label="Разделы">
-      <a href="#why">Почему таргет</a>
+      <a href="#value">Что получите</a>
       <a href="#program">Программа</a>
-      <a href="#creatives">Креативы</a>
       <a href="#plans">Тарифы</a>
     </nav>
-    <a class="nav-cta" href="#plans">Занять место</a>
+    <button class="nav-cta js-open" type="button">Занять место</button>
   </div>
 </header>
 
 <main id="top">
 
+  <!-- ============ блок 1: оффер ============ -->
   <div class="hero">
     <div class="wrap hero-grid">
       <div>
-        <span class="chip">Поток №7 — старт 15 сентября</span>
-        <h1>Профессия — <span class="grad">таргетолог ВКонтакте</span>. С нуля до первых клиентов</h1>
-        <p class="hero-sub">Онлайн-курс на 8 недель: рекламный кабинет VK Рекламы, аудитории, креативы и аналитика. 70% времени — практика на живом бюджете.</p>
+        <span class="chip">Поток №7 · старт 15 сентября · осталось 11 мест</span>
+        <h1>Профессия <span class="grad">таргетолог ВКонтакте</span> — доход от 45 000 ₽ уже через 2 месяца</h1>
+        <p class="hero-sub">Курс «Таргетология»: за 8 недель вы запустите <b>2 реальные рекламные кампании</b>, соберёте портфолио и получите план выхода на первых клиентов. 70% курса — практика на живом бюджете.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#plans">Записаться на поток</a>
-          <a class="btn btn-ghost" href="#program">Смотреть программу</a>
+          <button class="btn btn-primary js-open" type="button">Занять место на потоке</button>
+          <div class="guarantee">
+            <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+              <path d="M17 3l11 4v8c0 7.5-4.8 13-11 16C10.8 28 6 22.5 6 15V7l11-4z" fill="#D9E9FF" stroke="#0077FF" stroke-width="1.6"/>
+              <path d="M12 17l3.5 3.5L23 13" stroke="#0055C4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Гарантия возврата денег<br>в течение первых 14 дней</span>
+          </div>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b>8</b><span>недель</span></div>
+          <div class="stat"><b>2</b><span>кейса в портфолио</span></div>
+          <div class="stat"><b>70<i>%</i></b><span>практики</span></div>
+          <div class="stat"><b>412</b><span>выпускников</span></div>
         </div>
       </div>
 
@@ -425,7 +406,6 @@
           </svg>
           <div class="dash-foot"><span>лиды по дням · 2 недели</span><span>+41% к прошлой</span></div>
         </div>
-
         <div class="card vkpost">
           <span class="badge">CTR 3,1%</span>
           <div class="vk-top">
@@ -440,49 +420,31 @@
     </div>
   </div>
 
-  <div class="strip">
-    <div class="wrap strip-in">
-      <div class="stat"><b>8</b><span>недель обучения</span></div>
-      <div class="stat"><b>24</b><span>урока в 6 модулях</span></div>
-      <div class="stat"><b>70<i>%</i></b><span>времени — практика</span></div>
-      <div class="stat"><b>2</b><span>кейса в портфолио</span></div>
-    </div>
-  </div>
-
-  <section id="why">
+  <!-- ============ блок 2: что получите + цифры ============ -->
+  <section id="value">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-label">Почему таргет ВК</span>
-        <h2>Профессия, за которой стоят цифры</h2>
-        <p>ВКонтакте — крупнейшая соцсеть России с полноценным рекламным кабинетом. Бизнес идёт сюда за клиентами, а специалистов, умеющих настраивать VK Рекламу системно, по-прежнему не хватает.</p>
+        <span class="sec-label">Что вы получите</span>
+        <h2>Не «посмотрел уроки», а готовая услуга, которую покупают</h2>
       </div>
-      <div class="viz-grid">
-        <div class="viz reveal">
-          <h3>Аудитория площадок в России</h3>
-          <p class="sub">млн пользователей в месяц</p>
-          <div class="hbar" data-tip="ВКонтакте — 90 млн/мес">
-            <span class="lbl-strong">ВКонтакте</span>
-            <div class="track"><div class="fill vk" data-w="100"></div></div>
-            <b>90</b>
-          </div>
-          <div class="hbar" data-tip="Telegram — 85 млн/мес">
-            <span>Telegram</span>
-            <div class="track"><div class="fill" data-w="94"></div></div>
-            <b>85</b>
-          </div>
-          <div class="hbar" data-tip="Одноклассники — 36 млн/мес">
-            <span>ОК</span>
-            <div class="track"><div class="fill" data-w="40"></div></div>
-            <b>36</b>
-          </div>
-          <div class="hbar" data-tip="Дзен — 32 млн/мес">
-            <span>Дзен</span>
-            <div class="track"><div class="fill" data-w="36"></div></div>
-            <b>32</b>
-          </div>
-          <p class="viz-note">По открытым данным Mediascope · цифры иллюстративные</p>
+      <div class="value-grid">
+        <div class="value reveal">
+          <i>₽</i>
+          <h3>Навык, за который платят</h3>
+          <p>Настройка VK Рекламы руками: аудитории, креативы, оптимизация. Рынку не хватает специалистов — <b>бизнес ищет их каждый день</b>.</p>
         </div>
-
+        <div class="value reveal">
+          <i>▤</i>
+          <h3>2 кейса в портфолио</h3>
+          <p>Два реальных запуска с цифрами: охваты, CTR, стоимость заявки. <b>С таким портфолио первого клиента находят за 2–4 недели</b>.</p>
+        </div>
+        <div class="value reveal">
+          <i>◎</i>
+          <h3>План на первые 3 месяца</h3>
+          <p>Упаковка профиля, прайс, скрипты переговоров и площадки для поиска клиентов. <b>Выпускаетесь с планом действий</b>, а не с сертификатом в стол.</p>
+        </div>
+      </div>
+      <div class="viz-row">
         <div class="viz reveal">
           <h3>Доход таргетолога</h3>
           <p class="sub">₽ в месяц, медиана по вакансиям и фрилансу</p>
@@ -499,24 +461,23 @@
           </div>
           <p class="viz-note">Оценка по hh.ru и биржам · цифры иллюстративные</p>
         </div>
-
-        <div class="viz wide reveal">
+        <div class="viz reveal">
           <h3>Воронка, которую вы соберёте на курсе</h3>
-          <p class="sub">реальный учебный запуск: бюджет 25 000 ₽, ниша — кофейня</p>
+          <p class="sub">учебный запуск: бюджет 25 000 ₽, ниша — кофейня</p>
           <div class="funnel">
             <div class="fstage" data-tip="120 000 показов объявлений">
               <div class="bar" data-w="100"><span>Показы</span><b>120 000</b></div>
             </div>
             <div class="fstage" data-tip="CTR 2,0% — 2 400 переходов">
-              <div class="bar" data-w="76"><span>Переходы</span><b>2 400</b></div>
+              <div class="bar" data-w="74"><span>Переходы</span><b>2 400</b></div>
               <span class="conv">CTR 2,0%</span>
             </div>
             <div class="fstage" data-tip="конверсия сайта 9% — 216 заявок">
-              <div class="bar" data-w="52"><span>Заявки</span><b>216</b></div>
+              <div class="bar" data-w="50"><span>Заявки</span><b>216</b></div>
               <span class="conv">CR 9,0%</span>
             </div>
-            <div class="fstage" data-tip="43 продажи — CPL 116 ₽">
-              <div class="bar" data-w="30"><span>Продажи</span><b>43</b></div>
+            <div class="fstage" data-tip="43 продажи — стоимость заявки 116 ₽">
+              <div class="bar" data-w="28"><span>Продажи</span><b>43</b></div>
               <span class="conv">CR 19,9%</span>
             </div>
           </div>
@@ -525,170 +486,62 @@
     </div>
   </section>
 
-  <section id="audience">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="sec-label">Для кого</span>
-        <h2>Курс собран для трёх ситуаций</h2>
-      </div>
-      <div class="aud-grid">
-        <div class="aud reveal">
-          <div class="mark">01</div>
-          <h3>Начинаете с нуля</h3>
-          <p>Никогда не открывали рекламный кабинет. Начнём с устройства аукциона и первых настроек — без «это же очевидно» и пропущенных шагов.</p>
-        </div>
-        <div class="aud reveal">
-          <div class="mark">02</div>
-          <h3>Ведёте свой проект</h3>
-          <p>У вас бизнес или блог, и бюджет уходит подрядчикам. Научитесь запускать VK Рекламу сами и понимать, за что платите.</p>
-        </div>
-        <div class="aud reveal">
-          <div class="mark">03</div>
-          <h3>Меняете профессию</h3>
-          <p>SMM, дизайн, продажи — смежный опыт есть, системы нет. Соберёте недостающие навыки и упакуете их в услугу с прайсом.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
+  <!-- ============ блок 3: программа ============ -->
   <section id="program">
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-label">Программа</span>
-        <h2>Траектория: новичок → специалист</h2>
+        <h2>6 шагов от нуля до первых клиентов</h2>
+        <p>Каждый модуль заканчивается результатом, который остаётся у вас: стратегия, креативы, запуск, кейс.</p>
       </div>
-      <div>
-        <div class="module reveal">
-          <div class="m-num">Модуль 01</div>
-          <div class="m-body">
-            <h3>Как устроена VK Реклама</h3>
-            <p>Аукцион, алгоритмы, форматы объявлений. Устройство нового кабинета VK Рекламы и почему реклама «не работает» у 8 из 10 новичков.</p>
-          </div>
-          <div class="m-tags"><span class="tag">теория</span><span class="tag">1 неделя</span></div>
+      <div class="prog-grid">
+        <div class="prog reveal">
+          <span class="num">Шаг 01 · 1 неделя</span>
+          <h3>Кабинет VK Рекламы</h3>
+          <p>Аукцион, форматы, устройство нового кабинета — без пропущенных шагов.</p>
+          <span class="res">первый настроенный кабинет</span>
         </div>
-        <div class="module reveal">
-          <div class="m-num">Модуль 02</div>
-          <div class="m-body">
-            <h3>Аудитории и стратегия</h3>
-            <p>Сегментация, боли и мотивы, парсинг сообществ, look-alike. Составите медиаплан и стратегию запуска для реального проекта.</p>
-          </div>
-          <div class="m-tags"><span class="tag">практика</span><span class="tag">1 неделя</span></div>
+        <div class="prog reveal">
+          <span class="num">Шаг 02 · 1 неделя</span>
+          <h3>Аудитории и стратегия</h3>
+          <p>Сегменты, парсинг, look-alike. Стратегия запуска для реального проекта.</p>
+          <span class="res">медиаплан вашего проекта</span>
         </div>
-        <div class="module reveal">
-          <div class="m-num">Модуль 03</div>
-          <div class="m-body">
-            <h3>Креативы, которые кликают</h3>
-            <p>Офферы, тексты, статика и видео под форматы ВК. Соберёте 10 креативов по формулам и проверите их на тестовом бюджете.</p>
-          </div>
-          <div class="m-tags"><span class="tag">практика</span><span class="tag">1 неделя</span></div>
+        <div class="prog reveal">
+          <span class="num">Шаг 03 · 1 неделя</span>
+          <h3>Креативы</h3>
+          <p>Офферы и макеты под форматы ВК. Проверка на тестовом бюджете.</p>
+          <span class="res">10 готовых креативов</span>
         </div>
-        <div class="module reveal">
-          <div class="m-num">Модуль 04</div>
-          <div class="m-body">
-            <h3>Запуск и оптимизация</h3>
-            <p>Настройка кампаний руками, тесты гипотез, масштабирование связок. Живой бюджет, живые лиды — первый кейс в портфолио.</p>
-          </div>
-          <div class="m-tags"><span class="tag">кейс №1</span><span class="tag">2 недели</span></div>
+        <div class="prog reveal">
+          <span class="num">Шаг 04 · 2 недели</span>
+          <h3>Запуск и оптимизация</h3>
+          <p>Настройка кампаний руками, тесты гипотез, масштабирование связок.</p>
+          <span class="res">кейс №1 с живыми лидами</span>
         </div>
-        <div class="module reveal">
-          <div class="m-num">Модуль 05</div>
-          <div class="m-body">
-            <h3>Аналитика и отчётность</h3>
-            <p>CPL, CAC, ROMI без паники. Метрика, пиксель ВК, UTM. Научитесь читать цифры и защищать результат перед клиентом на языке денег.</p>
-          </div>
-          <div class="m-tags"><span class="tag">практика</span><span class="tag">1 неделя</span></div>
+        <div class="prog reveal">
+          <span class="num">Шаг 05 · 1 неделя</span>
+          <h3>Аналитика</h3>
+          <p>CPL, CAC, ROMI, пиксель ВК и UTM. Отчёт на языке денег клиента.</p>
+          <span class="res">дашборд и отчёт по запуску</span>
         </div>
-        <div class="module reveal">
-          <div class="m-num">Модуль 06</div>
-          <div class="m-body">
-            <h3>Продажа своих услуг</h3>
-            <p>Позиционирование, прайс, договор, поиск первых клиентов. Упакуете кейсы и получите план на первые 3 месяца работы.</p>
-          </div>
-          <div class="m-tags"><span class="tag">кейс №2</span><span class="tag">2 недели</span></div>
+        <div class="prog reveal">
+          <span class="num">Шаг 06 · 2 недели</span>
+          <h3>Первые клиенты</h3>
+          <p>Упаковка, прайс, договор, где искать заказы и как проходить созвоны.</p>
+          <span class="res">кейс №2 + план на 3 месяца</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="creatives">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="sec-label">Креативы</span>
-        <h2>Учимся на форматах, которые уже открутились в ВК</h2>
-        <p>На курсе разбираем связки «оффер + креатив + аудитория» из реальных ниш и собираем такие же макеты под ваш проект.</p>
-      </div>
-      <div class="cre-grid">
-        <div class="card cre reveal">
-          <div class="vk-top">
-            <div class="ava">Ф</div>
-            <div><b>Фитнес-клуб PULSE</b><span>Реклама</span></div>
-          </div>
-          <p class="vk-text">Месяц безлимита за 1 990 ₽ для новых клиентов. Осталось 14 абонементов 🔥</p>
-          <div class="vk-img v2"><p>Первая тренировка — бесплатно</p></div>
-          <span class="vk-btn">Записаться</span>
-          <div class="meta"><span>лид-форма · Ж 22–45</span><span class="ctr">CTR 2,8%</span></div>
-        </div>
-        <div class="card cre reveal">
-          <div class="vk-top">
-            <div class="ava">S</div>
-            <div><b>Школа английского SPEAK</b><span>Реклама</span></div>
-          </div>
-          <p class="vk-text">Заговорите за 3 месяца или вернём деньги. Бесплатный урок-диагностика уровня.</p>
-          <div class="vk-img"><p>Разговорный английский без зубрёжки</p></div>
-          <span class="vk-btn">Пройти тест уровня</span>
-          <div class="meta"><span>трафик на сайт · М/Ж 20–35</span><span class="ctr">CTR 3,1%</span></div>
-        </div>
-        <div class="card cre reveal">
-          <div class="vk-top">
-            <div class="ava">Ц</div>
-            <div><b>Цветы «Пион»</b><span>Реклама</span></div>
-          </div>
-          <p class="vk-text">Доставим букет за 90 минут по городу. Открытка и упаковка — в подарок 💐</p>
-          <div class="vk-img v3"><p>Букеты от 1 490 ₽ с доставкой сегодня</p></div>
-          <span class="vk-btn">Выбрать букет</span>
-          <div class="meta"><span>каталог · ретаргетинг</span><span class="ctr">CTR 2,3%</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="skills">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="sec-label">Результат</span>
-        <h2>Что вы умеете на выходе</h2>
-      </div>
-      <div class="skills">
-        <div class="skill reveal"><i>→</i><p>Запускать кампании в VK Рекламе<span>от брифа до открутки — руками, без «настройщиков»</span></p></div>
-        <div class="skill reveal"><i>→</i><p>Собирать и сегментировать аудитории<span>парсинг, look-alike, ретаргетинг по базе</span></p></div>
-        <div class="skill reveal"><i>→</i><p>Делать креативы с прогнозируемым CTR<span>формулы офферов и тестовые связки</span></p></div>
-        <div class="skill reveal"><i>→</i><p>Считать юнит-экономику рекламы<span>CPL, CAC, ROMI — и объяснять их клиенту</span></p></div>
-        <div class="skill reveal"><i>→</i><p>Вести отчётность, за которую не стыдно<span>дашборды и выводы вместо скриншотов кабинета</span></p></div>
-        <div class="skill reveal"><i>→</i><p>Продавать свои услуги от 30 000 ₽/проект<span>упаковка, прайс, первые клиенты за 3 месяца</span></p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="format">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="sec-label">Как проходит</span>
-        <h2>Формат: живой, но в вашем темпе</h2>
-      </div>
-      <div class="format-grid">
-        <div class="fmt reveal"><b>Уроки в записи</b><p>Короткие видео по 15–20 минут. Доступ — навсегда, обновления программы бесплатно.</p></div>
-        <div class="fmt reveal"><b>Живые разборы</b><p>Каждую неделю — созвон с куратором: разбор ваших кампаний и креативов в прямом эфире.</p></div>
-        <div class="fmt reveal"><b>Практика на бюджете</b><p>Настоящие запуски с тестовым бюджетом. Ошибаться можно — до того, как появится клиент.</p></div>
-        <div class="fmt reveal"><b>Чат потока</b><p>Кураторы отвечают в течение дня. После выпуска — закрытое комьюнити специалистов.</p></div>
-      </div>
-    </div>
-  </section>
-
+  <!-- ============ блок 4: тарифы ============ -->
   <section id="plans">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-label">Стоимость</span>
-        <h2>Тарифы седьмого потока</h2>
+        <span class="sec-label">Тарифы</span>
+        <h2>Цена вырастет 8 сентября — фиксируйте сейчас</h2>
+        <p>Рассрочка без переплат. Если за 14 дней поймёте, что не ваше — вернём всю сумму без вопросов.</p>
       </div>
       <div class="plans">
         <div class="plan reveal">
@@ -703,7 +556,7 @@
             <li class="off">Проверка домашних заданий</li>
             <li class="off">Живые разборы с куратором</li>
           </ul>
-          <a class="btn btn-ghost" href="#top">Выбрать «Сам»</a>
+          <button class="btn btn-ghost js-open" data-plan="Сам" type="button">Выбрать «Сам»</button>
         </div>
         <div class="plan featured reveal">
           <h3>С куратором</h3>
@@ -717,7 +570,7 @@
             <li>2 кейса в портфолио</li>
             <li>Сертификат специалиста</li>
           </ul>
-          <a class="btn btn-light" href="#top">Выбрать «С куратором»</a>
+          <button class="btn btn-light js-open" data-plan="С куратором" type="button">Выбрать «С куратором»</button>
         </div>
         <div class="plan reveal">
           <h3>До результата</h3>
@@ -731,20 +584,45 @@
             <li>Сопровождение первого клиента</li>
             <li>3 месяца поддержки после выпуска</li>
           </ul>
-          <a class="btn btn-ghost" href="#top">Выбрать «До результата»</a>
+          <button class="btn btn-ghost js-open" data-plan="До результата" type="button">Выбрать «До результата»</button>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ============ блок 5: финал + форма ============ -->
   <section class="final" id="cta">
     <div class="wrap">
       <div class="panel reveal">
-        <span class="f-label">Поток №7 · старт 15 сентября</span>
-        <h2>В группе 30 мест. Осталось 11</h2>
-        <p>Оставьте заявку — вышлем полную программу в PDF и пригласим на бесплатный вводный урок «Первая кампания в VK Рекламе за вечер».</p>
-        <a class="btn btn-light" href="#plans">Занять место на потоке</a>
-        <p class="note">Рассрочка без переплат · возврат в течение 14 дней</p>
+        <div>
+          <span class="f-label">Поток №7 · старт 15 сентября</span>
+          <h2>В группе 30 мест. Осталось 11</h2>
+          <p class="lead">Оставьте заявку — перезвоним в течение часа, вышлем полную программу и пригласим на бесплатный вводный урок.</p>
+          <ul>
+            <li>Бесплатный урок «Первая кампания в VK Рекламе за вечер»</li>
+            <li>Рассрочка без переплат от 6 225 ₽/мес</li>
+            <li>Возврат денег в течение 14 дней</li>
+          </ul>
+        </div>
+        <form class="form-card js-form" novalidate>
+          <h3>Занять место на потоке</h3>
+          <p class="fp">Заполните форму — менеджер свяжется с вами сегодня</p>
+          <div class="field">
+            <label for="f-name">ФИО</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" placeholder="Иванова Анна Сергеевна" required>
+          </div>
+          <div class="field">
+            <label for="f-phone">Телефон</label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required>
+          </div>
+          <button class="btn btn-primary" type="submit" style="width:100%">Отправить заявку</button>
+          <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных</p>
+          <div class="form-ok">
+            <div class="ok-ic">✓</div>
+            <b>Заявка отправлена!</b>
+            <p>Менеджер позвонит вам в течение часа в рабочее время</p>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -753,23 +631,49 @@
 
 <footer>
   <div class="wrap foot">
-    <span>© 2026 «Прицел» — курс по таргетированной рекламе ВКонтакте</span>
-    <span>hello@pricel.school · Оферта · Политика конфиденциальности</span>
+    <span>© 2026 «Таргетология» — курс по таргетированной рекламе ВКонтакте</span>
+    <span>hello@targetologia.ru · Оферта · Политика конфиденциальности</span>
   </div>
 </footer>
+
+<!-- модальная форма -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
+  <div class="modal-bg js-close"></div>
+  <form class="form-card js-form" novalidate>
+    <button class="modal-close js-close" type="button" aria-label="Закрыть">✕</button>
+    <h3 id="m-title">Занять место на потоке</h3>
+    <p class="fp js-plan-note">Заполните форму — менеджер свяжется с вами сегодня</p>
+    <div class="field">
+      <label for="m-name">ФИО</label>
+      <input id="m-name" name="name" type="text" autocomplete="name" placeholder="Иванова Анна Сергеевна" required>
+    </div>
+    <div class="field">
+      <label for="m-phone">Телефон</label>
+      <input id="m-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required>
+    </div>
+    <input type="hidden" name="plan" class="js-plan">
+    <button class="btn btn-primary" type="submit" style="width:100%">Отправить заявку</button>
+    <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных</p>
+    <div class="form-ok">
+      <div class="ok-ic">✓</div>
+      <b>Заявка отправлена!</b>
+      <p>Менеджер позвонит вам в течение часа в рабочее время</p>
+    </div>
+  </form>
+</div>
 
 <div id="tip" role="status"></div>
 
 <script>
-  // появление секций и анимация диаграмм при входе в вьюпорт
+  // появление секций и анимация диаграмм
   (function(){
     const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     function fire(el){
       el.classList.add('in');
-      el.querySelectorAll('.fill,.fstage .bar').forEach(b=>{b.style.width=b.dataset.w+'%'});
+      el.querySelectorAll('.fstage .bar').forEach(b=>{b.style.width=b.dataset.w+'%'});
       el.querySelectorAll('.pillar').forEach(b=>{b.style.height=b.dataset.h+'%'});
     }
-    const els=document.querySelectorAll('.reveal, .viz');
+    const els=document.querySelectorAll('.reveal');
     if(!('IntersectionObserver' in window)||reduce){els.forEach(fire);return}
     const io=new IntersectionObserver(entries=>{
       entries.forEach(en=>{if(en.isIntersecting){fire(en.target);io.unobserve(en.target)}});
@@ -777,17 +681,70 @@
     els.forEach(e=>io.observe(e));
   })();
 
-  // тултипы на элементах инфографики
+  // тултипы инфографики
   (function(){
     const tip=document.getElementById('tip');
     document.querySelectorAll('[data-tip]').forEach(el=>{
       el.addEventListener('mousemove',e=>{
         tip.textContent=el.dataset.tip;
-        tip.style.left=e.clientX+'px';
-        tip.style.top=e.clientY+'px';
+        tip.style.left=e.clientX+'px';tip.style.top=e.clientY+'px';
         tip.classList.add('on');
       });
       el.addEventListener('mouseleave',()=>tip.classList.remove('on'));
+    });
+  })();
+
+  // модалка
+  (function(){
+    const modal=document.getElementById('modal');
+    const planInput=modal.querySelector('.js-plan');
+    const planNote=modal.querySelector('.js-plan-note');
+    document.querySelectorAll('.js-open').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const plan=btn.dataset.plan||'';
+        planInput.value=plan;
+        planNote.textContent=plan?('Тариф «'+plan+'» — менеджер свяжется с вами сегодня'):'Заполните форму — менеджер свяжется с вами сегодня';
+        modal.classList.add('open');
+        document.body.style.overflow='hidden';
+        modal.querySelector('input').focus();
+      });
+    });
+    function close(){modal.classList.remove('open');document.body.style.overflow=''}
+    modal.querySelectorAll('.js-close').forEach(el=>el.addEventListener('click',close));
+    addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+  })();
+
+  // маска телефона + отправка форм
+  (function(){
+    document.querySelectorAll('input[type=tel]').forEach(inp=>{
+      inp.addEventListener('input',()=>{
+        let d=inp.value.replace(/\D/g,'');
+        if(d.startsWith('8'))d='7'+d.slice(1);
+        if(!d.startsWith('7'))d='7'+d;
+        d=d.slice(0,11);
+        let out='+7';
+        if(d.length>1)out+=' ('+d.slice(1,4);
+        if(d.length>=4)out+=') '+d.slice(4,7);
+        if(d.length>=7)out+='-'+d.slice(7,9);
+        if(d.length>=9)out+='-'+d.slice(9,11);
+        inp.value=out;
+      });
+    });
+    document.querySelectorAll('.js-form').forEach(form=>{
+      form.addEventListener('submit',e=>{
+        e.preventDefault();
+        const name=form.querySelector('input[name=name]');
+        const phone=form.querySelector('input[name=phone]');
+        let ok=true;
+        [name,phone].forEach(f=>f.classList.remove('err'));
+        if(name.value.trim().split(/\s+/).length<2){name.classList.add('err');ok=false}
+        if(phone.value.replace(/\D/g,'').length<11){phone.classList.add('err');ok=false}
+        if(!ok)return;
+        // TODO: сюда подключить отправку в CRM/Telegram-бот:
+        // fetch('/api/lead',{method:'POST',body:new FormData(form)})
+        form.querySelectorAll('.field,button[type=submit],.form-note,h3,.fp').forEach(el=>el.style.display='none');
+        form.querySelector('.form-ok').style.display='block';
+      });
     });
   })();
 </script>
