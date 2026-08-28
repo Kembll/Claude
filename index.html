@@ -305,26 +305,34 @@
   .final ul{list-style:none;margin-top:22px;display:flex;flex-direction:column;gap:10px}
   .final li{font-size:14.5px;color:#DFEFFF;padding-left:26px;position:relative}
   .final li::before{content:'✓';position:absolute;left:0;color:#9FDBFF;font-weight:600}
-  .form-card{position:relative;z-index:2;background:#fff;border-radius:24px;padding:34px 32px;color:#0C2340;
-    box-shadow:0 40px 80px -24px rgba(1,10,24,.8)}
-  .form-card h3{font-family:var(--display);font-weight:500;font-size:19px;margin-bottom:6px}
-  .form-card .fp{font-size:13.5px;color:#52677F;margin-bottom:22px}
+  .form-card{position:relative;z-index:2;color:var(--ink);border-radius:26px;padding:34px 32px;
+    background:linear-gradient(160deg,rgba(14,38,68,.94),rgba(6,20,38,.97));
+    border:1px solid var(--line-strong);backdrop-filter:blur(18px);
+    box-shadow:0 0 70px -16px var(--glow),0 40px 80px -24px rgba(1,10,24,.85)}
+  .form-card::before{content:'';position:absolute;inset:0;border-radius:26px;pointer-events:none;
+    background:radial-gradient(320px 160px at 50% -40px,rgba(79,195,255,.16),transparent 70%)}
+  .form-card h3{font-family:var(--display);font-weight:500;font-size:19px;margin-bottom:6px;color:#fff}
+  .form-card .fp{font-size:13.5px;color:var(--muted);margin-bottom:22px}
   .field{margin-bottom:14px}
-  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+  .field label{display:block;font-size:12px;font-weight:600;margin-bottom:7px;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--cyan)}
   .field input{
-    width:100%;font-family:var(--body);font-size:15.5px;color:#0C2340;
-    background:#EAF3FF;border:1.5px solid transparent;border-radius:100px;padding:13px 20px;
-    transition:border-color .2s,background .2s;
+    width:100%;font-family:var(--body);font-size:15.5px;color:#fff;
+    background:rgba(234,244,255,.06);border:1.5px solid var(--line);border-radius:100px;padding:13px 20px;
+    transition:border-color .2s,background .2s,box-shadow .2s;
   }
-  .field input::placeholder{color:#8AA0B8}
-  .field input:focus{border-color:var(--electric);background:#fff;outline:none}
-  .field input.err{border-color:#E23D5B}
-  .form-note{font-size:12px;color:#52677F;margin-top:14px}
+  .field input::placeholder{color:#5F7896}
+  .field input:focus{border-color:var(--cyan);background:rgba(234,244,255,.09);outline:none;
+    box-shadow:0 0 26px -8px var(--glow)}
+  .field input.err{border-color:#FF5C7A}
+  .form-note{font-size:12px;color:var(--muted);margin-top:14px}
   .form-ok{display:none;text-align:center;padding:28px 6px}
-  .form-ok .ok-ic{width:56px;height:56px;border-radius:50%;background:#EAF3FF;color:var(--electric);
-    display:flex;align-items:center;justify-content:center;font-size:24px;margin:0 auto 16px}
-  .form-ok b{font-size:17px;display:block;margin-bottom:6px}
-  .form-ok p{font-size:14px;color:#52677F}
+  .form-ok .ok-ic{width:56px;height:56px;border-radius:50%;margin:0 auto 16px;
+    background:rgba(33,160,255,.14);border:1px solid var(--line-strong);color:var(--cyan);
+    display:flex;align-items:center;justify-content:center;font-size:24px;
+    box-shadow:0 0 34px -8px var(--glow)}
+  .form-ok b{font-size:17px;display:block;margin-bottom:6px;color:#fff}
+  .form-ok p{font-size:14px;color:var(--muted)}
 
   footer{padding:42px 0;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line)}
   .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
@@ -335,10 +343,11 @@
   .modal-bg{position:absolute;inset:0;background:rgba(1,8,18,.72);backdrop-filter:blur(8px)}
   .modal .form-card{width:100%;max-width:420px;animation:pop .35s cubic-bezier(.2,.9,.3,1.2)}
   @keyframes pop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
-  .modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;border:none;cursor:pointer;
-    border-radius:100px;background:#EAF3FF;color:#52677F;font-size:16px;line-height:1;
-    transition:background .2s,color .2s}
-  .modal-close:hover{background:#D9E9FF;color:#0C2340}
+  .modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;cursor:pointer;
+    border-radius:100px;background:rgba(234,244,255,.08);border:1px solid var(--line);
+    color:var(--muted);font-size:15px;line-height:1;
+    transition:background .2s,color .2s,border-color .2s}
+  .modal-close:hover{background:rgba(33,160,255,.2);border-color:var(--line-strong);color:#fff}
 
   /* tooltip */
   #tip{position:fixed;z-index:99;pointer-events:none;opacity:0;transition:opacity .15s;
