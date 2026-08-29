@@ -1,0 +1,55 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [claude/targeting-course-website-7cmbmx]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # index.html хранится как фрагмент (без doctype/head) — так его
+      # публикует превью; здесь оборачиваем в полный HTML-документ с SEO-метатегами.
+      - name: Build full HTML document
+        run: |
+          mkdir -p _site
+          {
+            printf '%s\n' '<!doctype html>'
+            printf '%s\n' '<html lang="ru">'
+            printf '%s\n' '<meta charset="utf-8">'
+            printf '%s\n' '<meta name="viewport" content="width=device-width, initial-scale=1">'
+            printf '%s\n' '<meta name="description" content="Экспресс-курс «Таргетология»: таргетированная реклама ВКонтакте с нуля до специалиста за 1 месяц. Практика в кабинете VK Рекламы, кейсы в портфолио, наставник — Илья Камбалин.">'
+            printf '%s\n' '<meta property="og:title" content="Таргетология — экспресс-курс по таргету ВКонтакте">'
+            printf '%s\n' '<meta property="og:description" content="От новичка до специалиста за 1 месяц. Практика с первого дня, лучшим ученикам — первые клиенты.">'
+            printf '%s\n' '<meta property="og:type" content="website">'
+            printf '%s\n' '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">'
+            cat index.html
+            printf '%s\n' '</html>'
+          } > _site/index.html
+          [ -d assets ] && cp -r assets _site/assets || true
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
