@@ -200,18 +200,49 @@
   .ci span{display:block;font-size:12.5px;color:var(--muted);margin-top:4px;white-space:nowrap}
 
   /* ================= блок 2: выгоды + цифры ================= */
-  .value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px}
-  .value{padding:30px 28px;border-radius:24px;transition:transform .25s,border-color .25s}
-  .value:hover{transform:translateY(-4px);border-color:var(--line-strong)}
-  .value i{
-    font-style:normal;display:flex;width:44px;height:44px;border-radius:100px;margin-bottom:18px;
-    background:linear-gradient(135deg,var(--deep),var(--cyan));color:#fff;
-    align-items:center;justify-content:center;font-size:17px;
-    box-shadow:0 10px 26px -8px var(--glow);
+  .ba-grid{display:grid;grid-template-columns:1fr 72px 1fr;gap:18px;align-items:stretch;margin-bottom:22px}
+  .ba{border-radius:24px;padding:32px 30px}
+  .ba h3{font-size:18px;font-weight:600;margin-bottom:18px}
+  .ba ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+  .ba li{font-size:14.5px;line-height:1.55;padding-left:28px;position:relative}
+  .ba.before{background:rgba(7,20,38,.45);border:1px solid var(--line)}
+  .ba.before h3{color:#8FA9C7}
+  .ba.before li{color:var(--muted)}
+  .ba.before li::before{content:'✕';position:absolute;left:0;color:#54708F}
+  .ba.after{
+    background:linear-gradient(160deg,rgba(30,134,228,.24),rgba(7,24,44,.92));
+    border:1px solid var(--line-strong);
+    box-shadow:0 0 55px -16px var(--glow);
   }
-  .value h3{font-size:17.5px;font-weight:600;margin-bottom:8px;color:#fff}
-  .value p{font-size:14.5px;color:var(--muted)}
-  .value p b{color:var(--ink)}
+  .ba.after h3{color:#fff}
+  .ba.after li{color:var(--ink)}
+  .ba.after li::before{content:'✓';position:absolute;left:0;color:var(--cyan);font-weight:600}
+  .ba-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+  .ba-arrow .circ{
+    width:54px;height:54px;border-radius:50%;flex-shrink:0;
+    background:linear-gradient(135deg,var(--deep),var(--cyan));
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;
+    box-shadow:0 0 32px -6px var(--glow);
+  }
+  .ba-arrow span{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--muted);text-align:center;line-height:1.6;
+  }
+  .vs{margin-bottom:22px}
+  .vs h3{font-size:18px;font-weight:600;margin:26px 0 16px}
+  .vs-table{border:1px solid var(--line);border-radius:20px;overflow:hidden;
+    background:rgba(7,20,38,.35);backdrop-filter:blur(8px)}
+  .vs-row{display:grid;grid-template-columns:190px 1fr 1fr;border-top:1px solid var(--line)}
+  .vs-row:first-child{border-top:none}
+  .vs-row>div{padding:15px 22px;font-size:14px;display:flex;align-items:center}
+  .vs-row .crit{color:var(--muted);font-size:13px}
+  .vs-row .me{
+    background:rgba(33,160,255,.10);color:#fff;font-weight:500;
+    border-inline:1px solid var(--line);
+  }
+  .vs-row .them{color:var(--muted)}
+  .vs-head>div{font-size:13px;font-weight:600;letter-spacing:.04em}
+  .vs-head .me{color:var(--cyan)}
   .viz-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   .viz{padding:28px 28px 24px;border-radius:24px}
   .viz h3{font-size:16.5px;font-weight:600;margin-bottom:4px;color:#fff}
@@ -363,7 +394,14 @@
     .hero-top{grid-template-columns:1fr}
     .photo-card{min-height:460px}
     .cred{gap:28px}
-    .value-grid,.prog-grid,.plans,.viz-row{grid-template-columns:1fr}
+    .prog-grid,.plans,.viz-row{grid-template-columns:1fr}
+    .ba-grid{grid-template-columns:1fr}
+    .ba-arrow{flex-direction:row}
+    .ba-arrow .circ{transform:rotate(90deg)}
+    .ba-arrow span br{display:none}
+    .vs-row{grid-template-columns:1fr 1fr}
+    .vs-row .crit{grid-column:1/-1;padding-bottom:4px}
+    .vs-head .crit{display:none}
     .final .panel{grid-template-columns:1fr;padding:56px 36px}
   }
   @media (max-width:560px){
@@ -384,7 +422,7 @@
       Таргетология
     </a>
     <nav class="nav-links" aria-label="Разделы">
-      <a href="#value">Что получите</a>
+      <a href="#value">Что изменится</a>
       <a href="#program">Программа</a>
       <a href="#plans">Тарифы</a>
     </nav>
@@ -438,24 +476,42 @@
   <section id="value">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-label">Что вы получите</span>
-        <h2>Не «посмотрел уроки», а готовая услуга, которую покупают</h2>
+        <span class="sec-label">Что изменится</span>
+        <h2>Один месяц между «хочу в таргет» и первым клиентом</h2>
       </div>
-      <div class="value-grid">
-        <div class="card value reveal">
-          <i>₽</i>
-          <h3>Навык, за который платят</h3>
-          <p>Настройка VK Рекламы руками: аудитории, креативы, оптимизация. Рынку не хватает специалистов — <b>бизнес ищет их каждый день</b>.</p>
+      <div class="ba-grid">
+        <div class="ba before reveal">
+          <h3>Вы сейчас</h3>
+          <ul>
+            <li>Доход упёрся в потолок, и непонятно, как его пробить</li>
+            <li>Нет навыка, за который бизнес готов платить</li>
+            <li>Всё зависит от одного работодателя</li>
+            <li>Бесплатные уроки не складываются в систему</li>
+          </ul>
         </div>
-        <div class="card value reveal">
-          <i>▤</i>
-          <h3>Реальные кейсы после выпуска</h3>
-          <p>Вы выпускаетесь с двумя настоящими запусками: охваты, CTR, стоимость заявки. Эти кейсы остаются у вас — <b>покажете их любому потенциальному клиенту как готовое портфолио</b>.</p>
+        <div class="ba-arrow reveal" aria-hidden="true">
+          <div class="circ">→</div>
+          <span>4 недели<br>практики</span>
         </div>
-        <div class="card value reveal">
-          <i>◎</i>
-          <h3>План на первые 3 месяца</h3>
-          <p>Упаковка профиля, прайс, скрипты переговоров и площадки для поиска клиентов. <b>Выпускаетесь с планом действий</b>, а не с сертификатом в стол.</p>
+        <div class="ba after reveal">
+          <h3>Вы через месяц</h3>
+          <ul>
+            <li>2 кейса с реальными цифрами в портфолио</li>
+            <li>Навык настройки VK Рекламы под ключ</li>
+            <li>Первые клиенты и план на 3 месяца вперёд</li>
+            <li>Шанс попасть в мою команду на постоянку</li>
+          </ul>
+        </div>
+      </div>
+      <div class="vs reveal">
+        <h3>Почему у меня, а не в большой онлайн-школе</h3>
+        <div class="vs-table">
+          <div class="vs-row vs-head"><div class="crit"></div><div class="me">«Таргетология»</div><div class="them">Онлайн-школы</div></div>
+          <div class="vs-row"><div class="crit">Группа</div><div class="me">30 человек, каждого знаю по имени</div><div class="them">Потоки по 300–500 учеников</div></div>
+          <div class="vs-row"><div class="crit">Наставник</div><div class="me">Практик с живыми проектами</div><div class="them">Куратор по методичке</div></div>
+          <div class="vs-row"><div class="crit">Практика</div><div class="me">Реальный бюджет и живые лиды</div><div class="them">Симуляторы и тесты</div></div>
+          <div class="vs-row"><div class="crit">После выпуска</div><div class="me">Передаю первых клиентов лучшим</div><div class="them">Сертификат — и удачи на рынке</div></div>
+          <div class="vs-row"><div class="crit">Срок</div><div class="me">1 месяц</div><div class="them">6–12 месяцев</div></div>
         </div>
       </div>
       <div class="viz-row">
