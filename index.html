@@ -200,7 +200,7 @@
   .ci span{display:block;font-size:12.5px;color:var(--muted);margin-top:4px;white-space:nowrap}
 
   /* ================= блок 2: выгоды + цифры ================= */
-  .calc{max-width:780px;padding:38px 40px;border-radius:26px}
+  .calc{padding:44px 48px;border-radius:26px;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
   .calc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
   .calc-top span{font-size:14px;color:var(--muted)}
   .calc-top b{font-family:var(--mono);font-size:32px;font-weight:500;color:#fff;font-variant-numeric:tabular-nums}
@@ -220,11 +220,12 @@
     box-shadow:0 0 26px -2px var(--glow);cursor:grab;
   }
   .calc-scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:10px}
-  .calc-out{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 20px}
-  .co{background:rgba(33,160,255,.08);border:1px solid var(--line);border-radius:16px;padding:17px 19px}
-  .co b{font-family:var(--mono);font-size:21px;font-weight:500;display:block;color:#fff;font-variant-numeric:tabular-nums;margin-bottom:3px}
+  .calc-out{display:grid;grid-template-columns:1fr;gap:14px}
+  .co{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+  .co{background:rgba(33,160,255,.08);border:1px solid var(--line);border-radius:16px;padding:19px 24px}
+  .co b{font-family:var(--mono);font-size:24px;font-weight:500;display:block;color:#fff;font-variant-numeric:tabular-nums}
   .co span{font-size:12.5px;color:var(--muted)}
-  .calc-note{font-size:15px;color:var(--cyan);min-height:24px}
+  .calc-note{font-size:15px;color:var(--cyan);min-height:24px;margin-top:28px}
   .calc-foot{font-size:12px;color:var(--muted);margin-top:16px}
   .faq{max-width:840px;display:flex;flex-direction:column;gap:12px}
   .faq details{
@@ -362,8 +363,7 @@
     .photo-card{min-height:460px}
     .cred{gap:28px}
     .prog-grid,.plans{grid-template-columns:1fr}
-    .calc-out{grid-template-columns:1fr}
-    .calc{padding:30px 24px}
+    .calc{grid-template-columns:1fr;gap:28px;padding:30px 24px}
     .final .panel{grid-template-columns:1fr;padding:56px 36px}
   }
   @media (max-width:560px){
@@ -445,19 +445,21 @@
         <p>Подвиньте ползунок — сколько клиентов возьмёте после курса. Средний чек начинающего таргетолога — 15 000 ₽ за проект в месяц.</p>
       </div>
       <div class="card calc reveal">
-        <div class="calc-top">
-          <span>Клиентов в работе</span>
-          <b id="calc-n">2</b>
+        <div>
+          <div class="calc-top">
+            <span>Клиентов в работе</span>
+            <b id="calc-n">2</b>
+          </div>
+          <input class="slider" type="range" id="calc-range" min="1" max="5" step="1" value="2" aria-label="Количество клиентов в работе">
+          <div class="calc-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+          <p class="calc-note" id="calc-note">Два клиента — 30 000 ₽ в месяц всего при ≈2 часах работы в день.</p>
+          <p class="calc-foot">Расчёт — ориентир по рынку фриланса на тарифе «С куратором», не гарантия дохода</p>
         </div>
-        <input class="slider" type="range" id="calc-range" min="1" max="5" step="1" value="2" aria-label="Количество клиентов в работе">
-        <div class="calc-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         <div class="calc-out">
           <div class="co"><b id="calc-income">30 000 ₽</b><span>доход в месяц</span></div>
           <div class="co"><b id="calc-hours">≈2 ч</b><span>работы в сутки</span></div>
           <div class="co"><b id="calc-payback">3 недели</b><span>окупаемость курса</span></div>
         </div>
-        <p class="calc-note" id="calc-note">Два клиента — 30 000 ₽ в месяц всего при ≈2 часах работы в день.</p>
-        <p class="calc-foot">Расчёт — ориентир по рынку фриланса на тарифе «С куратором», не гарантия дохода</p>
       </div>
     </div>
   </section>
