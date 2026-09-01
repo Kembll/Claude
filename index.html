@@ -200,32 +200,51 @@
   .ci span{display:block;font-size:12.5px;color:var(--muted);margin-top:4px;white-space:nowrap}
 
   /* ================= блок 2: выгоды + цифры ================= */
-  .calc{padding:44px 48px;border-radius:26px;display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+  #income{position:relative;overflow:hidden}
+  #income::before{content:'';position:absolute;left:-240px;top:6%;width:680px;height:680px;border-radius:50%;
+    background:radial-gradient(circle,rgba(33,160,255,.17),transparent 62%);pointer-events:none}
+  #income::after{content:'';position:absolute;right:-260px;bottom:-200px;width:760px;height:760px;border-radius:50%;
+    background:radial-gradient(circle,rgba(79,195,255,.14),transparent 62%);pointer-events:none}
+  #income .wrap{position:relative;z-index:1}
+  .calc{
+    padding:48px 52px;border-radius:32px;
+    display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;
+    background:linear-gradient(160deg,rgba(18,46,82,.72),rgba(7,24,44,.86));
+    border-color:var(--line-strong);
+    box-shadow:0 0 90px -28px var(--glow),0 30px 70px -30px rgba(0,0,0,.7);
+  }
   .calc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
   .calc-top span{font-size:14px;color:var(--muted)}
   .calc-top b{font-family:var(--mono);font-size:32px;font-weight:500;color:#fff;font-variant-numeric:tabular-nums}
   .slider{
-    -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:100px;outline:none;
-    background:linear-gradient(90deg,var(--electric) var(--fill,25%),rgba(126,193,255,.18) var(--fill,25%));
+    -webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:100px;outline:none;
+    background:linear-gradient(90deg,var(--deep),var(--electric) var(--fill,25%),rgba(126,193,255,.14) var(--fill,25%));
     cursor:pointer;
   }
   .slider::-webkit-slider-thumb{
-    -webkit-appearance:none;width:26px;height:26px;border-radius:50%;
+    -webkit-appearance:none;width:30px;height:30px;border-radius:50%;
     background:linear-gradient(135deg,#FFFFFF,#CDE9FF);border:2px solid var(--cyan);
-    box-shadow:0 0 26px -2px var(--glow);cursor:grab;
+    box-shadow:0 0 34px 0 var(--glow);cursor:grab;
+    transition:transform .2s ease,box-shadow .2s ease;
   }
+  .slider::-webkit-slider-thumb:hover{transform:scale(1.12)}
+  .slider:active::-webkit-slider-thumb{transform:scale(1.18);cursor:grabbing}
   .slider::-moz-range-thumb{
-    width:24px;height:24px;border-radius:50%;
+    width:28px;height:28px;border-radius:50%;
     background:linear-gradient(135deg,#FFFFFF,#CDE9FF);border:2px solid var(--cyan);
-    box-shadow:0 0 26px -2px var(--glow);cursor:grab;
+    box-shadow:0 0 34px 0 var(--glow);cursor:grab;
+    transition:transform .2s ease;
   }
+  .slider::-moz-range-thumb:hover{transform:scale(1.12)}
   .calc-scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:10px}
   .calc-out{display:grid;grid-template-columns:1fr;gap:14px}
   .co{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
-  .co{background:rgba(33,160,255,.08);border:1px solid var(--line);border-radius:16px;padding:19px 24px}
+  .co{background:rgba(33,160,255,.08);border:1px solid var(--line);border-radius:20px;padding:20px 26px;
+    transition:border-color .3s,background .3s}
+  .co:hover{border-color:var(--line-strong);background:rgba(33,160,255,.12)}
   .co b{font-family:var(--mono);font-size:24px;font-weight:500;display:block;color:#fff;font-variant-numeric:tabular-nums}
   .co span{font-size:12.5px;color:var(--muted)}
-  .calc-note{font-size:15px;color:var(--cyan);min-height:24px;margin-top:28px}
+  .calc-note{font-size:15px;color:var(--cyan);min-height:24px;margin-top:28px;transition:opacity .25s}
   .calc-foot{font-size:12px;color:var(--muted);margin-top:16px}
   .faq{max-width:840px;display:flex;flex-direction:column;gap:12px}
   .faq details{
@@ -450,7 +469,7 @@
             <span>Клиентов в работе</span>
             <b id="calc-n">2</b>
           </div>
-          <input class="slider" type="range" id="calc-range" min="1" max="5" step="1" value="2" aria-label="Количество клиентов в работе">
+          <input class="slider" type="range" id="calc-range" min="1" max="5" step="0.01" value="2" aria-label="Количество клиентов в работе">
           <div class="calc-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
           <p class="calc-note" id="calc-note">Два клиента — 30 000 ₽ в месяц всего при ≈2 часах работы в день.</p>
           <p class="calc-foot">Расчёт — ориентир по рынку фриланса на тарифе «С куратором», не гарантия дохода</p>
@@ -741,7 +760,7 @@
     els.forEach(e=>io.observe(e));
   })();
 
-  // калькулятор дохода
+  // калькулятор дохода: плавный ползунок и мягкий пересчёт цифр
   (function(){
     const r=document.getElementById('calc-range');
     if(!r)return;
@@ -750,6 +769,7 @@
     const hrs=document.getElementById('calc-hours');
     const pay=document.getElementById('calc-payback');
     const note=document.getElementById('calc-note');
+    const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     const PRICE=44900, CHECK=15000;
     const notes={
       1:'Один клиент — спокойный старт: курс окупается за первые три месяца.',
@@ -759,17 +779,33 @@
       5:'Пять клиентов — полная загрузка. Дальше растёт не количество, а чек.'
     };
     function plural(w){return w===1?'неделя':(w<5?'недели':'недель')}
+    function tween(el,to,fmt){
+      const from=(el._v===undefined)?to:el._v;
+      el._v=to;
+      if(reduce||from===to){el.textContent=fmt(to);return}
+      const t0=performance.now(),dur=300;
+      cancelAnimationFrame(el._raf);
+      (function step(t){
+        const p=Math.min(1,(t-t0)/dur), e=1-Math.pow(1-p,3);
+        el.textContent=fmt(Math.round(from+(to-from)*e));
+        if(p<1)el._raf=requestAnimationFrame(step);
+      })(t0);
+    }
+    let lastK=0;
     function upd(){
-      const k=+r.value;
+      const v=+r.value, k=Math.round(v);
+      r.style.setProperty('--fill',((v-1)/4*100)+'%');
+      if(k===lastK)return;
+      lastK=k;
       n.textContent=k;
-      inc.textContent=(k*CHECK).toLocaleString('ru-RU')+' ₽';
-      hrs.textContent='≈'+Math.round(k*8/7)+' ч';
-      const w=Math.max(1,Math.round(PRICE/(k*CHECK)*4.33));
-      pay.textContent=w+' '+plural(w);
-      note.textContent=notes[k];
-      r.style.setProperty('--fill',((k-1)/4*100)+'%');
+      tween(inc,k*CHECK,x=>x.toLocaleString('ru-RU')+' ₽');
+      tween(hrs,Math.round(k*8/7),x=>'≈'+x+' ч');
+      tween(pay,Math.max(1,Math.round(PRICE/(k*CHECK)*4.33)),x=>x+' '+plural(x));
+      note.style.opacity=0;
+      setTimeout(()=>{note.textContent=notes[k];note.style.opacity=1},reduce?0:160);
     }
     r.addEventListener('input',upd);
+    r.addEventListener('change',()=>{r.value=Math.round(+r.value);r.style.setProperty('--fill',((r.value-1)/4*100)+'%')});
     upd();
   })();
 
