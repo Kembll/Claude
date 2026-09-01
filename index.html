@@ -200,61 +200,50 @@
   .ci span{display:block;font-size:12.5px;color:var(--muted);margin-top:4px;white-space:nowrap}
 
   /* ================= блок 2: выгоды + цифры ================= */
-  .ba-grid{display:grid;grid-template-columns:1fr 72px 1fr;gap:18px;align-items:stretch;margin-bottom:22px}
-  .ba{border-radius:24px;padding:32px 30px}
-  .ba h3{font-size:18px;font-weight:600;margin-bottom:18px}
-  .ba ul{list-style:none;display:flex;flex-direction:column;gap:13px}
-  .ba li{font-size:14.5px;line-height:1.55;padding-left:28px;position:relative}
-  .ba.before{background:rgba(7,20,38,.45);border:1px solid var(--line)}
-  .ba.before h3{color:#8FA9C7}
-  .ba.before li{color:var(--muted)}
-  .ba.before li::before{content:'✕';position:absolute;left:0;color:#54708F}
-  .ba.after{
-    background:linear-gradient(160deg,rgba(30,134,228,.24),rgba(7,24,44,.92));
-    border:1px solid var(--line-strong);
-    box-shadow:0 0 55px -16px var(--glow);
+  .calc{max-width:780px;padding:38px 40px;border-radius:26px}
+  .calc-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
+  .calc-top span{font-size:14px;color:var(--muted)}
+  .calc-top b{font-family:var(--mono);font-size:32px;font-weight:500;color:#fff;font-variant-numeric:tabular-nums}
+  .slider{
+    -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:100px;outline:none;
+    background:linear-gradient(90deg,var(--electric) var(--fill,25%),rgba(126,193,255,.18) var(--fill,25%));
+    cursor:pointer;
   }
-  .ba.after h3{color:#fff}
-  .ba.after li{color:var(--ink)}
-  .ba.after li::before{content:'✓';position:absolute;left:0;color:var(--cyan);font-weight:600}
-  .ba-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
-  .ba-arrow .circ{
-    width:54px;height:54px;border-radius:50%;flex-shrink:0;
-    background:linear-gradient(135deg,var(--deep),var(--cyan));
-    display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;
-    box-shadow:0 0 32px -6px var(--glow);
+  .slider::-webkit-slider-thumb{
+    -webkit-appearance:none;width:26px;height:26px;border-radius:50%;
+    background:linear-gradient(135deg,#FFFFFF,#CDE9FF);border:2px solid var(--cyan);
+    box-shadow:0 0 26px -2px var(--glow);cursor:grab;
   }
-  .ba-arrow span{
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
-    color:var(--muted);text-align:center;line-height:1.6;
+  .slider::-moz-range-thumb{
+    width:24px;height:24px;border-radius:50%;
+    background:linear-gradient(135deg,#FFFFFF,#CDE9FF);border:2px solid var(--cyan);
+    box-shadow:0 0 26px -2px var(--glow);cursor:grab;
   }
-  .viz-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  .viz{padding:28px 28px 24px;border-radius:24px}
-  .viz h3{font-size:16.5px;font-weight:600;margin-bottom:4px;color:#fff}
-  .viz .sub{font-size:13px;color:var(--muted);margin-bottom:22px}
-  .viz-note{font-size:12px;color:var(--muted);margin-top:12px}
-  .cols{display:flex;align-items:flex-end;gap:26px;height:210px;padding-top:6px}
-  .col{flex:1;display:flex;flex-direction:column;align-items:center;gap:9px;height:100%;justify-content:flex-end}
-  .col b{font-family:var(--mono);font-weight:500;font-size:14.5px;font-variant-numeric:tabular-nums}
-  .col .pillar{width:100%;max-width:104px;border-radius:12px 12px 0 0;height:0;
-    background:linear-gradient(180deg,var(--cyan),var(--deep));
-    box-shadow:0 0 30px -6px var(--glow);
-    transition:height 1s cubic-bezier(.2,.7,.2,1)}
-  .col:nth-child(1) .pillar{background:#1E4E82;box-shadow:none}
-  .col:nth-child(2) .pillar{background:#1873C9;box-shadow:none}
-  .col span{font-size:13px;color:var(--muted);border-top:1px solid var(--line);width:100%;text-align:center;padding-top:9px}
-  .funnel{display:flex;flex-direction:column;gap:9px}
-  .fstage{position:relative}
-  .fstage .bar{height:46px;border-radius:100px;display:flex;align-items:center;justify-content:space-between;
-    padding:0 20px;color:#fff;min-width:190px;width:0;transition:width 1s cubic-bezier(.2,.7,.2,1)}
-  .fstage:nth-child(1) .bar{background:#16395F}
-  .fstage:nth-child(2) .bar{background:#1B5A9E}
-  .fstage:nth-child(3) .bar{background:#1E86E4}
-  .fstage:nth-child(4) .bar{background:linear-gradient(90deg,#21A0FF,#4FC3FF);box-shadow:0 0 30px -6px var(--glow)}
-  .fstage .bar span{font-size:13px;font-weight:500}
-  .fstage .bar b{font-family:var(--mono);font-weight:500;font-size:14px;font-variant-numeric:tabular-nums}
-  .fstage .conv{position:absolute;right:0;top:50%;transform:translateY(-50%);
-    font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .calc-scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:10px}
+  .calc-out{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 20px}
+  .co{background:rgba(33,160,255,.08);border:1px solid var(--line);border-radius:16px;padding:17px 19px}
+  .co b{font-family:var(--mono);font-size:21px;font-weight:500;display:block;color:#fff;font-variant-numeric:tabular-nums;margin-bottom:3px}
+  .co span{font-size:12.5px;color:var(--muted)}
+  .calc-note{font-size:15px;color:var(--cyan);min-height:24px}
+  .calc-foot{font-size:12px;color:var(--muted);margin-top:16px}
+  .faq{max-width:840px;display:flex;flex-direction:column;gap:12px}
+  .faq details{
+    background:linear-gradient(160deg,rgba(16,42,74,.6),rgba(7,24,44,.72));
+    border:1px solid var(--line);border-radius:18px;
+    transition:border-color .25s;
+  }
+  .faq details[open]{border-color:var(--line-strong)}
+  .faq summary{
+    cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:18px;
+    padding:20px 26px;font-size:16px;font-weight:600;color:#fff;
+  }
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{
+    content:'+';font-family:var(--mono);font-size:22px;font-weight:400;color:var(--cyan);
+    transition:transform .25s;flex-shrink:0;line-height:1;
+  }
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq .a{padding:0 26px 22px;font-size:14.5px;line-height:1.65;color:var(--muted);max-width:66ch}
 
   /* ================= блок 3: программа ================= */
   .prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -356,18 +345,11 @@
     transition:background .2s,color .2s,border-color .2s}
   .modal-close:hover{background:rgba(33,160,255,.2);border-color:var(--line-strong);color:#fff}
 
-  /* tooltip */
-  #tip{position:fixed;z-index:99;pointer-events:none;opacity:0;transition:opacity .15s;
-    background:#EAF4FF;color:#071A31;font-size:12.5px;font-family:var(--mono);
-    padding:7px 12px;border-radius:10px;transform:translate(-50%,calc(-100% - 10px));white-space:nowrap}
-  #tip.on{opacity:1}
-
   .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){
     html{scroll-behavior:auto}
     .reveal{opacity:1;transform:none;transition:none}
-    .fstage .bar,.col .pillar{transition:none}
     .btn:hover,.value:hover,.prog:hover,.nav-links a:hover{transform:none}
     .nav-cta:hover::before,.btn-primary:hover::before{animation:none}
     .modal .form-card{animation:none}
@@ -379,11 +361,9 @@
     .hero-top{grid-template-columns:1fr}
     .photo-card{min-height:460px}
     .cred{gap:28px}
-    .prog-grid,.plans,.viz-row{grid-template-columns:1fr}
-    .ba-grid{grid-template-columns:1fr}
-    .ba-arrow{flex-direction:row}
-    .ba-arrow .circ{transform:rotate(90deg)}
-    .ba-arrow span br{display:none}
+    .prog-grid,.plans{grid-template-columns:1fr}
+    .calc-out{grid-template-columns:1fr}
+    .calc{padding:30px 24px}
     .final .panel{grid-template-columns:1fr;padding:56px 36px}
   }
   @media (max-width:560px){
@@ -404,7 +384,8 @@
       Таргетология
     </a>
     <nav class="nav-links" aria-label="Разделы">
-      <a href="#value">Что изменится</a>
+      <a href="#income">Доход</a>
+      <a href="#faq">Вопросы</a>
       <a href="#program">Программа</a>
       <a href="#plans">Тарифы</a>
     </nav>
@@ -455,74 +436,60 @@
   </div>
 
   <!-- ============ блок 2: что получите + цифры ============ -->
-  <section id="value">
+  <!-- ============ блок 2: калькулятор дохода ============ -->
+  <section id="income">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-label">Что изменится</span>
-        <h2>Один месяц между «хочу в таргет» и первым клиентом</h2>
+        <span class="sec-label">Математика профессии</span>
+        <h2>Посчитаем ваш будущий доход</h2>
+        <p>Подвиньте ползунок — сколько клиентов возьмёте после курса. Средний чек начинающего таргетолога — 30 000 ₽ за проект в месяц.</p>
       </div>
-      <div class="ba-grid">
-        <div class="ba before reveal">
-          <h3>Вы сейчас</h3>
-          <ul>
-            <li>Доход упёрся в потолок, и непонятно, как его пробить</li>
-            <li>Нет навыка, за который бизнес готов платить</li>
-            <li>Всё зависит от одного работодателя</li>
-            <li>Бесплатные уроки не складываются в систему</li>
-          </ul>
+      <div class="card calc reveal">
+        <div class="calc-top">
+          <span>Клиентов в работе</span>
+          <b id="calc-n">2</b>
         </div>
-        <div class="ba-arrow reveal" aria-hidden="true">
-          <div class="circ">→</div>
-          <span>4 недели<br>практики</span>
+        <input class="slider" type="range" id="calc-range" min="1" max="5" step="1" value="2" aria-label="Количество клиентов в работе">
+        <div class="calc-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+        <div class="calc-out">
+          <div class="co"><b id="calc-income">60 000 ₽</b><span>доход в месяц</span></div>
+          <div class="co"><b id="calc-hours">≈16 ч</b><span>работы в неделю</span></div>
+          <div class="co"><b id="calc-payback">3 недели</b><span>окупаемость курса</span></div>
         </div>
-        <div class="ba after reveal">
-          <h3>Вы через месяц</h3>
-          <ul>
-            <li>2 кейса с реальными цифрами в портфолио</li>
-            <li>Навык настройки VK Рекламы под ключ</li>
-            <li>Первые клиенты и план на 3 месяца вперёд</li>
-            <li>Шанс попасть в мою команду на постоянку</li>
-          </ul>
-        </div>
+        <p class="calc-note" id="calc-note">Два клиента — доход выше средней зарплаты по стране. И это только старт.</p>
+        <p class="calc-foot">Расчёт — ориентир по рынку фриланса на тарифе «С куратором», не гарантия дохода</p>
       </div>
-      <div class="viz-row">
-        <div class="card viz reveal">
-          <h3>Доход таргетолога</h3>
-          <p class="sub">₽ в месяц, медиана по вакансиям и фрилансу</p>
-          <div class="cols">
-            <div class="col" data-tip="Junior · первые 3–6 месяцев">
-              <b>45 000</b><div class="pillar" data-h="30"></div><span>Junior</span>
-            </div>
-            <div class="col" data-tip="Middle · 1–2 года практики">
-              <b>90 000</b><div class="pillar" data-h="60"></div><span>Middle</span>
-            </div>
-            <div class="col" data-tip="Senior · 4–6 своих клиентов">
-              <b>150 000+</b><div class="pillar" data-h="100"></div><span>Senior</span>
-            </div>
-          </div>
-          <p class="viz-note">Оценка по hh.ru и биржам · цифры иллюстративные</p>
-        </div>
-        <div class="card viz reveal">
-          <h3>Воронка, которую вы соберёте на курсе</h3>
-          <p class="sub">учебный запуск: бюджет 25 000 ₽, ниша — кофейня</p>
-          <div class="funnel">
-            <div class="fstage" data-tip="120 000 показов объявлений">
-              <div class="bar" data-w="100"><span>Показы</span><b>120 000</b></div>
-            </div>
-            <div class="fstage" data-tip="CTR 2,0% — 2 400 переходов">
-              <div class="bar" data-w="74"><span>Переходы</span><b>2 400</b></div>
-              <span class="conv">CTR 2,0%</span>
-            </div>
-            <div class="fstage" data-tip="конверсия сайта 9% — 216 заявок">
-              <div class="bar" data-w="50"><span>Заявки</span><b>216</b></div>
-              <span class="conv">CR 9,0%</span>
-            </div>
-            <div class="fstage" data-tip="43 продажи — стоимость заявки 116 ₽">
-              <div class="bar" data-w="28"><span>Продажи</span><b>43</b></div>
-              <span class="conv">CR 19,9%</span>
-            </div>
-          </div>
-        </div>
+    </div>
+  </section>
+
+  <!-- ============ блок 3: вопросы ============ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-label">Вопросы</span>
+        <h2>Честные ответы до того, как вы спросите</h2>
+      </div>
+      <div class="faq reveal">
+        <details>
+          <summary>У меня совсем нет опыта — потяну?</summary>
+          <p class="a">Курс построен с нуля: первый модуль объясняет устройство кабинета «на пальцах», без терминов ради терминов. Большинство учеников приходят без опыта — важнее выделять 5–7 часов в неделю на практику.</p>
+        </details>
+        <details>
+          <summary>А если я не найду клиентов после курса?</summary>
+          <p class="a">Последний модуль целиком про это: упаковка профиля, прайс, площадки для поиска заказов и скрипты переговоров. Лучшим ученикам я передаю своих первых клиентов, а каждый выпускник уходит с планом на 3 месяца вперёд.</p>
+        </details>
+        <details>
+          <summary>Почему всего месяц? Везде учат по полгода</summary>
+          <p class="a">Потому что здесь нет «воды»: только то, что нужно для запуска рекламы и работы с клиентом. Вы учитесь на реальной кампании с живым бюджетом, а не на теории — так навык ставится в разы быстрее.</p>
+        </details>
+        <details>
+          <summary>VK Реклама вообще работает? Все ушли в Telegram</summary>
+          <p class="a">ВКонтакте — крупнейшая соцсеть России, и бизнес планово переносит сюда рекламные бюджеты. Специалистов, которые умеют настраивать VK Рекламу системно, по-прежнему не хватает — спрос выше предложения.</p>
+        </details>
+        <details>
+          <summary>Что, если мне не понравится?</summary>
+          <p class="a">В течение 14 дней после старта потока можно вернуть всю сумму без объяснения причин. Вы рискуете только двумя неделями времени.</p>
+        </details>
       </div>
     </div>
   </section>
@@ -703,7 +670,6 @@
   </form>
 </div>
 
-<div id="tip" role="status"></div>
 
 <script>
   // океан: светящиеся частицы, поднимающиеся вверх (стилистика референса)
@@ -764,8 +730,6 @@
     const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
     function fire(el){
       el.classList.add('in');
-      el.querySelectorAll('.fstage .bar').forEach(b=>{b.style.width=b.dataset.w+'%'});
-      el.querySelectorAll('.pillar').forEach(b=>{b.style.height=b.dataset.h+'%'});
     }
     const els=document.querySelectorAll('.reveal');
     if(!('IntersectionObserver' in window)||reduce){els.forEach(fire);return}
@@ -775,17 +739,36 @@
     els.forEach(e=>io.observe(e));
   })();
 
-  // тултипы инфографики
+  // калькулятор дохода
   (function(){
-    const tip=document.getElementById('tip');
-    document.querySelectorAll('[data-tip]').forEach(el=>{
-      el.addEventListener('mousemove',e=>{
-        tip.textContent=el.dataset.tip;
-        tip.style.left=e.clientX+'px';tip.style.top=e.clientY+'px';
-        tip.classList.add('on');
-      });
-      el.addEventListener('mouseleave',()=>tip.classList.remove('on'));
-    });
+    const r=document.getElementById('calc-range');
+    if(!r)return;
+    const n=document.getElementById('calc-n');
+    const inc=document.getElementById('calc-income');
+    const hrs=document.getElementById('calc-hours');
+    const pay=document.getElementById('calc-payback');
+    const note=document.getElementById('calc-note');
+    const PRICE=44900, CHECK=30000;
+    const notes={
+      1:'Один клиент окупает курс за полтора месяца — дальше чистый плюс.',
+      2:'Два клиента — доход выше средней зарплаты по стране. И это только старт.',
+      3:'Три клиента — комфортная загрузка новичка при 3–4 часах в день.',
+      4:'Четыре клиента — уровень уверенного специалиста, пора поднимать чек.',
+      5:'Пять клиентов — полная загрузка. Дальше растёт не количество, а чек.'
+    };
+    function plural(w){return w===1?'неделя':(w<5?'недели':'недель')}
+    function upd(){
+      const k=+r.value;
+      n.textContent=k;
+      inc.textContent=(k*CHECK).toLocaleString('ru-RU')+' ₽';
+      hrs.textContent='≈'+(k*8)+' ч';
+      const w=Math.max(1,Math.round(PRICE/(k*CHECK)*4.33));
+      pay.textContent=w+' '+plural(w);
+      note.textContent=notes[k];
+      r.style.setProperty('--fill',((k-1)/4*100)+'%');
+    }
+    r.addEventListener('input',upd);
+    upd();
   })();
 
   // модалка
