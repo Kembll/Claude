@@ -442,7 +442,7 @@
       <div class="sec-head reveal">
         <span class="sec-label">Математика профессии</span>
         <h2>Посчитаем ваш будущий доход</h2>
-        <p>Подвиньте ползунок — сколько клиентов возьмёте после курса. Средний чек начинающего таргетолога — 30 000 ₽ за проект в месяц.</p>
+        <p>Подвиньте ползунок — сколько клиентов возьмёте после курса. Средний чек начинающего таргетолога — 15 000 ₽ за проект в месяц.</p>
       </div>
       <div class="card calc reveal">
         <div class="calc-top">
@@ -452,11 +452,11 @@
         <input class="slider" type="range" id="calc-range" min="1" max="5" step="1" value="2" aria-label="Количество клиентов в работе">
         <div class="calc-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
         <div class="calc-out">
-          <div class="co"><b id="calc-income">60 000 ₽</b><span>доход в месяц</span></div>
+          <div class="co"><b id="calc-income">30 000 ₽</b><span>доход в месяц</span></div>
           <div class="co"><b id="calc-hours">≈16 ч</b><span>работы в неделю</span></div>
           <div class="co"><b id="calc-payback">3 недели</b><span>окупаемость курса</span></div>
         </div>
-        <p class="calc-note" id="calc-note">Два клиента — доход выше средней зарплаты по стране. И это только старт.</p>
+        <p class="calc-note" id="calc-note">Два клиента — 30 000 ₽ в месяц всего при ≈16 часах работы в неделю.</p>
         <p class="calc-foot">Расчёт — ориентир по рынку фриланса на тарифе «С куратором», не гарантия дохода</p>
       </div>
     </div>
@@ -748,12 +748,12 @@
     const hrs=document.getElementById('calc-hours');
     const pay=document.getElementById('calc-payback');
     const note=document.getElementById('calc-note');
-    const PRICE=44900, CHECK=30000;
+    const PRICE=44900, CHECK=15000;
     const notes={
-      1:'Один клиент окупает курс за полтора месяца — дальше чистый плюс.',
-      2:'Два клиента — доход выше средней зарплаты по стране. И это только старт.',
+      1:'Один клиент — спокойный старт: курс окупается за первые три месяца.',
+      2:'Два клиента — 30 000 ₽ в месяц всего при ≈16 часах работы в неделю.',
       3:'Три клиента — комфортная загрузка новичка при 3–4 часах в день.',
-      4:'Четыре клиента — уровень уверенного специалиста, пора поднимать чек.',
+      4:'Четыре клиента — 60 000 ₽ в месяц, уровень уверенного специалиста.',
       5:'Пять клиентов — полная загрузка. Дальше растёт не количество, а чек.'
     };
     function plural(w){return w===1?'неделя':(w<5?'недели':'недель')}
