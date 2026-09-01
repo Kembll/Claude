@@ -202,6 +202,13 @@
   .ci span{display:block;font-size:12.5px;color:var(--muted);margin-top:4px;white-space:nowrap}
 
   /* ================= блок 2: выгоды + цифры ================= */
+  .reticle{
+    position:absolute;width:640px;height:640px;pointer-events:none;opacity:.09;
+    background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><g fill='none' stroke='%234FC3FF' stroke-width='1'><circle cx='300' cy='300' r='90'/><circle cx='300' cy='300' r='170'/><circle cx='300' cy='300' r='250'/><path d='M300 20v130M300 450v130M20 300h130M450 300h130'/><path d='M300 210v-20M300 390v20M210 300h-20M390 300h20'/><circle cx='300' cy='300' r='5' fill='%234FC3FF' stroke='none'/></g></svg>") center/contain no-repeat;
+  }
+  #income .reticle{left:-200px;bottom:-180px}
+  #program .reticle{right:-170px;top:70px}
+  #faq .reticle{right:-220px;top:30px}
   #program,#plans,#faq{position:relative;overflow:hidden}
   #program .wrap,#plans .wrap,#faq .wrap,#income .wrap{position:relative;z-index:1}
   #program::before{content:'';position:absolute;right:-200px;top:60px;width:600px;height:600px;border-radius:50%;
@@ -485,6 +492,7 @@
   <!-- ============ блок 2: что получите + цифры ============ -->
   <!-- ============ блок 2: калькулятор дохода ============ -->
   <section id="income">
+    <div class="reticle" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-label">Математика профессии</span>
@@ -519,6 +527,7 @@
 
   <!-- ============ блок 3: программа ============ -->
   <section id="program">
+    <div class="reticle" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-label">Программа</span>
@@ -624,6 +633,7 @@
   <!-- ============ блок 5: финал + форма ============ -->
   <!-- ============ блок 3: вопросы ============ -->
   <section id="faq">
+    <div class="reticle" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-label">Вопросы</span>
