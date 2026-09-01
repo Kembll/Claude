@@ -228,21 +228,6 @@
     font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
     color:var(--muted);text-align:center;line-height:1.6;
   }
-  .vs{margin-bottom:22px}
-  .vs h3{font-size:18px;font-weight:600;margin:26px 0 16px}
-  .vs-table{border:1px solid var(--line);border-radius:20px;overflow:hidden;
-    background:rgba(7,20,38,.35);backdrop-filter:blur(8px)}
-  .vs-row{display:grid;grid-template-columns:190px 1fr 1fr;border-top:1px solid var(--line)}
-  .vs-row:first-child{border-top:none}
-  .vs-row>div{padding:15px 22px;font-size:14px;display:flex;align-items:center}
-  .vs-row .crit{color:var(--muted);font-size:13px}
-  .vs-row .me{
-    background:rgba(33,160,255,.10);color:#fff;font-weight:500;
-    border-inline:1px solid var(--line);
-  }
-  .vs-row .them{color:var(--muted)}
-  .vs-head>div{font-size:13px;font-weight:600;letter-spacing:.04em}
-  .vs-head .me{color:var(--cyan)}
   .viz-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
   .viz{padding:28px 28px 24px;border-radius:24px}
   .viz h3{font-size:16.5px;font-weight:600;margin-bottom:4px;color:#fff}
@@ -399,9 +384,6 @@
     .ba-arrow{flex-direction:row}
     .ba-arrow .circ{transform:rotate(90deg)}
     .ba-arrow span br{display:none}
-    .vs-row{grid-template-columns:1fr 1fr}
-    .vs-row .crit{grid-column:1/-1;padding-bottom:4px}
-    .vs-head .crit{display:none}
     .final .panel{grid-template-columns:1fr;padding:56px 36px}
   }
   @media (max-width:560px){
@@ -501,17 +483,6 @@
             <li>Первые клиенты и план на 3 месяца вперёд</li>
             <li>Шанс попасть в мою команду на постоянку</li>
           </ul>
-        </div>
-      </div>
-      <div class="vs reveal">
-        <h3>Почему у меня, а не в большой онлайн-школе</h3>
-        <div class="vs-table">
-          <div class="vs-row vs-head"><div class="crit"></div><div class="me">«Таргетология»</div><div class="them">Онлайн-школы</div></div>
-          <div class="vs-row"><div class="crit">Группа</div><div class="me">30 человек, каждого знаю по имени</div><div class="them">Потоки по 300–500 учеников</div></div>
-          <div class="vs-row"><div class="crit">Наставник</div><div class="me">Практик с живыми проектами</div><div class="them">Куратор по методичке</div></div>
-          <div class="vs-row"><div class="crit">Практика</div><div class="me">Реальный бюджет и живые лиды</div><div class="them">Симуляторы и тесты</div></div>
-          <div class="vs-row"><div class="crit">После выпуска</div><div class="me">Передаю первых клиентов лучшим</div><div class="them">Сертификат — и удачи на рынке</div></div>
-          <div class="vs-row"><div class="crit">Срок</div><div class="me">1 месяц</div><div class="them">6–12 месяцев</div></div>
         </div>
       </div>
       <div class="viz-row">
