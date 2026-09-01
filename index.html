@@ -240,13 +240,27 @@
   }
   .slider::-moz-range-thumb:hover{transform:scale(1.12)}
   .calc-scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:10px}
-  .calc-out{display:grid;grid-template-columns:1fr;gap:14px}
-  .co{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
-  .co{background:rgba(33,160,255,.08);border:1px solid var(--line);border-radius:20px;padding:20px 26px;
-    transition:border-color .3s,background .3s}
-  .co:hover{border-color:var(--line-strong);background:rgba(33,160,255,.12)}
-  .co b{font-family:var(--mono);font-size:24px;font-weight:500;display:block;color:#fff;font-variant-numeric:tabular-nums}
-  .co span{font-size:12.5px;color:var(--muted)}
+  .calc-out{
+    position:relative;overflow:hidden;
+    background:linear-gradient(160deg,rgba(33,160,255,.14),rgba(11,60,120,.18));
+    border:1px solid var(--line-strong);border-radius:24px;padding:34px 36px;
+    box-shadow:0 0 60px -20px var(--glow);
+  }
+  .calc-out::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;
+    background:radial-gradient(circle,rgba(79,195,255,.22),transparent 65%);pointer-events:none}
+  .co-main span{
+    display:block;font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--cyan);margin-bottom:8px;
+  }
+  .co-main b{
+    font-family:var(--mono);font-size:clamp(34px,3.2vw,44px);font-weight:500;line-height:1.1;
+    display:block;font-variant-numeric:tabular-nums;
+    background:linear-gradient(100deg,#FFFFFF 25%,#9FDBFF);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .co-row{display:grid;grid-template-columns:1fr 1fr;gap:28px;border-top:1px solid var(--line);margin-top:26px;padding-top:24px}
+  .co-mini b{font-family:var(--mono);font-size:22px;font-weight:500;display:block;color:#fff;font-variant-numeric:tabular-nums;margin-bottom:3px}
+  .co-mini span{font-size:12.5px;color:var(--muted)}
   .calc-note{font-size:15px;color:var(--cyan);min-height:24px;margin-top:28px;transition:opacity .25s}
   .calc-foot{font-size:12px;color:var(--muted);margin-top:16px}
   .faq{max-width:840px;display:flex;flex-direction:column;gap:12px}
@@ -478,9 +492,14 @@
           <p class="calc-foot">Расчёт — ориентир по рынку фриланса на тарифе «С куратором», не гарантия дохода</p>
         </div>
         <div class="calc-out">
-          <div class="co"><b id="calc-income">30 000 ₽</b><span>доход в месяц</span></div>
-          <div class="co"><b id="calc-hours">≈2 ч</b><span>работы в сутки</span></div>
-          <div class="co"><b id="calc-payback">3 недели</b><span>окупаемость курса</span></div>
+          <div class="co-main">
+            <span>Доход в месяц</span>
+            <b id="calc-income">30 000 ₽</b>
+          </div>
+          <div class="co-row">
+            <div class="co-mini"><b id="calc-hours">≈2 ч</b><span>работы в сутки</span></div>
+            <div class="co-mini"><b id="calc-payback">6 недель</b><span>окупаемость курса</span></div>
+          </div>
         </div>
       </div>
     </div>
