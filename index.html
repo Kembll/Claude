@@ -145,7 +145,7 @@
     .hero-side{margin-right:-64px}
   }
   .hero-left{display:flex;flex-direction:column;justify-content:center}
-  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:12px}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px}
   .chip{
     background:var(--glass-light);border:1px solid var(--line);border-radius:100px;
     padding:7px 15px;font-size:12.5px;font-weight:500;color:var(--ink);backdrop-filter:blur(10px);
@@ -178,7 +178,10 @@
     background:linear-gradient(100deg,var(--cyan) 5%,#9FDBFF 45%,var(--electric));
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .hero-sub{font-size:17px;color:#C2D8F2;max-width:58ch;margin-bottom:24px}
+  .hero-sub{
+    font-size:17px;color:#C2D8F2;max-width:58ch;margin-bottom:26px;
+    padding-left:18px;border-left:2px solid rgba(79,195,255,.5);
+  }
   .hero-sub b{color:#fff;font-weight:600}
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .hero-actions .btn{padding:15px 34px;font-size:16px}
@@ -201,7 +204,10 @@
   }
   .photo-cred span{display:block;font-size:14px;color:#A9C8F2;margin-top:4px}
 
-  .cred{margin-top:24px;display:flex;gap:38px;flex-wrap:wrap}
+  .cred{margin-top:30px;padding-top:24px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap}
+  .ci{padding:0 34px}
+  .ci:first-child{padding-left:0}
+  .ci+.ci{border-left:1px solid var(--line)}
   .ci b{
     font-family:var(--mono);font-weight:500;font-size:23px;line-height:1.2;
     display:block;font-variant-numeric:tabular-nums;color:#fff;
@@ -507,15 +513,14 @@
           <div class="chips">
             <span class="chip hot">Поток №1 · старт 15 сентября</span>
             <span class="chip">Осталось 11 мест</span>
-            <span class="chip">С нуля</span>
           </div>
-          <p class="kicker">Экспресс-курс</p>
+          <p class="kicker">Экспресс-курс · с нуля</p>
           <h1><span class="grad">Таргетология</span></h1>
           <p class="h1-line">от новичка до специалиста <em>за 1 месяц</em></p>
           <p class="hero-sub">После выпуска вы не останетесь один на один с рынком: <b>лучшим ученикам передаю своих первых клиентов</b> и приглашаю в мою команду работать на постоянной основе.</p>
           <div class="hero-actions">
             <button class="btn btn-primary js-open" type="button">Занять место</button>
-            <a class="btn btn-ghost" href="#program">Программа курса</a>
+            <a class="btn btn-ghost" href="#program">Программа курса <span aria-hidden="true" style="color:var(--cyan)">→</span></a>
           </div>
           <div class="cred">
             <div class="ci"><b>3 года</b><span>в таргете</span></div>
