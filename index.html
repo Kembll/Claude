@@ -333,7 +333,18 @@
   .co-mini span{font-size:12.5px;color:var(--muted)}
   .calc-note{font-size:15px;color:var(--cyan);min-height:24px;margin-top:28px;transition:opacity .25s}
   .calc-foot{font-size:12px;color:var(--muted);margin-top:16px}
-  .faq{max-width:840px;display:flex;flex-direction:column;gap:12px}
+  .faq-grid{display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start}
+  .faq{display:flex;flex-direction:column;gap:12px}
+  .faq-cta{position:sticky;top:96px;padding:34px 32px;border-radius:24px;
+    background:linear-gradient(160deg,rgba(30,134,228,.22),rgba(7,24,44,.9));
+    border:1px solid var(--line-strong);box-shadow:0 0 55px -16px var(--glow)}
+  .faq-cta .fc-chip{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--cyan);background:rgba(33,160,255,.12);border:1px solid var(--line);
+    border-radius:100px;padding:5px 14px;margin-bottom:18px}
+  .faq-cta h3{font-family:var(--display);font-weight:500;font-size:21px;color:#fff;margin-bottom:12px}
+  .faq-cta p{font-size:14.5px;line-height:1.6;color:#C2D8F2;margin-bottom:24px}
+  .faq-cta .btn{width:100%;text-align:center}
+  .faq-cta .fc-note{font-size:12.5px;color:var(--muted);margin:14px 0 0;text-align:center}
   .faq details{
     background:linear-gradient(160deg,rgba(16,42,74,.6),rgba(7,24,44,.72));
     border:1px solid var(--line);border-radius:18px;
@@ -475,7 +486,8 @@
     .ci{padding:0}
     .ci+.ci{border-left:none}
     .ci span{white-space:normal}
-    .prog-grid,.plans{grid-template-columns:1fr}
+    .prog-grid,.plans,.faq-grid{grid-template-columns:1fr}
+    .faq-cta{position:static}
     .calc{grid-template-columns:1fr;gap:28px;padding:30px 24px}
     .final .panel{grid-template-columns:1fr;padding:56px 36px}
   }
@@ -723,6 +735,7 @@
         <span class="sec-label">04 · Вопросы</span>
         <h2>Честные ответы до того, как вы спросите</h2>
       </div>
+      <div class="faq-grid">
       <div class="faq reveal">
         <details>
           <summary>У меня совсем нет опыта — потяну?</summary>
@@ -744,7 +757,14 @@
           <summary>Что, если мне не понравится?</summary>
           <p class="a">В течение 14 дней после старта потока можно вернуть всю сумму без объяснения причин. Вы рискуете только двумя неделями времени.</p>
         </details>
-        <p class="faq-more">Не нашли свой вопрос? <a href="#cta">Оставьте заявку</a> — обсудим всё на созвоне перед стартом.</p>
+      </div>
+      <div class="card faq-cta reveal">
+        <span class="fc-chip">Поток №1 · осталось 11 мест</span>
+        <h3>Не нашли свой вопрос?</h3>
+        <p>Оставьте заявку — созвонимся до старта и разберём вашу ситуацию лично: подойдёт ли вам курс, какой тариф выбрать и с чего начать.</p>
+        <button class="btn btn-primary js-open" type="button">Задать вопрос лично</button>
+        <p class="fc-note">Это ни к чему не обязывает — просто разговор</p>
+      </div>
       </div>
     </div>
   </section>
