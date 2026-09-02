@@ -261,11 +261,13 @@
   #program::after{content:'';position:absolute;left:-220px;bottom:40px;width:560px;height:560px;border-radius:50%;
     background:radial-gradient(circle,rgba(11,111,216,.13),transparent 60%);pointer-events:none}
   #plans::before{content:'';position:absolute;left:50%;top:120px;width:760px;height:640px;transform:translateX(-50%);border-radius:50%;
-    background:radial-gradient(circle,rgba(33,160,255,.13),transparent 62%);pointer-events:none}
-  #plans::after{content:'';position:absolute;right:-200px;bottom:60px;width:520px;height:520px;border-radius:50%;
-    background:radial-gradient(circle,rgba(79,195,255,.11),transparent 60%);pointer-events:none}
+    background:radial-gradient(circle,rgba(33,160,255,.18),transparent 62%);pointer-events:none}
+  #plans::after{content:'';position:absolute;right:-200px;bottom:60px;width:560px;height:560px;border-radius:50%;
+    background:radial-gradient(circle,rgba(79,195,255,.15),transparent 60%);pointer-events:none}
   #faq::before{content:'';position:absolute;left:-220px;top:100px;width:560px;height:560px;border-radius:50%;
-    background:radial-gradient(circle,rgba(33,160,255,.13),transparent 60%);pointer-events:none}
+    background:radial-gradient(circle,rgba(33,160,255,.15),transparent 60%);pointer-events:none}
+  #faq::after{content:'';position:absolute;right:-160px;top:30%;width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle,rgba(33,160,255,.14),transparent 60%);pointer-events:none}
   #income{position:relative;overflow:hidden;padding-top:48px;padding-bottom:52px}
   #faq{padding-top:52px;padding-bottom:52px}
   #income::before{content:'';position:absolute;left:-180px;top:140px;width:540px;height:540px;border-radius:50%;
@@ -392,6 +394,12 @@
   .plan .btn{text-align:center;width:100%}
 
   /* ================= блок 5: финал + форма ================= */
+  .final{position:relative;overflow:hidden}
+  .final .wrap{position:relative;z-index:1}
+  .final::before{content:'';position:absolute;left:-220px;top:14%;width:620px;height:620px;border-radius:50%;
+    background:radial-gradient(circle,rgba(33,160,255,.16),transparent 60%);pointer-events:none}
+  .final::after{content:'';position:absolute;right:-240px;bottom:-140px;width:680px;height:680px;border-radius:50%;
+    background:radial-gradient(circle,rgba(79,195,255,.14),transparent 60%);pointer-events:none}
   .final .panel{
     position:relative;border-radius:32px;padding:72px 64px;color:#fff;overflow:hidden;
     display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
