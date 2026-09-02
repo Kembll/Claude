@@ -218,15 +218,6 @@
     border-top:2px solid rgba(79,195,255,.75);border-left:2px solid rgba(79,195,255,.75);border-radius:8px 0 0 0}
   .pc-corners::after{content:'';position:absolute;bottom:0;right:0;width:28px;height:28px;
     border-bottom:2px solid rgba(79,195,255,.75);border-right:2px solid rgba(79,195,255,.75);border-radius:0 0 8px 0}
-  .scroll-hint{
-    position:absolute;left:50%;bottom:12px;transform:translateX(-50%);z-index:3;
-    display:flex;flex-direction:column;align-items:center;gap:7px;
-    color:var(--muted);font-size:10.5px;font-family:var(--mono);letter-spacing:.24em;text-transform:uppercase;
-  }
-  .scroll-hint i{width:22px;height:34px;border:1.5px solid var(--line-strong);border-radius:100px;position:relative}
-  .scroll-hint i::after{content:'';position:absolute;left:50%;top:6px;width:4px;height:8px;margin-left:-2px;
-    border-radius:2px;background:var(--cyan);animation:wheel 1.8s ease-in-out infinite}
-  @keyframes wheel{0%{opacity:1;transform:translateY(0)}70%{opacity:0;transform:translateY(12px)}100%{opacity:0}}
   .prog{overflow:hidden}
   .prog::after{
     content:attr(data-n);position:absolute;right:10px;bottom:-22px;line-height:1;
@@ -455,7 +446,6 @@
     html{scroll-behavior:auto}
     .reveal{opacity:1;transform:none;transition:none}
     .fm{animation:none}
-    .scroll-hint i::after{animation:none}
     .btn:hover,.value:hover,.prog:hover,.nav-links a:hover{transform:none}
     .nav-cta:hover::before,.btn-primary:hover::before{animation:none}
     .modal .form-card{animation:none}
@@ -539,7 +529,6 @@
         </div>
       </div>
     </div>
-    <div class="scroll-hint" aria-hidden="true"><i></i>листайте</div>
   </div>
 
   <!-- ============ блок 2: что получите + цифры ============ -->
