@@ -181,6 +181,8 @@
   .cred-photo{display:none} /* мобильная карточка статистики у фото, включается в media */
   .hero-feats{display:none} /* мобильный список преимуществ, включается в media */
   .ph-label{display:none}   /* мобильный лейбл секции наставника, включается в media */
+  .mob-name{display:none}   /* имя наставника на мобильном хиро, включается в media */
+  .mob-timer{display:none}  /* мобильная секция обратного отсчёта, включается в media */
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .hero-actions .btn{padding:15px 34px;font-size:16px}
 
@@ -663,17 +665,46 @@
     .ci{padding:0}
     .ci b{font-size:17px}
     .ci span{font-size:11px;margin-top:1px}
-    /* билетные строки — в самый верх, над заголовком */
-    .chips{order:-1;margin:0 0 16px;padding-top:0}
-    /* цифры и кнопки — ниже к краю экрана */
-    .hero-left{padding-bottom:60px}
+    /* плашки потока с хиро убраны — их роль играет секция с таймером */
+    .chips{display:none}
+    /* первый экран: только фото + заголовок + имя; цифры и кнопки — за сгибом */
+    .hero-left{min-height:0;padding-bottom:36px}
+    .hero{padding-top:44px}
+    h1{font-size:34px}
+    .h1-line{margin-bottom:0}
+    .mob-name{display:block;margin-top:calc(100lvh - 300px);
+      font-size:15px;font-weight:600;color:#fff;text-align:center;
+      text-shadow:0 2px 14px rgba(2,7,15,.9)}
+    .mob-name::before{content:'';display:block;width:34px;height:2px;margin:0 auto 10px;
+      background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+    .cred{margin-top:112px}
+    .hero-actions{margin-top:16px}
     /* «Программа курса» — чистая текстовая ссылка, без плашки */
     .hero-actions .btn-ghost{background:none;border:none;box-shadow:none;backdrop-filter:none}
     .hero-actions .btn-ghost::before{display:none}
-    .photo-card img{top:-260px;bottom:0;height:calc(100% + 260px);object-position:50% 100%}
+    /* фото занимает ровно первый экран, максимально отдалено (без доп. зума) */
+    .hero-side{top:-54px;bottom:auto;height:100lvh}
+    .photo-card img{top:0;bottom:0;height:100%;object-position:50% 0}
     .photo-card::after{background:linear-gradient(180deg,
-      rgba(2,7,15,.93) 0%,rgba(2,7,15,.40) 26%,rgba(2,7,15,.24) 40%,
-      rgba(2,7,15,.68) 56%,rgba(2,7,15,.96) 74%)}
+      rgba(2,7,15,.90) 0%,rgba(2,7,15,.34) 26%,rgba(2,7,15,.22) 46%,
+      rgba(2,7,15,.55) 72%,var(--bg) 99%)}
+
+    /* секция обратного отсчёта */
+    .mob-timer{display:block;padding:26px 0 8px;text-align:center}
+    .mt-t{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;
+      text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+    .mt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+    .mt-grid>div{padding:12px 4px;border-radius:14px;
+      background:linear-gradient(160deg,rgba(16,42,74,.65),rgba(7,24,44,.78));
+      border:1px solid var(--line)}
+    .mt-grid b{font-family:var(--mono);font-size:24px;font-weight:500;color:#fff;
+      display:block;font-variant-numeric:tabular-nums}
+    .mt-grid span{display:block;font-size:10.5px;color:var(--muted);margin-top:2px}
+    .mt-note{font-size:14px;font-weight:600;color:#fff;margin-bottom:14px}
+    .mt-note::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;
+      background:var(--cyan);margin-right:8px;vertical-align:1px;
+      box-shadow:0 0 12px var(--glow);animation:dotpulse 2s ease-in-out infinite}
+    .mob-timer .btn{width:100%}
   }
 </style>
 
@@ -713,6 +744,7 @@
           <p class="kicker">Экспресс-курс · с нуля</p>
           <h1><span class="grad">Таргетология</span></h1>
           <p class="h1-line">от новичка до специалиста <em>за 1 месяц</em></p>
+          <p class="mob-name">Илья Камбалин · наставник курса</p>
           <p class="hero-sub"><span class="only-d">После выпуска вы не останетесь один на один с рынком: <b>лучшим ученикам передаю своих первых клиентов</b> и приглашаю в мою команду работать на постоянной основе.</span><span class="only-m">После выпуска не оставлю один на один с рынком: <b>лучшим ученикам передаю своих первых клиентов</b> и приглашаю работать в моей команде.</span></p>
           <!-- мобильный список преимуществ (на десктопе скрыт) -->
           <ul class="hero-feats">
@@ -757,6 +789,21 @@
       </div>
     </div>
   </div>
+
+  <!-- мобильная секция срочности: обратный отсчёт до старта (на десктопе скрыта) -->
+  <section class="mob-timer" aria-label="До старта потока">
+    <div class="wrap">
+      <p class="mt-t">До старта потока №1</p>
+      <div class="mt-grid">
+        <div><b id="cd-d">—</b><span>дней</span></div>
+        <div><b id="cd-h">—</b><span>часов</span></div>
+        <div><b id="cd-m">—</b><span>минут</span></div>
+        <div><b id="cd-s">—</b><span>секунд</span></div>
+      </div>
+      <p class="mt-note">Осталось 11 мест из 30</p>
+      <button class="btn btn-primary js-open" type="button">Занять место</button>
+    </div>
+  </section>
 
   <!-- ============ блок 2: что получите + цифры ============ -->
   <!-- ============ блок 2: калькулятор дохода ============ -->
@@ -1222,6 +1269,25 @@
     r.addEventListener('input',upd);
     r.addEventListener('change',()=>{r.value=Math.round(+r.value);r.style.setProperty('--fill',((r.value-1)/4*100)+'%')});
     upd();
+  })();
+
+  // обратный отсчёт до старта потока (мобильная секция)
+  (function(){
+    const d=document.getElementById('cd-d');
+    if(!d)return;
+    const h=document.getElementById('cd-h'),m=document.getElementById('cd-m'),s=document.getElementById('cd-s');
+    const target=new Date('2026-09-15T00:00:00+03:00').getTime();
+    function two(n){return String(n).padStart(2,'0')}
+    function tick(){
+      let ms=target-Date.now();
+      if(ms<0)ms=0;
+      const sec=Math.floor(ms/1000);
+      d.textContent=Math.floor(sec/86400);
+      h.textContent=two(Math.floor(sec%86400/3600));
+      m.textContent=two(Math.floor(sec%3600/60));
+      s.textContent=two(sec%60);
+    }
+    tick();setInterval(tick,1000);
   })();
 
   // модалка
