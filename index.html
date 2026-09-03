@@ -569,7 +569,7 @@
     .hero-left::before{display:none}
     /* высота первого экрана: кнопка выше панели Safari, фото за сгибом
        (lvh — полная высота экрана iOS) */
-    .hero-left{min-height:calc(100vh/var(--z,1) - 88px);min-height:calc(100lvh/var(--z,1) - 88px);padding-bottom:96px}
+    .hero-left{min-height:844px;padding-bottom:96px}
     /* порядок на телефоне: текст вверху → (растяжка) → плашки → кнопки внизу.
        Статистика с первого экрана убрана — она в карточке у фото */
     .cred{display:none}
@@ -696,7 +696,7 @@
     /* плашки потока с хиро убраны — их роль играет секция с таймером */
     .chips{display:none}
     /* первый экран: фото + заголовок (чуть ниже) + имя + цифры + кнопки внизу */
-    .hero-left{min-height:calc(100vh/var(--z,1) - 88px);min-height:calc(100lvh/var(--z,1) - 88px);padding-bottom:14px}
+    .hero-left{min-height:844px;padding-bottom:14px}
     .hero{padding-top:64px;padding-bottom:0}
     h1{font-size:38px}
     h1 .grad{background:linear-gradient(100deg,#5BC8FF 5%,#CFEBFF 50%,#2BA8FF);
@@ -764,7 +764,7 @@
 
     /* секция акции: полноэкранная, мост-переход, свечения и метрики */
     .mob-timer{display:flex;flex-direction:column;justify-content:center;
-      min-height:calc(100lvh/var(--z,1) - 60px);padding:28px 0 44px;text-align:center;
+      min-height:700px;padding:28px 0 44px;text-align:center;
       position:relative;overflow:hidden}
     .mob-timer::after{content:'';position:absolute;left:50%;top:34%;
       transform:translate(-50%,-50%);width:560px;height:560px;border-radius:50%;
