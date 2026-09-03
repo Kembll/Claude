@@ -526,7 +526,7 @@
        на первом экране остаётся одна большая кнопка */
     .nav-cta{display:none}
     header.scrolled .nav-cta{display:block}
-    .nav{height:64px}
+    .nav{height:52px}
     /* плашки потока → «билетный» блок: строка-анонс + счётчик мест с пульсом */
     .chips{flex-direction:column;gap:7px;align-items:center;flex-wrap:nowrap;margin-bottom:12px}
     .chip{background:none;border:none;padding:0;box-shadow:none;white-space:nowrap}
@@ -687,13 +687,13 @@
     /* шапка отделена тонкой линией от заголовка */
     header{border-bottom:1px solid rgba(126,193,255,.22)}
     /* бургер-меню с оглавлением сайта */
-    .logo svg{width:40px;height:40px}
+    .logo svg{width:36px;height:36px}
     .nav-burger{display:flex;align-items:center;justify-content:center;
-      width:40px;height:40px;margin-left:auto;border-radius:12px;cursor:pointer;
+      width:36px;height:36px;margin-left:auto;border-radius:11px;cursor:pointer;
       border:1px solid var(--line-strong);background:rgba(33,160,255,.14);
       backdrop-filter:blur(10px)}
     #hdr.menu-open .nav-links{display:flex;flex-direction:column;gap:2px;
-      position:absolute;top:60px;right:16px;padding:10px;border-radius:16px;
+      position:absolute;top:50px;right:16px;padding:10px;border-radius:16px;
       background:linear-gradient(160deg,rgba(10,26,48,.97),rgba(5,16,32,.99));
       border:1px solid var(--line-strong);box-shadow:0 20px 50px -12px rgba(0,0,0,.8)}
     #hdr.menu-open .nav-links a{display:block;padding:11px 20px;font-size:15px;
@@ -703,11 +703,11 @@
     .hero-actions .btn-ghost{background:none;border:none;box-shadow:none;backdrop-filter:none}
     .hero-actions .btn-ghost::before{display:none}
     /* фото занимает ровно первый экран, максимально отдалено (без доп. зума) */
-    .hero-side{top:-124px;bottom:auto;height:78lvh}
-    .photo-card img{top:0;bottom:0;height:100%;object-position:50% 0}
+    .hero-side{top:-52px;bottom:-56px;height:auto}
+    .photo-card img{top:0;bottom:0;height:100%;object-position:50% 0%}
     .photo-card::after{background:linear-gradient(180deg,
-      rgba(2,7,15,.90) 0%,rgba(2,7,15,.34) 26%,rgba(2,7,15,.22) 46%,
-      rgba(2,7,15,.60) 70%,var(--bg) 94%)}
+      rgba(2,7,15,.90) 0%,rgba(2,7,15,.34) 24%,rgba(2,7,15,.22) 42%,
+      rgba(2,7,15,.72) 60%,rgba(2,7,15,.94) 80%)}
 
     /* секция обратного отсчёта — отдельный экран со скидкой */
     .mob-timer{display:flex;flex-direction:column;justify-content:center;
