@@ -177,6 +177,7 @@
     padding-left:18px;border-left:2px solid rgba(79,195,255,.5);
   }
   .hero-sub b{color:#fff;font-weight:600}
+  .only-m{display:none} /* короткая мобильная версия текста, включается в media */
   .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .hero-actions .btn{padding:15px 34px;font-size:16px}
 
@@ -545,10 +546,15 @@
     /* первый экран телефона занят текстом целиком — фото начинается ниже сгиба:
        блок статистики прижат к низу первого экрана */
     .hero-left::before{display:none}
-    /* lvh — полная высота экрана iOS вместе с областью под панелью Safari,
-       иначе фото выглядывает из-под неё */
-    .hero-left{min-height:calc(100vh - 78px);min-height:calc(100lvh - 78px)}
+    /* lvh — полная высота экрана iOS вместе с областью под панелью Safari.
+       Запас -30px гарантирует, что фото не выглянет, а padding-bottom
+       поднимает статистику над нижней панелью Safari */
+    .hero-left{min-height:calc(100vh - 30px);min-height:calc(100lvh - 30px);padding-bottom:96px}
     .cred{margin-top:auto;padding-top:16px;row-gap:14px}
+    /* меньше текста на первом экране */
+    .kicker{display:none}
+    .only-d{display:none}
+    .only-m{display:inline}
     /* пилюля «за 1 месяц» отделена от текста рядом */
     .h1-line em{display:inline-block;margin:10px 0 0 12px}
 
@@ -611,7 +617,7 @@
           <p class="kicker">Экспресс-курс · с нуля</p>
           <h1><span class="grad">Таргетология</span></h1>
           <p class="h1-line">от новичка до специалиста <em>за 1 месяц</em></p>
-          <p class="hero-sub">После выпуска вы не останетесь один на один с рынком: <b>лучшим ученикам передаю своих первых клиентов</b> и приглашаю в мою команду работать на постоянной основе.</p>
+          <p class="hero-sub"><span class="only-d">После выпуска вы не останетесь один на один с рынком: <b>лучшим ученикам передаю своих первых клиентов</b> и приглашаю в мою команду работать на постоянной основе.</span><span class="only-m"><b>Лучшим ученикам передаю первых клиентов</b> и приглашаю в свою команду.</span></p>
           <div class="hero-actions">
             <button class="btn btn-primary js-open" type="button">Занять место</button>
             <a class="btn btn-ghost" href="#program">Программа курса <span aria-hidden="true" style="color:var(--cyan)">→</span></a>
