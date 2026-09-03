@@ -651,6 +651,23 @@
     .plan .who{margin-bottom:16px}
     .per{margin-bottom:16px}
     .plan ul{gap:9px;margin-bottom:20px}
+
+    /* ===== фото-хиро v2: минимум текста, цифры наставника на первом экране =====
+       (блок в конце media-запроса, чтобы переопределить правила выше) */
+    p.kicker{display:none}
+    .hero-sub{display:none}
+    .cred-photo{display:none}
+    .cred{display:grid;grid-template-columns:1fr 1fr;row-gap:12px;column-gap:8px;
+      margin-top:auto;order:8;padding:14px 10px;border-radius:16px;
+      background:rgba(4,14,28,.52);border:1px solid var(--line);backdrop-filter:blur(8px)}
+    .ci{padding:0}
+    .ci b{font-size:17px}
+    .ci span{font-size:11px;margin-top:1px}
+    .chips{margin:12px 0 0;padding-top:0}
+    .photo-card img{top:-260px;bottom:0;height:calc(100% + 260px);object-position:50% 100%}
+    .photo-card::after{background:linear-gradient(180deg,
+      rgba(2,7,15,.93) 0%,rgba(2,7,15,.40) 26%,rgba(2,7,15,.24) 40%,
+      rgba(2,7,15,.68) 56%,rgba(2,7,15,.96) 74%)}
   }
 </style>
 
