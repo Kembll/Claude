@@ -1070,11 +1070,16 @@
       +'📞 Телефон: '+data.phone
       +(data.plan?'\n💳 Тариф: '+data.plan:'')
       +'\n🕐 '+new Date().toLocaleString('ru-RU',{timeZone:'Europe/Moscow'})+' (МСК)';
+    // Таймаут 8с: у части провайдеров api.telegram.org заблокирован,
+    // без него кнопка висит на «Отправляем…» минуту и дольше.
+    const ctrl=new AbortController();
+    const t=setTimeout(()=>ctrl.abort(),8000);
     return fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({chat_id:TG_CHAT,text:text})
-    });
+      body:JSON.stringify({chat_id:TG_CHAT,text:text}),
+      signal:ctrl.signal
+    }).finally(()=>clearTimeout(t));
   }
 
   // маска телефона + отправка форм
