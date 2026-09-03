@@ -557,17 +557,9 @@
     /* первый экран телефона занят текстом целиком — фото начинается ниже сгиба:
        блок статистики прижат к низу первого экрана */
     .hero-left::before{display:none}
-    /* весь первый экран — одна светящаяся панель в стиле финального блока;
-       высота подобрана так, чтобы кнопки были выше панели Safari,
-       а фото начиналось за сгибом (lvh — полная высота экрана iOS) */
-    .hero-left{
-      min-height:calc(100vh - 142px);min-height:calc(100lvh - 142px);
-      padding:26px 18px 20px;border-radius:28px;
-      background:linear-gradient(165deg,rgba(30,134,228,.26),rgba(11,60,120,.42)),
-                 linear-gradient(160deg,rgba(16,42,74,.88),rgba(7,24,44,.94));
-      border:1px solid var(--line-strong);
-      box-shadow:0 0 70px -18px var(--glow),0 30px 70px -30px rgba(0,0,0,.7);
-    }
+    /* высота первого экрана: кнопка выше панели Safari, фото за сгибом
+       (lvh — полная высота экрана iOS) */
+    .hero-left{min-height:calc(100vh - 88px);min-height:calc(100lvh - 88px);padding-bottom:96px}
     /* порядок на телефоне: текст вверху → (растяжка) → плашки → кнопки внизу.
        Статистика с первого экрана убрана — она в карточке у фото */
     .cred{display:none}
@@ -607,18 +599,21 @@
     h1{margin-bottom:10px}
     .h1-line{font-size:18px;line-height:1.5;margin-bottom:18px}
     .h1-line em{display:inline-block;margin:9px 0 0;padding:5px 16px;font-size:16px}
-    /* оффер — просто текст внутри панели, между тонкими линейками */
+    /* оффер в стеклянной карточке */
     .hero-sub{
-      border-left:none;background:none;padding:14px 0;margin:0 auto;max-width:37ch;
-      border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-      border-radius:0;color:#C2D8F2;text-align:center;font-size:15px;
+      border-left:none;padding:12px 16px;margin:0 auto;max-width:37ch;
+      background:linear-gradient(160deg,rgba(16,42,74,.55),rgba(7,24,44,.65));
+      border:1px solid var(--line);border-radius:16px;color:#C2D8F2;
+      text-align:center;font-size:15px;
     }
-    /* преимущества — ряд маленьких чипов */
-    .hero-feats{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;
-      gap:7px;margin:16px auto 0;list-style:none;padding:0}
-    .hero-feats li{font-size:12px;color:#C2D8F2;padding:7px 12px;border-radius:100px;
-      border:1px solid var(--line);background:rgba(33,160,255,.10);white-space:nowrap}
-    .hero-feats li::before{content:none}
+    /* преимущества — список с алмазиками */
+    .hero-feats{display:flex;flex-direction:column;gap:9px;margin:18px auto 0;
+      list-style:none;padding:0}
+    .hero-feats li{font-size:14.5px;color:#C2D8F2}
+    .hero-feats li::before{content:'✦';color:var(--cyan);margin-right:9px;font-size:12px}
+    /* концепция «одно действие»: вторичная кнопка — текстовая ссылка */
+    .hero-actions .btn-ghost{background:none;border:none;box-shadow:none;
+      padding:10px 0 0;font-size:15px;color:var(--cyan);width:auto;margin:0 auto}
     .cred,.ci{text-align:center}
 
     /* компактный калькулятор */
