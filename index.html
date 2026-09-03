@@ -663,7 +663,13 @@
     .ci{padding:0}
     .ci b{font-size:17px}
     .ci span{font-size:11px;margin-top:1px}
-    .chips{margin:12px 0 0;padding-top:0}
+    /* билетные строки — в самый верх, над заголовком */
+    .chips{order:-1;margin:0 0 16px;padding-top:0}
+    /* цифры и кнопки — ниже к краю экрана */
+    .hero-left{padding-bottom:60px}
+    /* «Программа курса» — чистая текстовая ссылка, без плашки */
+    .hero-actions .btn-ghost{background:none;border:none;box-shadow:none;backdrop-filter:none}
+    .hero-actions .btn-ghost::before{display:none}
     .photo-card img{top:-260px;bottom:0;height:calc(100% + 260px);object-position:50% 100%}
     .photo-card::after{background:linear-gradient(180deg,
       rgba(2,7,15,.93) 0%,rgba(2,7,15,.40) 26%,rgba(2,7,15,.24) 40%,
