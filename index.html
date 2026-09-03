@@ -948,28 +948,17 @@
     draw();
   })();
 
-  // масштаб рабочего стола: на широких экранах сайт увеличивается пропорционально,
-  // сохраняя те же соотношения, что на экране 1440px (мобильная версия не затрагивается)
+  // масштаб рабочего стола: широкие экраны увеличиваются до вида MacBook (1440x830),
+  // масштаб ограничен и шириной, и высотой — первый экран всегда влезает целиком
   (function(){
-    const BASE=1440;
+    const BW=1440, BH=830;
     function fit(){
-      const w=window.innerWidth*(document.documentElement.style.zoom?parseFloat(document.documentElement.style.zoom):1);
-      const real=window.outerWidth||w;
-      const width=Math.max(w,real);
-      if(width>BASE){
-        document.documentElement.style.zoom=(width/BASE).toFixed(4);
-      }else{
-        document.documentElement.style.zoom='';
-      }
-    }
-    // считаем по фактическому окну, не зависящему от уже применённого zoom
-    function fitSafe(){
       document.documentElement.style.zoom='';
-      const width=window.innerWidth;
-      if(width>BASE) document.documentElement.style.zoom=(width/BASE).toFixed(4);
+      const z=Math.min(window.innerWidth/BW, window.innerHeight/BH);
+      if(z>1.02) document.documentElement.style.zoom=z.toFixed(4);
     }
-    fitSafe();
-    addEventListener('resize',fitSafe);
+    fit();
+    addEventListener('resize',fit);
   })();
 
   // хедер: подложка после прокрутки
