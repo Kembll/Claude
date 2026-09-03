@@ -669,8 +669,8 @@
     /* плашки потока с хиро убраны — их роль играет секция с таймером */
     .chips{display:none}
     /* первый экран: фото + заголовок (чуть ниже) + имя + цифры + кнопки внизу */
-    .hero-left{min-height:calc(100vh - 88px);min-height:calc(100lvh - 88px);padding-bottom:30px}
-    .hero{padding-top:64px}
+    .hero-left{min-height:calc(100vh - 88px);min-height:calc(100lvh - 88px);padding-bottom:14px}
+    .hero{padding-top:64px;padding-bottom:0}
     h1{font-size:34px}
     .h1-line{margin-bottom:0}
     .mob-name{display:block;margin-top:auto;
@@ -703,7 +703,7 @@
     .hero-actions .btn-ghost{background:none;border:none;box-shadow:none;backdrop-filter:none}
     .hero-actions .btn-ghost::before{display:none}
     /* фото занимает ровно первый экран, максимально отдалено (без доп. зума) */
-    .hero-side{top:-52px;bottom:-56px;height:auto}
+    .hero-side{top:-52px;bottom:0;height:auto}
     .photo-card img{top:-130px;bottom:0;height:calc(100% + 130px);object-position:50% 100%}
     .photo-card::after{background:linear-gradient(180deg,
       rgba(2,7,15,.90) 0%,rgba(2,7,15,.34) 24%,rgba(2,7,15,.22) 42%,
@@ -711,7 +711,7 @@
 
     /* секция обратного отсчёта — отдельный экран со скидкой */
     .mob-timer{display:flex;flex-direction:column;justify-content:center;
-      min-height:calc(100lvh - 140px);padding:40px 0 24px;text-align:center}
+      min-height:calc(100lvh - 320px);padding:40px 0 24px;text-align:center}
     .mt-sale{margin-bottom:12px;font-size:15px;color:#EAF4FF;
       display:inline-block;align-self:center;padding:9px 18px;border-radius:100px;
       background:linear-gradient(120deg,rgba(33,160,255,.22),rgba(11,60,120,.30));
