@@ -725,7 +725,7 @@
     .hero-actions .btn-ghost{background:none;border:none;box-shadow:none;backdrop-filter:none}
     .hero-actions .btn-ghost::before{display:none}
     /* фото занимает ровно первый экран, максимально отдалено (без доп. зума) */
-    .hero-side{top:-52px;bottom:0;height:auto}
+    .hero-side{top:-84px;bottom:0;height:auto}
     .photo-card img{top:-60px;bottom:0;height:calc(100% + 60px);object-position:50% 100%}
     .photo-card::after{background:linear-gradient(180deg,
       rgba(2,7,15,.80) 0%,rgba(2,7,15,.24) 24%,rgba(2,7,15,.14) 42%,
@@ -735,14 +735,10 @@
     .mob-timer{display:flex;flex-direction:column;justify-content:center;
       min-height:calc(100lvh - 60px);padding:28px 0 44px;text-align:center;
       position:relative;overflow:hidden}
-    .mob-timer::after{content:'';position:absolute;left:-150px;top:6%;
-      width:430px;height:430px;border-radius:50%;pointer-events:none;
-      background:radial-gradient(circle,rgba(33,160,255,.15),transparent 62%)}
-    .mob-timer .reticle{left:auto;right:-170px;bottom:-130px;top:auto}
-    .mt-fm{position:absolute;font-family:var(--mono);font-size:12px;
-      color:rgba(159,219,255,.55);letter-spacing:.08em;pointer-events:none;
-      animation:mtfloat 9s ease-in-out infinite}
-    @keyframes mtfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+    .mob-timer::after{content:'';position:absolute;left:50%;top:34%;
+      transform:translate(-50%,-50%);width:560px;height:560px;border-radius:50%;
+      pointer-events:none;
+      background:radial-gradient(circle,rgba(33,160,255,.12),transparent 60%)}
     .mob-timer::before{content:'';display:block;width:2px;height:46px;margin:0 auto 24px;
       background:linear-gradient(180deg,transparent,var(--cyan))}
     .mt-sale{margin:0 0 6px;font-size:19px;color:#EAF4FF;font-weight:600}
@@ -870,10 +866,7 @@
 
   <!-- мобильная секция срочности: обратный отсчёт до старта (на десктопе скрыта) -->
   <section class="mob-timer" aria-label="До старта потока">
-    <div class="reticle" aria-hidden="true"></div>
     <div class="wrap">
-      <span class="mt-fm" style="top:11%;right:7%;animation-delay:-3s">CTR 2,4%</span>
-      <span class="mt-fm" style="bottom:16%;left:6%">CPL 116 ₽</span>
       <p class="mt-t">Акция потока №1 · до старта</p>
       <div class="mt-grid">
         <div><b id="cd-d">—</b><span>дней</span></div>
