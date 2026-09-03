@@ -728,13 +728,15 @@
     /* фото занимает ровно первый экран, максимально отдалено (без доп. зума) */
     .hero-side{top:-84px;bottom:0;height:auto}
     /* фото видно целиком, фоном — его размытая копия */
-    .photo-card img{top:46%;bottom:auto;transform:translateY(-50%);
-      width:100%;height:auto;object-fit:contain;object-position:center}
+    .photo-card img{top:41%;bottom:auto;left:-4%;transform:translateY(-50%);
+      width:108%;height:auto;object-fit:contain;object-position:center;
+      -webkit-mask-image:linear-gradient(180deg,#000 84%,transparent 99%);
+      mask-image:linear-gradient(180deg,#000 84%,transparent 99%)}
     .bg-blur{display:block;position:absolute;inset:0;width:100%;height:100%;
-      filter:blur(26px) brightness(.8) saturate(1.15);transform:scale(1.2)}
+      filter:blur(26px) brightness(.95) saturate(1.15);transform:translateY(9%) scale(1.35)}
     .photo-card::after{background:linear-gradient(180deg,
-      rgba(2,7,15,.80) 0%,rgba(2,7,15,.24) 24%,rgba(2,7,15,.14) 42%,
-      rgba(2,7,15,.58) 62%,rgba(3,10,20,.88) 80%,var(--bg) 98%)}
+      rgba(2,7,15,.80) 0%,rgba(2,7,15,.24) 24%,rgba(2,7,15,.14) 44%,
+      rgba(2,7,15,.30) 62%,rgba(2,7,15,.46) 78%,rgba(3,10,20,.72) 92%,var(--bg) 100%)}
 
     /* секция акции: полноэкранная, мост-переход, свечения и метрики */
     .mob-timer{display:flex;flex-direction:column;justify-content:center;
