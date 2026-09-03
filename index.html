@@ -265,14 +265,16 @@
     background:radial-gradient(circle,rgba(33,160,255,.18),transparent 62%);pointer-events:none}
   #plans::after{content:'';position:absolute;right:-200px;bottom:60px;width:560px;height:560px;border-radius:50%;
     background:radial-gradient(circle,rgba(79,195,255,.15),transparent 60%);pointer-events:none}
-  #faq::before{content:'';position:absolute;left:-220px;top:100px;width:560px;height:560px;border-radius:50%;
-    background:radial-gradient(circle,rgba(33,160,255,.11),transparent 60%);pointer-events:none}
-  #faq::after{content:'';position:absolute;right:-160px;top:30%;width:600px;height:600px;border-radius:50%;
-    background:radial-gradient(circle,rgba(33,160,255,.14),transparent 60%);pointer-events:none}
+  #faq::before{content:'';position:absolute;left:-200px;top:60px;width:660px;height:660px;border-radius:50%;
+    background:radial-gradient(circle,rgba(33,160,255,.22),transparent 62%);pointer-events:none}
+  #faq::after{content:'';position:absolute;right:-140px;top:24%;width:700px;height:700px;border-radius:50%;
+    background:radial-gradient(circle,rgba(33,160,255,.19),transparent 62%);pointer-events:none}
+  .faq-glow{position:absolute;left:50%;bottom:-240px;width:1000px;height:520px;transform:translateX(-50%);border-radius:50%;
+    background:radial-gradient(ellipse,rgba(11,111,216,.20),transparent 65%);pointer-events:none}
   #income{position:relative;overflow:hidden;padding-top:48px;padding-bottom:52px}
   #faq{padding-top:52px;padding-bottom:52px}
   #income::before{content:'';position:absolute;left:-180px;top:140px;width:540px;height:540px;border-radius:50%;
-    background:radial-gradient(circle,rgba(33,160,255,.15),transparent 60%);pointer-events:none}
+    background:radial-gradient(circle,rgba(33,160,255,.11),transparent 60%);pointer-events:none}
   .calc{
     padding:48px 52px;border-radius:32px;
     display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;
@@ -732,6 +734,7 @@
   <!-- ============ блок 5: финал + форма ============ -->
   <!-- ============ блок 3: вопросы ============ -->
   <section id="faq">
+    <div class="faq-glow" aria-hidden="true"></div>
     <div class="reticle" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head reveal">
