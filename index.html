@@ -550,7 +550,9 @@
        Запас -30px гарантирует, что фото не выглянет, а padding-bottom
        поднимает статистику над нижней панелью Safari */
     .hero-left{min-height:calc(100vh - 30px);min-height:calc(100lvh - 30px);padding-bottom:96px}
-    .cred{margin-top:auto;padding-top:16px;row-gap:14px}
+    /* порядок на телефоне: текст → статистика → (растяжка) → кнопки внизу экрана */
+    .cred{margin-top:22px;padding-top:18px;row-gap:14px}
+    .hero-actions{order:10;margin-top:auto;padding-top:26px}
     /* меньше текста на первом экране */
     .kicker{display:none}
     .only-d{display:none}
