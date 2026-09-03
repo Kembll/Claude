@@ -186,9 +186,9 @@
     border:1px solid var(--line-strong);
     box-shadow:0 0 70px -14px var(--glow),0 40px 90px -30px rgba(0,0,0,.85);
   }
-  /* правка по просьбе владельца: человек чуть выше в кадре — картинка выступает на 46px
-     ниже рамки (обрезается overflow:hidden), сама рамка не менялась */
-  .photo-card img{position:absolute;left:0;right:0;top:0;bottom:-46px;width:100%;height:calc(100% + 46px);object-fit:cover;object-position:50% 100%}
+  /* правка по просьбе владельца: человек чуть выше в кадре — картинка выступает на 110px
+     выше рамки (низ прижат, верх с небом обрезается overflow:hidden), сама рамка не менялась */
+  .photo-card img{position:absolute;left:0;right:0;top:-110px;bottom:0;width:100%;height:calc(100% + 110px);object-fit:cover;object-position:50% 100%}
 
   .photo-card::after{content:'';position:absolute;inset:0;pointer-events:none;
     background:linear-gradient(180deg,rgba(2,7,15,0) 52%,rgba(2,7,15,.45) 78%,rgba(2,7,15,.92))}
@@ -490,7 +490,7 @@
     .hero-top{grid-template-columns:1fr}
     .photo-card{min-height:460px}
     .cred{margin-top:26px}
-    .photo-card img{object-position:50% 18%;bottom:0;height:100%}
+    .photo-card img{object-position:50% 18%;top:0;bottom:0;height:100%}
     .hero-left{margin-left:0}
     .hero-side{margin-right:0}
     .cred{display:grid;grid-template-columns:1fr 1fr;row-gap:18px;column-gap:20px}
