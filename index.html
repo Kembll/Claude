@@ -684,6 +684,8 @@
     .hero-actions{margin-top:10px}
     .hero-actions .btn-primary{padding:12px 24px;font-size:15px}
     .hero-actions .btn-ghost{display:none}
+    /* шапка отделена тонкой линией от заголовка */
+    header{border-bottom:1px solid rgba(126,193,255,.22)}
     /* бургер-меню с оглавлением сайта */
     .logo svg{width:40px;height:40px}
     .nav-burger{display:flex;align-items:center;justify-content:center;
@@ -701,11 +703,11 @@
     .hero-actions .btn-ghost{background:none;border:none;box-shadow:none;backdrop-filter:none}
     .hero-actions .btn-ghost::before{display:none}
     /* фото занимает ровно первый экран, максимально отдалено (без доп. зума) */
-    .hero-side{top:-54px;bottom:auto;height:78lvh}
+    .hero-side{top:-124px;bottom:auto;height:78lvh}
     .photo-card img{top:0;bottom:0;height:100%;object-position:50% 0}
     .photo-card::after{background:linear-gradient(180deg,
       rgba(2,7,15,.90) 0%,rgba(2,7,15,.34) 26%,rgba(2,7,15,.22) 46%,
-      rgba(2,7,15,.55) 72%,var(--bg) 99%)}
+      rgba(2,7,15,.60) 70%,var(--bg) 94%)}
 
     /* секция обратного отсчёта — отдельный экран со скидкой */
     .mob-timer{display:flex;flex-direction:column;justify-content:center;
