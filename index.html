@@ -555,8 +555,14 @@
     .kicker{display:none}
     .only-d{display:none}
     .only-m{display:inline}
-    /* пилюля «за 1 месяц» отделена от текста рядом */
-    .h1-line em{display:inline-block;margin:10px 0 0 12px}
+    /* верхний блок — простая иерархия: заголовок, одна фраза-подзаголовок
+       («за 1 месяц» — выделенное слово, а не отдельная плашка), короткий оффер */
+    .chips{margin-bottom:18px}
+    h1{margin-bottom:8px}
+    .h1-line{font-size:19px;line-height:1.45;margin-bottom:16px}
+    .h1-line em{background:none;border:none;padding:0;margin:0;box-shadow:none;
+      color:var(--cyan);font-weight:600;white-space:nowrap}
+    .hero-sub{border-left:none;padding-left:0;color:#A9C4E4;margin-bottom:26px}
 
     /* компактный калькулятор */
     .calc{padding:22px 16px;gap:20px}
