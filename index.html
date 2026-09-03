@@ -560,12 +560,12 @@
     /* lvh — полная высота экрана iOS вместе с областью под панелью Safari.
        Запас -30px гарантирует, что фото не выглянет, а padding-bottom
        поднимает статистику над нижней панелью Safari */
-    .hero-left{min-height:calc(100vh - 30px);min-height:calc(100lvh - 30px);padding-bottom:96px}
+    .hero-left{min-height:calc(100vh - 88px);min-height:calc(100lvh - 88px);padding-bottom:96px}
     /* порядок на телефоне: текст вверху → (растяжка) → плашки → кнопки внизу.
        Статистика с первого экрана убрана — она в карточке у фото */
     .cred{display:none}
-    .chips{order:9;margin:auto 0 0;padding-top:26px}
-    .hero-actions{order:10;margin-top:16px}
+    .chips{order:9;margin:auto 0 0;padding-top:14px}
+    .hero-actions{order:10;margin-top:14px}
     /* в шапке телефона только иконка — слово «Таргетология» не дублирует заголовок */
     .logo{font-size:0;gap:0}
     /* экран наставника: лейбл → фото → карточка цифр с цитатой, всё на один экран */
@@ -594,18 +594,19 @@
        с плашкой → оффер → три преимущества */
     .hero-left{text-align:center}
     .chips{justify-content:center;margin-bottom:22px}
-    .kicker{display:block;font-size:11px;letter-spacing:.3em;margin-bottom:12px;text-align:center}
+    .hero{padding-top:54px}
+    .kicker{display:block;font-size:11px;letter-spacing:.3em;margin-bottom:8px;text-align:center}
     .kicker::after{display:none}
     h1{margin-bottom:10px}
-    .h1-line{font-size:18px;line-height:1.5;margin-bottom:22px}
-    .h1-line em{display:inline-block;margin:10px 0 0;padding:5px 16px;font-size:16px}
+    .h1-line{font-size:18px;line-height:1.5;margin-bottom:18px}
+    .h1-line em{display:inline-block;margin:9px 0 0;padding:5px 16px;font-size:16px}
     .hero-sub{
-      border-left:none;padding:15px 18px;margin:0 auto;max-width:34ch;
+      border-left:none;padding:12px 16px;margin:0 auto;max-width:37ch;
       background:linear-gradient(160deg,rgba(16,42,74,.55),rgba(7,24,44,.65));
       border:1px solid var(--line);border-radius:16px;color:#C2D8F2;
-      text-align:center;font-size:15.5px;
+      text-align:center;font-size:15px;
     }
-    .hero-feats{display:flex;flex-direction:column;gap:13px;margin:28px auto 0;
+    .hero-feats{display:flex;flex-direction:column;gap:9px;margin:18px auto 0;
       list-style:none;padding:0}
     .hero-feats li{font-size:14.5px;color:#C2D8F2}
     .hero-feats li::before{content:'✦';color:var(--cyan);margin-right:9px;font-size:12px}
@@ -673,9 +674,9 @@
           <p class="hero-sub"><span class="only-d">После выпуска вы не останетесь один на один с рынком: <b>лучшим ученикам передаю своих первых клиентов</b> и приглашаю в мою команду работать на постоянной основе.</span><span class="only-m">После выпуска не оставлю один на один с рынком: <b>лучшим ученикам передаю своих первых клиентов</b> и приглашаю работать в моей команде.</span></p>
           <!-- мобильный список преимуществ (на десктопе скрыт) -->
           <ul class="hero-feats">
-            <li>Первая рекламная кампания — уже на первой неделе</li>
-            <li>Работа с живыми бюджетами, а не учебные задачки</li>
-            <li>На выходе — портфолио и первые деньги с таргета</li>
+            <li>Практика с первой недели</li>
+            <li>Живые рекламные бюджеты</li>
+            <li>Портфолио и первые деньги</li>
           </ul>
           <div class="hero-actions">
             <button class="btn btn-primary js-open" type="button">Занять место</button>
