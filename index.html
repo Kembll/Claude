@@ -567,11 +567,26 @@
     .hero-actions{order:10;margin-top:14px}
     /* в шапке телефона только иконка — слово «Таргетология» не дублирует заголовок */
     .logo{font-size:0;gap:0}
-    /* экран наставника: лейбл → фото → карточка цифр с цитатой, всё на один экран */
-    .hero-side{flex-direction:column}
-    .ph-label{display:inline-block;align-self:center;order:-1}
-    .photo-card{min-height:0;height:min(380px,50vh);flex:none;margin-top:12px}
-    .cred-photo{display:block;margin-top:10px;padding:16px 14px 14px;border-radius:20px;
+    /* ===== фото-хиро: фото наставника — фон всего первого экрана ===== */
+    .hero-top{position:relative}
+    .hero-left{position:relative;z-index:1}
+    .hero-side{position:absolute;top:-54px;bottom:-56px;left:50%;width:100vw;
+      transform:translateX(-50%);z-index:0;margin:0}
+    .ph-label{display:none}
+    .photo-card{position:absolute;inset:0;height:100%;min-height:0;margin:0;flex:none;
+      border-radius:0;border:none;box-shadow:none}
+    .photo-card img{top:0;bottom:0;height:100%;object-position:50% 20%}
+    /* затемнение: сверху и снизу темно (текст читаем), в середине видно лицо */
+    .photo-card::after{background:linear-gradient(180deg,
+      rgba(2,7,15,.92) 0%,rgba(2,7,15,.42) 30%,rgba(2,7,15,.30) 46%,
+      rgba(2,7,15,.72) 62%,rgba(2,7,15,.96) 82%)}
+    .pc-corners{display:none}
+    .photo-cred{display:none}
+    /* пункты на фото не выводим — экран держит фото и оффер
+       (ul повышает специфичность над правилом со display:flex) */
+    ul.hero-feats{display:none}
+    /* карточка цифр наставника — блок сразу под фото-хиро */
+    .cred-photo{display:block;margin-top:18px;padding:16px 14px 14px;border-radius:20px;
       background:linear-gradient(160deg,rgba(16,42,74,.55),rgba(7,24,44,.65));
       border:1px solid var(--line);text-align:center}
     .cred-photo .cp-t{font-family:var(--mono);font-size:11px;letter-spacing:.2em;
@@ -704,18 +719,18 @@
               <span>Наставник курса «Таргетология»</span>
             </div>
           </div>
-          <!-- мобильная карточка статистики под фото (на десктопе скрыта) -->
-          <div class="cred-photo" aria-hidden="false">
-            <div class="cp-t">Наставник в цифрах</div>
-            <div class="cp-grid">
-              <div><b>3 года</b><span>в таргете</span></div>
-              <div><b>100+</b><span>проектов</span></div>
-              <div><b>15 млн ₽</b><span>бюджета откручено</span></div>
-              <div><b>20+ ниш</b><span>от кофеен до B2B</span></div>
-            </div>
-            <p class="cp-quote">«Моя задача — довести вас до первых клиентов, а не просто до конца курса»</p>
-          </div>
         </div>
+      </div>
+      <!-- мобильная карточка статистики наставника (на десктопе скрыта) -->
+      <div class="cred-photo" aria-hidden="false">
+        <div class="cp-t">Наставник в цифрах</div>
+        <div class="cp-grid">
+          <div><b>3 года</b><span>в таргете</span></div>
+          <div><b>100+</b><span>проектов</span></div>
+          <div><b>15 млн ₽</b><span>бюджета откручено</span></div>
+          <div><b>20+ ниш</b><span>от кофеен до B2B</span></div>
+        </div>
+        <p class="cp-quote">«Моя задача — довести вас до первых клиентов, а не просто до конца курса»</p>
       </div>
     </div>
   </div>
