@@ -551,20 +551,23 @@
        поднимает статистику над нижней панелью Safari */
     .hero-left{min-height:calc(100vh - 30px);min-height:calc(100lvh - 30px);padding-bottom:96px}
     /* порядок на телефоне: текст → статистика → (растяжка) → кнопки внизу экрана */
-    .cred{margin-top:22px;padding-top:18px;row-gap:14px}
+    .cred{margin-top:36px;padding-top:18px;row-gap:14px}
     .hero-actions{order:10;margin-top:auto;padding-top:26px}
     /* меньше текста на первом экране */
     .kicker{display:none}
     .only-d{display:none}
     .only-m{display:inline}
-    /* верхний блок — простая иерархия: заголовок, одна фраза-подзаголовок
-       («за 1 месяц» — выделенное слово, а не отдельная плашка), короткий оффер */
+    /* верхний блок — постерная иерархия: заголовок, фраза + плашка «за 1 месяц»,
+       оффер в стеклянной карточке */
     .chips{margin-bottom:18px}
     h1{margin-bottom:8px}
-    .h1-line{font-size:19px;line-height:1.45;margin-bottom:16px}
-    .h1-line em{background:none;border:none;padding:0;margin:0;box-shadow:none;
-      color:var(--cyan);font-weight:600;white-space:nowrap}
-    .hero-sub{border-left:none;padding-left:0;color:#A9C4E4;margin-bottom:26px}
+    .h1-line{font-size:19px;line-height:1.45;margin-bottom:18px}
+    .h1-line em{display:inline-block;margin:10px 0 0;padding:6px 18px}
+    .hero-sub{
+      border-left:none;padding:14px 16px;margin-bottom:0;
+      background:linear-gradient(160deg,rgba(16,42,74,.55),rgba(7,24,44,.65));
+      border:1px solid var(--line);border-radius:16px;color:#C2D8F2;
+    }
 
     /* компактный калькулятор */
     .calc{padding:22px 16px;gap:20px}
