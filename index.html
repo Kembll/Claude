@@ -668,17 +668,21 @@
     /* плашки потока с хиро убраны — их роль играет секция с таймером */
     .chips{display:none}
     /* первый экран: фото + заголовок (чуть ниже) + имя + цифры + кнопки внизу */
-    .hero-left{min-height:calc(100vh - 88px);min-height:calc(100lvh - 88px);padding-bottom:76px}
+    .hero-left{min-height:calc(100vh - 88px);min-height:calc(100lvh - 88px);padding-bottom:70px}
     .hero{padding-top:64px}
     h1{font-size:34px}
     .h1-line{margin-bottom:0}
     .mob-name{display:block;margin-top:auto;
-      font-size:15px;font-weight:600;color:#fff;text-align:center;
+      font-size:13px;font-weight:600;color:#fff;text-align:center;
       text-shadow:0 2px 14px rgba(2,7,15,.9)}
-    .mob-name::before{content:'';display:block;width:34px;height:2px;margin:0 auto 10px;
+    .mob-name::before{content:'';display:block;width:28px;height:2px;margin:0 auto 8px;
       background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
-    .cred{margin-top:18px}
-    .hero-actions{margin-top:14px}
+    .cred{margin-top:12px;padding:10px 8px;row-gap:8px}
+    .ci b{font-size:15px}
+    .ci span{font-size:10.5px}
+    .hero-actions{margin-top:10px}
+    .hero-actions .btn-primary{padding:12px 24px;font-size:15px}
+    .hero-actions .btn-ghost{font-size:14px;padding-top:6px}
     /* «Программа курса» — чистая текстовая ссылка, без плашки */
     .hero-actions .btn-ghost{background:none;border:none;box-shadow:none;backdrop-filter:none}
     .hero-actions .btn-ghost::before{display:none}
