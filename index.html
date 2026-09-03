@@ -1057,6 +1057,25 @@
     addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   })();
 
+  // === Отправка заявок в Telegram ===
+  // Токен бота (@BotFather) и chat_id получателя. Пока стоят заглушки —
+  // форма показывает «успех», но никуда не отправляет.
+  const TG_TOKEN='PASTE_BOT_TOKEN';
+  const TG_CHAT='PASTE_CHAT_ID';
+  function sendLead(data){
+    if(TG_TOKEN.indexOf('PASTE')===0)return Promise.resolve();
+    const text='🎯 Новая заявка — «Таргетология»\n\n'
+      +'👤 Имя: '+data.name+'\n'
+      +'📞 Телефон: '+data.phone
+      +(data.plan?'\n💳 Тариф: '+data.plan:'')
+      +'\n🕐 '+new Date().toLocaleString('ru-RU',{timeZone:'Europe/Moscow'})+' (МСК)';
+    return fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:TG_CHAT,text:text})
+    });
+  }
+
   // маска телефона + отправка форм
   (function(){
     document.querySelectorAll('input[type=tel]').forEach(inp=>{
@@ -1083,10 +1102,17 @@
         if(name.value.trim().split(/\s+/).length<2){name.classList.add('err');ok=false}
         if(phone.value.replace(/\D/g,'').length<11){phone.classList.add('err');ok=false}
         if(!ok)return;
-        // TODO: сюда подключить отправку в CRM/Telegram-бот:
-        // fetch('/api/lead',{method:'POST',body:new FormData(form)})
-        form.querySelectorAll('.field,button[type=submit],.form-note,h3,.fp').forEach(el=>el.style.display='none');
-        form.querySelector('.form-ok').style.display='block';
+        const btn=form.querySelector('button[type=submit]');
+        btn.disabled=true;btn.textContent='Отправляем…';
+        const plan=form.querySelector('input[name=plan]')||form.querySelector('.js-plan');
+        sendLead({
+          name:name.value.trim(),
+          phone:phone.value,
+          plan:plan?plan.value:''
+        }).catch(err=>console.warn('lead send failed',err)).finally(()=>{
+          form.querySelectorAll('.field,button[type=submit],.form-note,h3,.fp').forEach(el=>el.style.display='none');
+          form.querySelector('.form-ok').style.display='block';
+        });
       });
     });
   })();
