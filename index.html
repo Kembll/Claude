@@ -1451,7 +1451,8 @@
         planNote.textContent=plan?('Тариф «'+plan+'» — менеджер свяжется с вами сегодня'):'Заполните форму — менеджер свяжется с вами сегодня';
         modal.classList.add('open');
         document.body.style.overflow='hidden';
-        modal.querySelector('input').focus();
+        // на телефоне автофокус не ставим — иначе сразу выезжает клавиатура
+        if(window.innerWidth>560)modal.querySelector('input').focus();
       });
     });
     function close(){modal.classList.remove('open');document.body.style.overflow=''}
