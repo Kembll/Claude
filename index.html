@@ -368,6 +368,10 @@
   .prog .num{font-family:var(--mono);font-size:12.5px;color:var(--cyan);margin-bottom:10px;display:block}
   .prog h3{font-size:17px;font-weight:600;margin-bottom:8px;color:#fff}
   .prog p{font-size:14px;color:var(--muted);margin-bottom:14px}
+  .prog ul{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+  .prog ul li{font-size:13.5px;line-height:1.5;color:var(--muted);padding-left:18px;position:relative}
+  .prog ul li::before{content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;
+    background:var(--cyan);opacity:.75}
   .prog .res{font-size:13px;font-weight:600;color:var(--cyan);background:rgba(33,160,255,.10);
     border:1px solid var(--line);border-radius:100px;padding:9px 16px;display:inline-block}
   .prog .res::before{content:'→ '}
@@ -630,37 +634,61 @@
         <div class="card prog reveal" data-n="01">
           <span class="num">Шаг 01 · дни 1–3</span>
           <h3>Кабинет VK Рекламы</h3>
-          <p>Аукцион, форматы, устройство нового кабинета — без пропущенных шагов.</p>
+          <ul>
+            <li>Как работает рекламный аукцион ВК</li>
+            <li>Форматы объявлений и их задачи</li>
+            <li>Настройка кабинета с нуля, руками</li>
+          </ul>
           <span class="res">первый настроенный кабинет</span>
         </div>
         <div class="card prog reveal" data-n="02">
           <span class="num">Шаг 02 · дни 4–7</span>
           <h3>Аудитории и стратегия</h3>
-          <p>Сегменты, парсинг, look-alike. Стратегия запуска для реального проекта.</p>
-          <span class="res">медиаплан вашего проекта</span>
+          <ul>
+            <li>Сегменты и боли вашей аудитории</li>
+            <li>Парсинг сообществ и look-alike базы</li>
+            <li>Медиаплан под бюджет проекта</li>
+          </ul>
+          <span class="res">готовая стратегия запуска</span>
         </div>
         <div class="card prog reveal" data-n="03">
           <span class="num">Шаг 03 · дни 8–12</span>
           <h3>Креативы</h3>
-          <p>Офферы и макеты под форматы ВК. Проверка на тестовом бюджете.</p>
+          <ul>
+            <li>Формулы офферов, которые кликают</li>
+            <li>Тексты и макеты под форматы ВК</li>
+            <li>Тест креативов на малом бюджете</li>
+          </ul>
           <span class="res">10 готовых креативов</span>
         </div>
         <div class="card prog reveal" data-n="04">
           <span class="num">Шаг 04 · дни 13–19</span>
           <h3>Запуск и оптимизация</h3>
-          <p>Настройка кампаний руками, тесты гипотез, масштабирование связок.</p>
+          <ul>
+            <li>Запуск кампании на живом бюджете</li>
+            <li>Тесты гипотез, отсев слабых связок</li>
+            <li>Масштабирование того, что работает</li>
+          </ul>
           <span class="res">кейс №1 с живыми лидами</span>
         </div>
         <div class="card prog reveal" data-n="05">
           <span class="num">Шаг 05 · дни 20–23</span>
           <h3>Аналитика</h3>
-          <p>CPL, CAC, ROMI, пиксель ВК и UTM. Отчёт на языке денег клиента.</p>
+          <ul>
+            <li>CPL, CAC и ROMI простыми словами</li>
+            <li>Пиксель ВК, UTM-метки, Метрика</li>
+            <li>Отчёт, который понимает клиент</li>
+          </ul>
           <span class="res">дашборд и отчёт по запуску</span>
         </div>
         <div class="card prog reveal" data-n="06">
           <span class="num">Шаг 06 · дни 24–30</span>
           <h3>Первые клиенты</h3>
-          <p>Упаковка, прайс, договор, где искать заказы и как проходить созвоны.</p>
+          <ul>
+            <li>Упаковка профиля и прайс на услуги</li>
+            <li>Где брать заказы: площадки и скрипты</li>
+            <li>Созвон и договор с первым клиентом</li>
+          </ul>
           <span class="res">кейс №2 + план на 3 месяца</span>
         </div>
       </div>
