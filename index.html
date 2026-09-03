@@ -545,8 +545,12 @@
     /* первый экран телефона занят текстом целиком — фото начинается ниже сгиба:
        блок статистики прижат к низу первого экрана */
     .hero-left::before{display:none}
-    .hero-left{min-height:calc(100vh - 88px);min-height:calc(100svh - 88px)}
+    /* lvh — полная высота экрана iOS вместе с областью под панелью Safari,
+       иначе фото выглядывает из-под неё */
+    .hero-left{min-height:calc(100vh - 78px);min-height:calc(100lvh - 78px)}
     .cred{margin-top:auto;padding-top:16px;row-gap:14px}
+    /* пилюля «за 1 месяц» отделена от текста рядом */
+    .h1-line em{display:inline-block;margin:10px 0 0 12px}
 
     /* компактный калькулятор */
     .calc{padding:22px 16px;gap:20px}
