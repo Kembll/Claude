@@ -1060,8 +1060,9 @@
   // === Отправка заявок в Telegram ===
   // Токен бота (@BotFather) и chat_id получателя. Пока стоят заглушки —
   // форма показывает «успех», но никуда не отправляет.
+  // Токен подставляется при деплое из секрета GitHub (TG_BOT_TOKEN) — см. pages.yml
   const TG_TOKEN='PASTE_BOT_TOKEN';
-  const TG_CHAT='PASTE_CHAT_ID';
+  const TG_CHAT='836651005';
   function sendLead(data){
     if(TG_TOKEN.indexOf('PASTE')===0)return Promise.resolve();
     const text='🎯 Новая заявка — «Таргетология»\n\n'

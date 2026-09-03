@@ -43,6 +43,17 @@ jobs:
           } > _site/index.html
           [ -d assets ] && cp -r assets _site/assets || true
 
+      # Токен телеграм-бота не хранится в репозитории — подставляем из секрета.
+      - name: Inject Telegram bot token
+        env:
+          TG_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
+        run: |
+          if [ -n "$TG_TOKEN" ]; then
+            sed -i "s|PASTE_BOT_TOKEN|$TG_TOKEN|" _site/index.html
+          else
+            echo "::warning::TG_BOT_TOKEN secret is not set — lead form will not send to Telegram"
+          fi
+
       - uses: actions/configure-pages@v5
         with:
           enablement: true
