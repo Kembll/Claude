@@ -1057,27 +1057,19 @@
     addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   })();
 
-  // === Отправка заявок в Telegram ===
-  // Токен бота (@BotFather) и chat_id получателя. Пока стоят заглушки —
-  // форма показывает «успех», но никуда не отправляет.
-  // Токен подставляется при деплое из секрета GitHub (TG_BOT_TOKEN) — см. pages.yml
-  const TG_TOKEN='PASTE_BOT_TOKEN';
-  const TG_CHAT='836651005';
+  // === Отправка заявок в Telegram через Google Apps Script владельца ===
+  // Прямой api.telegram.org заблокирован у части провайдеров, поэтому заявка
+  // идёт на прокси-скрипт (script.google.com доступен везде), а он уже шлёт в Telegram.
+  // Content-Type text/plain — простой запрос без CORS-preflight (Apps Script не отвечает на OPTIONS).
+  const LEAD_URL='https://script.google.com/macros/s/AKfycbz0GPThfsOkdoZXO6cIyOcRuVoS2Axin94tdwHaufgQelrIETAmqan9djR9Oq_f8qDQ/exec';
   function sendLead(data){
-    if(TG_TOKEN.indexOf('PASTE')===0)return Promise.resolve();
-    const text='🎯 Новая заявка — «Таргетология»\n\n'
-      +'👤 Имя: '+data.name+'\n'
-      +'📞 Телефон: '+data.phone
-      +(data.plan?'\n💳 Тариф: '+data.plan:'')
-      +'\n🕐 '+new Date().toLocaleString('ru-RU',{timeZone:'Europe/Moscow'})+' (МСК)';
-    // Таймаут 8с: у части провайдеров api.telegram.org заблокирован,
-    // без него кнопка висит на «Отправляем…» минуту и дольше.
+    // Таймаут 8с, чтобы кнопка не висела на «Отправляем…» при проблемах с сетью.
     const ctrl=new AbortController();
     const t=setTimeout(()=>ctrl.abort(),8000);
-    return fetch('https://api.telegram.org/bot'+TG_TOKEN+'/sendMessage',{
+    return fetch(LEAD_URL,{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({chat_id:TG_CHAT,text:text}),
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify(data),
       signal:ctrl.signal
     }).finally(()=>clearTimeout(t));
   }

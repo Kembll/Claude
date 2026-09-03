@@ -43,25 +43,6 @@ jobs:
           } > _site/index.html
           [ -d assets ] && cp -r assets _site/assets || true
 
-      # Токен телеграм-бота не хранится в репозитории — подставляем из секрета.
-      - name: Inject Telegram bot token
-        env:
-          TG_TOKEN: ${{ secrets.TG_BOT_TOKEN }}
-        run: |
-          if [ -n "$TG_TOKEN" ]; then
-            sed -i "s|PASTE_BOT_TOKEN|$TG_TOKEN|" _site/index.html
-          else
-            echo "::warning::TG_BOT_TOKEN secret is not set — lead form will not send to Telegram"
-          fi
-
-      # Диагностика: печатаем длину и хэш токена, реально попавшего в страницу
-      # (сам токен не раскрывается). Сравнивается с эталоном вручную.
-      - name: Token fingerprint
-        run: |
-          tok=$(grep -o "const TG_TOKEN='[^']*'" _site/index.html | head -1 | cut -d"'" -f2)
-          echo "embedded token length: $(printf '%s' "$tok" | wc -c)"
-          echo "embedded token sha256[0:16]: $(printf '%s' "$tok" | sha256sum | cut -c1-16)"
-
       - uses: actions/configure-pages@v5
         with:
           enablement: true
