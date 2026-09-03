@@ -1,5 +1,6 @@
 <title>Таргетология</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://script.google.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
   :root{
@@ -1063,15 +1064,14 @@
   // Content-Type text/plain — простой запрос без CORS-preflight (Apps Script не отвечает на OPTIONS).
   const LEAD_URL='https://script.google.com/macros/s/AKfycbz0GPThfsOkdoZXO6cIyOcRuVoS2Axin94tdwHaufgQelrIETAmqan9djR9Oq_f8qDQ/exec';
   function sendLead(data){
-    // Таймаут 8с, чтобы кнопка не висела на «Отправляем…» при проблемах с сетью.
-    const ctrl=new AbortController();
-    const t=setTimeout(()=>ctrl.abort(),8000);
+    // keepalive: запрос доедет, даже если пользователь сразу закроет страницу —
+    // поэтому UI не ждёт ответа, а успех показывается мгновенно.
     return fetch(LEAD_URL,{
       method:'POST',
       headers:{'Content-Type':'text/plain;charset=utf-8'},
       body:JSON.stringify(data),
-      signal:ctrl.signal
-    }).finally(()=>clearTimeout(t));
+      keepalive:true
+    });
   }
 
   // маска телефона + отправка форм
@@ -1100,17 +1100,15 @@
         if(name.value.trim().split(/\s+/).length<2){name.classList.add('err');ok=false}
         if(phone.value.replace(/\D/g,'').length<11){phone.classList.add('err');ok=false}
         if(!ok)return;
-        const btn=form.querySelector('button[type=submit]');
-        btn.disabled=true;btn.textContent='Отправляем…';
         const plan=form.querySelector('input[name=plan]')||form.querySelector('.js-plan');
+        // Успех показываем сразу, заявка уходит в фоне (keepalive довезёт).
         sendLead({
           name:name.value.trim(),
           phone:phone.value,
           plan:plan?plan.value:''
-        }).catch(err=>console.warn('lead send failed',err)).finally(()=>{
-          form.querySelectorAll('.field,button[type=submit],.form-note,h3,.fp').forEach(el=>el.style.display='none');
-          form.querySelector('.form-ok').style.display='block';
-        });
+        }).catch(err=>console.warn('lead send failed',err));
+        form.querySelectorAll('.field,button[type=submit],.form-note,h3,.fp').forEach(el=>el.style.display='none');
+        form.querySelector('.form-ok').style.display='block';
       });
     });
   })();
