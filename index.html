@@ -690,10 +690,9 @@
     .hero-actions{margin-top:10px}
     .hero-actions .btn-primary{padding:12px 24px;font-size:15px}
     .hero-actions .btn-ghost{display:none}
-    /* шапка — голубое стекло: фото просвечивает, частицы размыты блюром */
-    header{background:linear-gradient(180deg,rgba(33,130,235,.30),rgba(15,70,150,.20));
-      backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-      border-bottom:1px solid rgba(126,193,255,.30)}
+    /* шапка без своего фона — фото продолжается под ней, осталась только полоска */
+    header{background:none;border-bottom:1px solid rgba(126,193,255,.30)}
+    header.scrolled{background:rgba(4,14,28,.78)}
     /* бургер-меню с оглавлением сайта */
     .logo svg{width:36px;height:36px}
     .nav-burger{display:flex;align-items:center;justify-content:center;
@@ -727,21 +726,30 @@
     .hero-actions .btn-ghost::before{display:none}
     /* фото занимает ровно первый экран, максимально отдалено (без доп. зума) */
     .hero-side{top:-52px;bottom:0;height:auto}
-    .photo-card img{top:-130px;bottom:0;height:calc(100% + 130px);object-position:50% 100%}
+    .photo-card img{top:-60px;bottom:0;height:calc(100% + 60px);object-position:50% 100%}
     .photo-card::after{background:linear-gradient(180deg,
-      rgba(2,7,15,.90) 0%,rgba(2,7,15,.34) 24%,rgba(2,7,15,.22) 42%,
-      rgba(2,7,15,.72) 60%,rgba(2,7,15,.94) 80%)}
+      rgba(2,7,15,.80) 0%,rgba(2,7,15,.24) 24%,rgba(2,7,15,.14) 42%,
+      rgba(2,7,15,.58) 62%,rgba(3,10,20,.88) 80%,var(--bg) 98%)}
 
-    /* секция акции: мост-переход, скидка крупно, таймер, сводка цен */
-    .mob-timer{display:flex;flex-direction:column;justify-content:flex-start;
-      min-height:0;padding:8px 0 40px;text-align:center}
+    /* секция акции: полноэкранная, мост-переход, свечения и метрики */
+    .mob-timer{display:flex;flex-direction:column;justify-content:center;
+      min-height:calc(100lvh - 60px);padding:28px 0 44px;text-align:center;
+      position:relative;overflow:hidden}
+    .mob-timer::after{content:'';position:absolute;left:-150px;top:6%;
+      width:430px;height:430px;border-radius:50%;pointer-events:none;
+      background:radial-gradient(circle,rgba(33,160,255,.15),transparent 62%)}
+    .mob-timer .reticle{left:auto;right:-170px;bottom:-130px;top:auto}
+    .mt-fm{position:absolute;font-family:var(--mono);font-size:12px;
+      color:rgba(159,219,255,.55);letter-spacing:.08em;pointer-events:none;
+      animation:mtfloat 9s ease-in-out infinite}
+    @keyframes mtfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
     .mob-timer::before{content:'';display:block;width:2px;height:46px;margin:0 auto 24px;
       background:linear-gradient(180deg,transparent,var(--cyan))}
     .mt-sale{margin:0 0 6px;font-size:19px;color:#EAF4FF;font-weight:600}
     .mt-sale b{font-family:var(--mono);font-weight:600;font-size:30px;
       background:linear-gradient(100deg,var(--cyan) 5%,#9FDBFF 45%,var(--electric));
       -webkit-background-clip:text;background-clip:text;color:transparent}
-    .mt-prices{margin:16px auto 18px;max-width:340px;width:100%;
+    .mt-prices{margin:20px auto 22px;max-width:356px;width:100%;
       border:1px solid var(--line);border-radius:16px;padding:6px 16px;
       background:linear-gradient(160deg,rgba(16,42,74,.5),rgba(7,24,44,.6))}
     .mt-prices>div{display:flex;align-items:baseline;gap:8px;padding:10px 0;text-align:left}
@@ -753,7 +761,7 @@
       font-variant-numeric:tabular-nums;white-space:nowrap}
     .mt-t{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;
       text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
-    .mt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+    .mt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
     .mt-grid>div{padding:12px 4px;border-radius:14px;
       background:linear-gradient(160deg,rgba(16,42,74,.65),rgba(7,24,44,.78));
       border:1px solid var(--line)}
@@ -862,7 +870,10 @@
 
   <!-- мобильная секция срочности: обратный отсчёт до старта (на десктопе скрыта) -->
   <section class="mob-timer" aria-label="До старта потока">
+    <div class="reticle" aria-hidden="true"></div>
     <div class="wrap">
+      <span class="mt-fm" style="top:11%;right:7%;animation-delay:-3s">CTR 2,4%</span>
+      <span class="mt-fm" style="bottom:16%;left:6%">CPL 116 ₽</span>
       <p class="mt-t">Акция потока №1 · до старта</p>
       <div class="mt-grid">
         <div><b id="cd-d">—</b><span>дней</span></div>
