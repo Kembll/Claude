@@ -472,6 +472,7 @@
   .modal-bg{position:absolute;inset:0;background:rgba(1,8,18,.72);backdrop-filter:blur(8px)}
   .modal .form-card{width:100%;max-width:420px;animation:pop .35s cubic-bezier(.2,.9,.3,1.2)}
   @keyframes pop{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:none}}
+  @keyframes dotpulse{0%,100%{opacity:1}50%{opacity:.3}}
   .modal-close{position:absolute;top:14px;right:14px;width:34px;height:34px;cursor:pointer;
     border-radius:100px;background:rgba(234,244,255,.08);border:1px solid var(--line);
     color:var(--muted);font-size:15px;line-height:1;
@@ -523,9 +524,16 @@
     .nav-cta{display:none}
     header.scrolled .nav-cta{display:block}
     .nav{height:64px}
-    /* обе плашки в один ряд */
-    .chip{font-size:11.5px;padding:6px 10px;white-space:nowrap}
-    .chips{gap:8px;margin-bottom:12px;flex-wrap:nowrap}
+    /* плашки потока → «билетный» блок: строка-анонс + счётчик мест с пульсом */
+    .chips{flex-direction:column;gap:7px;align-items:center;flex-wrap:nowrap;margin-bottom:12px}
+    .chip{background:none;border:none;padding:0;box-shadow:none;white-space:nowrap}
+    .chip.hot{background:none;border:none;box-shadow:none;
+      font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--cyan)}
+    .chip:not(.hot){font-size:15.5px;font-weight:600;color:#fff}
+    .chip:not(.hot)::before{content:'';display:inline-block;width:7px;height:7px;
+      border-radius:50%;background:var(--cyan);margin-right:9px;vertical-align:2px;
+      box-shadow:0 0 12px var(--glow);animation:dotpulse 2s ease-in-out infinite}
     .co-row{gap:18px;margin-top:18px;padding-top:16px}
     .co-mini b{font-size:19px;white-space:nowrap}
     .co-mini span{font-size:12px}
@@ -662,12 +670,12 @@
           <p class="kicker">Экспресс-курс · с нуля</p>
           <h1><span class="grad">Таргетология</span></h1>
           <p class="h1-line">от новичка до специалиста <em>за 1 месяц</em></p>
-          <p class="hero-sub"><span class="only-d">После выпуска вы не останетесь один на один с рынком: <b>лучшим ученикам передаю своих первых клиентов</b> и приглашаю в мою команду работать на постоянной основе.</span><span class="only-m"><b>Лучшим ученикам передаю первых клиентов</b> и приглашаю в свою команду.</span></p>
+          <p class="hero-sub"><span class="only-d">После выпуска вы не останетесь один на один с рынком: <b>лучшим ученикам передаю своих первых клиентов</b> и приглашаю в мою команду работать на постоянной основе.</span><span class="only-m">После выпуска не оставлю один на один с рынком: <b>лучшим ученикам передаю своих первых клиентов</b> и приглашаю работать в моей команде.</span></p>
           <!-- мобильный список преимуществ (на десктопе скрыт) -->
           <ul class="hero-feats">
-            <li>24 урока и практика с первого дня</li>
-            <li>Реальный кабинет VK Рекламы</li>
-            <li>Кейсы в портфолио к выпуску</li>
+            <li>Первая рекламная кампания — уже на первой неделе</li>
+            <li>Работа с живыми бюджетами, а не учебные задачки</li>
+            <li>На выходе — портфолио и первые деньги с таргета</li>
           </ul>
           <div class="hero-actions">
             <button class="btn btn-primary js-open" type="button">Занять место</button>
