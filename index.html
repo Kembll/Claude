@@ -643,7 +643,7 @@
     .cred,.ci{text-align:center}
 
     /* компактный калькулятор */
-    .calc{padding:22px 16px;gap:20px}
+    .calc{padding:20px 14px;gap:18px;max-width:378px;margin:0 auto}
     .calc-top{margin-bottom:14px}
     .calc-top b{font-size:26px}
     .calc-note{margin-top:16px;min-height:0}
@@ -656,6 +656,11 @@
     .prog p{margin-bottom:10px}
     .prog ul{gap:6px;margin-bottom:14px}
 
+    /* финальная форма компактнее, не на всю ширину */
+    .final .panel{padding:36px 18px}
+    .final .form-card{max-width:378px;width:100%;margin:0 auto}
+    /* пузырьки и в секции акции */
+    .mob-timer .mob-bubbles{height:64%}
     /* компактные тарифы */
     .plans{gap:18px}
     .plan{padding:26px 20px}
@@ -753,30 +758,30 @@
       background:radial-gradient(circle,rgba(33,160,255,.12),transparent 60%)}
     .mob-timer::before{content:'';display:block;width:2px;height:46px;margin:0 auto 24px;
       background:linear-gradient(180deg,transparent,var(--cyan))}
-    .mt-sale{margin:0 0 6px;font-size:19px;color:#EAF4FF;font-weight:600}
-    .mt-sale b{font-family:var(--mono);font-weight:600;font-size:30px;
+    .mt-sale{margin:0 0 6px;font-size:22px;color:#EAF4FF;font-weight:600}
+    .mt-sale b{font-family:var(--mono);font-weight:600;font-size:36px;
       background:linear-gradient(100deg,var(--cyan) 5%,#9FDBFF 45%,var(--electric));
       -webkit-background-clip:text;background-clip:text;color:transparent}
-    .mt-prices{margin:20px auto 22px;max-width:356px;width:100%;
+    .mt-prices{margin:22px auto 24px;max-width:376px;width:100%;
       border:1px solid var(--line);border-radius:16px;padding:6px 16px;
       background:linear-gradient(160deg,rgba(16,42,74,.5),rgba(7,24,44,.6))}
     .mt-prices>div{display:flex;align-items:baseline;gap:8px;padding:10px 0;text-align:left}
     .mt-prices>div+div{border-top:1px solid var(--line)}
-    .mt-prices span{font-size:13.5px;color:#C2D8F2;white-space:nowrap}
+    .mt-prices span{font-size:15.5px;color:#C2D8F2;white-space:nowrap}
     .mt-prices i{flex:1;border-bottom:1px dotted rgba(126,193,255,.25);transform:translateY(-3px)}
-    .mt-prices s{font-size:11.5px;color:var(--muted)}
-    .mt-prices b{font-family:var(--mono);font-size:15px;font-weight:500;color:#fff;
+    .mt-prices s{font-size:13px;color:var(--muted)}
+    .mt-prices b{font-family:var(--mono);font-size:18px;font-weight:500;color:#fff;
       font-variant-numeric:tabular-nums;white-space:nowrap}
-    .mt-t{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;
-      text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+    .mt-t{font-family:var(--mono);font-size:13px;letter-spacing:.2em;
+      text-transform:uppercase;color:var(--cyan);margin-bottom:16px}
     .mt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:22px}
-    .mt-grid>div{padding:12px 4px;border-radius:14px;
+    .mt-grid>div{padding:15px 4px;border-radius:14px;
       background:linear-gradient(160deg,rgba(16,42,74,.65),rgba(7,24,44,.78));
       border:1px solid var(--line)}
-    .mt-grid b{font-family:var(--mono);font-size:24px;font-weight:500;color:#fff;
+    .mt-grid b{font-family:var(--mono);font-size:30px;font-weight:500;color:#fff;
       display:block;font-variant-numeric:tabular-nums}
-    .mt-grid span{display:block;font-size:10.5px;color:var(--muted);margin-top:2px}
-    .mt-note{font-size:14px;font-weight:600;color:#fff;margin-bottom:14px}
+    .mt-grid span{display:block;font-size:12.5px;color:var(--muted);margin-top:3px}
+    .mt-note{font-size:16px;font-weight:600;color:#fff;margin-bottom:16px}
     .mt-note::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;
       background:var(--cyan);margin-right:8px;vertical-align:1px;
       box-shadow:0 0 12px var(--glow);animation:dotpulse 2s ease-in-out infinite}
@@ -820,7 +825,7 @@
         <div class="hero-left">
           <div class="chips">
             <span class="chip hot">Поток №1 · старт 15 сентября</span>
-            <span class="chip">Осталось 11 мест</span>
+            <span class="chip">Всего 5 мест в потоке</span>
           </div>
           <p class="kicker">Экспресс-курс · с нуля</p>
           <h1><span class="grad">Таргетология</span></h1>
@@ -878,6 +883,10 @@
 
   <!-- мобильная секция срочности: обратный отсчёт до старта (на десктопе скрыта) -->
   <section class="mob-timer" aria-label="До старта потока">
+    <div class="mob-bubbles" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
     <div class="wrap">
       <p class="mt-t">Акция потока №1 · до старта</p>
       <div class="mt-grid">
@@ -888,11 +897,11 @@
       </div>
       <p class="mt-sale">Скидка <b>−50%</b> на все тарифы</p>
       <div class="mt-prices">
-        <div><span>Сам</span><i></i><s>49 800</s><b>24 900 ₽</b></div>
-        <div><span>С куратором</span><i></i><s>89 800</s><b>44 900 ₽</b></div>
-        <div><span>До результата</span><i></i><s>159 800</s><b>79 900 ₽</b></div>
+        <div><span>Сам</span><i></i><s>40 000</s><b>20 000 ₽</b></div>
+        <div><span>С куратором</span><i></i><s>80 000</s><b>40 000 ₽</b></div>
+        <div><span>До результата</span><i></i><s>140 000</s><b>70 000 ₽</b></div>
       </div>
-      <p class="mt-note">Осталось 11 мест из 30</p>
+      <p class="mt-note">Всего 5 мест в потоке — все свободны</p>
       <button class="btn btn-primary js-open" type="button">Занять место со скидкой</button>
     </div>
   </section>
@@ -1037,53 +1046,50 @@
       <div class="sec-head reveal">
         <span class="sec-label">03 · Тарифы</span>
         <h2>Цена вырастет 8 сентября — фиксируйте сейчас</h2>
-        <p>Рассрочка без переплат. Если за 14 дней поймёте, что не ваше — вернём всю сумму без вопросов.</p>
+        <p>Оплата картой любого банка. Если за 14 дней поймёте, что не ваше — вернём всю сумму без вопросов.</p>
       </div>
       <div class="plans">
         <div class="card plan reveal">
           <h3>Сам</h3>
-          <p class="who">Смотрю уроки, иду в своём темпе</p>
-          <p class="price">24 900 ₽<s>49 800 ₽</s><span class="save">−50%</span></p>
-          <p class="per">или 4 платежа по 6 225 ₽</p>
+          <p class="who">Двигаюсь сам — нужна база и система</p>
+          <p class="price">20 000 ₽<s>40 000 ₽</s><span class="save">−50%</span></p>
           <ul>
-            <li>24 урока и все шаблоны</li>
-            <li>Доступ навсегда + обновления</li>
-            <li>Чат потока</li>
-            <li class="off">Проверка домашних заданий</li>
-            <li class="off">Живые разборы с куратором</li>
+            <li>24 видеоурока с доступом навсегда</li>
+            <li>Шаблоны: медиаплан, отчёт, креативы</li>
+            <li>Общий чат потока</li>
+            <li class="off">Обратная связь по домашкам</li>
+            <li class="off">Личные разборы запусков</li>
           </ul>
           <button class="btn btn-ghost js-open" data-plan="Сам" type="button">Выбрать «Сам»</button>
         </div>
         <div class="card plan featured reveal">
           <h3>С куратором</h3>
-          <p class="who">Полная траектория до специалиста</p>
-          <p class="price">44 900 ₽<s>89 800 ₽</s><span class="save">−50%</span></p>
-          <p class="per">или 6 платежей по 7 483 ₽</p>
+          <p class="who">Веду за руку до уровня специалиста</p>
+          <p class="price">40 000 ₽<s>80 000 ₽</s><span class="save">−50%</span></p>
           <ul>
             <li>Всё из тарифа «Сам»</li>
-            <li>Проверка всех домашних заданий</li>
-            <li>8 живых разборов ваших запусков</li>
-            <li>2 кейса в портфолио</li>
+            <li>Куратор разбирает каждую домашку</li>
+            <li>8 живых разборов ваших кампаний</li>
+            <li>2 полноценных кейса в портфолио</li>
             <li>Сертификат специалиста</li>
           </ul>
           <button class="btn btn-primary js-open" data-plan="С куратором" type="button">Выбрать «С куратором»</button>
         </div>
         <div class="card plan reveal">
           <h3>До результата</h3>
-          <p class="who">С поддержкой до первого клиента</p>
-          <p class="price">79 900 ₽<s>159 800 ₽</s><span class="save">−50%</span></p>
-          <p class="per">или 6 платежей по 13 317 ₽</p>
+          <p class="who">Не отпускаю до первого клиента</p>
+          <p class="price">70 000 ₽<s>140 000 ₽</s><span class="save">−50%</span></p>
           <ul>
             <li>Всё из тарифа «С куратором»</li>
-            <li>4 личные сессии один на один</li>
-            <li>Упаковка и аудит вашего профиля</li>
-            <li>Сопровождение первого клиента</li>
+            <li>4 личные стратегические сессии</li>
+            <li>Упаковка профиля под поиск клиентов</li>
+            <li>Вместе доводим первого клиента до оплаты</li>
             <li>3 месяца поддержки после выпуска</li>
           </ul>
           <button class="btn btn-ghost js-open" data-plan="До результата" type="button">Выбрать «До результата»</button>
         </div>
       </div>
-      <p class="plans-note reveal">Рассрочка без переплат · Безопасная оплата · Возврат в течение 14 дней</p>
+      <p class="plans-note reveal">Цена фиксируется за вами на сутки · Безопасная оплата · Возврат в течение 14 дней</p>
     </div>
   </section>
 
@@ -1146,11 +1152,11 @@
         <span class="fm" style="bottom:10%;left:4%;animation-duration:15s;animation-delay:-6s">+41% лидов</span>
         <div>
           <span class="f-label">Поток №1 · старт 15 сентября</span>
-          <h2>В группе 30 мест. Осталось 11</h2>
-          <p class="lead">Оставьте заявку — перезвоним в течение часа, вышлем полную программу и пригласим на бесплатный вводный урок.</p>
+          <h2>В потоке всего 5 мест</h2>
+          <p class="lead">Оставьте заявку — я перезвоню лично в течение часа, отвечу на вопросы и забронирую за вами место со скидкой.</p>
           <ul>
-            <li>Бесплатный урок «Первая кампания в VK Рекламе за вечер»</li>
-            <li>Рассрочка без переплат от 6 225 ₽/мес</li>
+            <li>Бесплатный вводный урок до старта потока</li>
+            <li>Скидка −50% фиксируется за вами на сутки</li>
             <li>Возврат денег в течение 14 дней</li>
           </ul>
         </div>
