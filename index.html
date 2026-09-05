@@ -521,10 +521,13 @@
       min-height:calc(100vh/var(--z,1) - 64px);padding:72px 0 88px}
     .mob-timer::before{content:'';display:block;width:2px;height:56px;margin:0 auto 30px;
       background:linear-gradient(180deg,transparent,var(--cyan))}
-    .mob-timer::after{content:'';position:absolute;left:50%;top:38%;
-      transform:translate(-50%,-50%);width:820px;height:820px;border-radius:50%;
-      pointer-events:none;
-      background:radial-gradient(circle,rgba(33,160,255,.10),transparent 60%)}
+    /* свечения: центральное за таймером + два боковых неоновых */
+    .mob-timer::after{content:'';position:absolute;inset:0;pointer-events:none;
+      background:
+        radial-gradient(circle 480px at 50% 32%,rgba(33,160,255,.16),transparent 62%),
+        radial-gradient(circle 420px at 8% 80%,rgba(43,168,255,.12),transparent 68%),
+        radial-gradient(circle 440px at 93% 18%,rgba(91,200,255,.10),transparent 68%),
+        radial-gradient(circle 300px at 78% 88%,rgba(33,160,255,.08),transparent 70%)}
     .mob-timer .mob-bubbles{display:block;height:52%}
     .mt-t{font-family:var(--mono);font-size:14px;letter-spacing:.24em;
       text-transform:uppercase;color:var(--cyan);margin-bottom:22px}
