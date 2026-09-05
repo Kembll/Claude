@@ -182,9 +182,23 @@
   .hero-feats{display:none} /* мобильный список преимуществ, включается в media */
   .ph-label{display:none}   /* мобильный лейбл секции наставника, включается в media */
   .mob-name{display:none}   /* имя наставника на мобильном хиро, включается в media */
-  .mob-timer{display:none}  /* мобильная секция обратного отсчёта, включается в media */
+  .mob-timer{display:none}  /* секция обратного отсчёта: мобайл в media ≤560, десктоп в media ≥561 */
   .nav-burger{display:none} /* мобильный бургер оглавления, включается в media */
-  .mob-bubbles{display:none} /* неоновые пузырьки мобильного хиро, включается в media */
+  /* неоновые пузырьки: включаются в media (мобайл — хиро и акция, десктоп — только акция) */
+  .mob-bubbles{display:none;position:absolute;left:0;right:0;bottom:0;height:46%;
+    z-index:0;pointer-events:none;overflow:hidden}
+  .mob-bubbles span{position:absolute;bottom:-14px;border-radius:50%;
+    background:radial-gradient(circle at 32% 30%,rgba(159,219,255,.85),rgba(33,160,255,.28) 60%,transparent 75%);
+    box-shadow:0 0 14px rgba(33,160,255,.5);
+    animation:bubbleUp 7s ease-in infinite}
+  .mob-bubbles span:nth-child(1){left:8%;width:10px;height:10px;animation-delay:0s}
+  .mob-bubbles span:nth-child(2){left:22%;width:6px;height:6px;animation-delay:1.6s;animation-duration:6s}
+  .mob-bubbles span:nth-child(3){left:35%;width:13px;height:13px;animation-delay:3.1s;animation-duration:8s}
+  .mob-bubbles span:nth-child(4){left:52%;width:7px;height:7px;animation-delay:.9s;animation-duration:6.4s}
+  .mob-bubbles span:nth-child(5){left:64%;width:11px;height:11px;animation-delay:2.4s;animation-duration:7.4s}
+  .mob-bubbles span:nth-child(6){left:76%;width:6px;height:6px;animation-delay:4s;animation-duration:5.8s}
+  .mob-bubbles span:nth-child(7){left:87%;width:9px;height:9px;animation-delay:1.2s;animation-duration:6.8s}
+  .mob-bubbles span:nth-child(8){left:94%;width:5px;height:5px;animation-delay:3.6s;animation-duration:6.2s}
   .bg-blur{display:none}     /* размытая подложка мобильного хиро, включается в media */
   @keyframes bubbleUp{
     0%{transform:translateY(0) scale(.6);opacity:0}
@@ -500,6 +514,50 @@
     .modal .form-card{animation:none}
   }
 
+  /* ===== секция срочности (таймер + скидка −50%) на десктопе и планшете ===== */
+  @media (min-width:561px){
+    .mob-timer{display:flex;flex-direction:column;justify-content:center;text-align:center;
+      position:relative;overflow:hidden;
+      min-height:calc(100vh/var(--z,1) - 64px);padding:72px 0 88px}
+    .mob-timer::before{content:'';display:block;width:2px;height:56px;margin:0 auto 30px;
+      background:linear-gradient(180deg,transparent,var(--cyan))}
+    .mob-timer::after{content:'';position:absolute;left:50%;top:38%;
+      transform:translate(-50%,-50%);width:820px;height:820px;border-radius:50%;
+      pointer-events:none;
+      background:radial-gradient(circle,rgba(33,160,255,.10),transparent 60%)}
+    .mob-timer .mob-bubbles{display:block;height:52%}
+    .mt-t{font-family:var(--mono);font-size:14px;letter-spacing:.24em;
+      text-transform:uppercase;color:var(--cyan);margin-bottom:22px}
+    .mt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;
+      max-width:640px;margin:0 auto 30px}
+    .mt-grid>div{padding:20px 8px;border-radius:16px;
+      background:linear-gradient(160deg,rgba(16,42,74,.65),rgba(7,24,44,.78));
+      border:1px solid var(--line)}
+    .mt-grid b{font-family:var(--mono);font-size:44px;font-weight:500;color:#fff;
+      display:block;font-variant-numeric:tabular-nums}
+    .mt-grid span{display:block;font-size:13.5px;color:var(--muted);margin-top:5px}
+    .mt-sale{margin:0 0 6px;font-size:26px;color:#EAF4FF;font-weight:600}
+    .mt-sale b{font-family:var(--mono);font-weight:600;font-size:44px;
+      background:linear-gradient(100deg,var(--cyan) 5%,#9FDBFF 45%,var(--electric));
+      -webkit-background-clip:text;background-clip:text;color:transparent}
+    .mt-deadline{margin:4px 0 0;font-size:16px;color:#A9C4E4}
+    .mt-deadline b{color:var(--cyan);font-weight:600}
+    .mt-prices{margin:24px auto 28px;max-width:440px;width:100%;
+      border:1px solid var(--line);border-radius:16px;padding:8px 22px;
+      background:linear-gradient(160deg,rgba(16,42,74,.5),rgba(7,24,44,.6))}
+    .mt-prices>div{display:flex;align-items:baseline;gap:10px;padding:12px 0;text-align:left}
+    .mt-prices>div+div{border-top:1px solid var(--line)}
+    .mt-prices span{font-size:16.5px;color:#C2D8F2;white-space:nowrap}
+    .mt-prices i{flex:1;border-bottom:1px dotted rgba(126,193,255,.25);transform:translateY(-3px)}
+    .mt-prices s{font-size:14px;color:var(--muted)}
+    .mt-prices b{font-family:var(--mono);font-size:20px;font-weight:500;color:#fff;
+      font-variant-numeric:tabular-nums;white-space:nowrap}
+    .mt-note{font-size:17px;font-weight:600;color:#fff;margin-bottom:20px}
+    .mt-note::before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;
+      background:var(--cyan);margin-right:8px;vertical-align:1px;
+      box-shadow:0 0 12px var(--glow);animation:dotpulse 2s ease-in-out infinite}
+  }
+
   @media (max-width:1020px){
     .nav-links{display:none}
     .hero{min-height:0}
@@ -729,21 +787,8 @@
     #hdr.menu-open .nav-links a{display:block;padding:11px 20px;font-size:15px;
       font-weight:600;color:#EAF4FF;border-radius:10px}
     .nav-cta{margin-left:10px}
-    /* неоновые пузырьки в нижней части хиро */
-    .mob-bubbles{display:block;position:absolute;left:0;right:0;bottom:0;height:46%;
-      z-index:0;pointer-events:none;overflow:hidden}
-    .mob-bubbles span{position:absolute;bottom:-14px;border-radius:50%;
-      background:radial-gradient(circle at 32% 30%,rgba(159,219,255,.85),rgba(33,160,255,.28) 60%,transparent 75%);
-      box-shadow:0 0 14px rgba(33,160,255,.5);
-      animation:bubbleUp 7s ease-in infinite}
-    .mob-bubbles span:nth-child(1){left:8%;width:10px;height:10px;animation-delay:0s}
-    .mob-bubbles span:nth-child(2){left:22%;width:6px;height:6px;animation-delay:1.6s;animation-duration:6s}
-    .mob-bubbles span:nth-child(3){left:35%;width:13px;height:13px;animation-delay:3.1s;animation-duration:8s}
-    .mob-bubbles span:nth-child(4){left:52%;width:7px;height:7px;animation-delay:.9s;animation-duration:6.4s}
-    .mob-bubbles span:nth-child(5){left:64%;width:11px;height:11px;animation-delay:2.4s;animation-duration:7.4s}
-    .mob-bubbles span:nth-child(6){left:76%;width:6px;height:6px;animation-delay:4s;animation-duration:5.8s}
-    .mob-bubbles span:nth-child(7){left:87%;width:9px;height:9px;animation-delay:1.2s;animation-duration:6.8s}
-    .mob-bubbles span:nth-child(8){left:94%;width:5px;height:5px;animation-delay:3.6s;animation-duration:6.2s}
+    /* неоновые пузырьки в нижней части хиро (общие стили — на базовом уровне) */
+    .mob-bubbles{display:block}
     /* «Программа курса» — чистая текстовая ссылка, без плашки */
     .hero-actions .btn-ghost{background:none;border:none;box-shadow:none;backdrop-filter:none}
     .hero-actions .btn-ghost::before{display:none}
@@ -897,7 +942,7 @@
     </div>
   </div>
 
-  <!-- мобильная секция срочности: обратный отсчёт до старта (на десктопе скрыта) -->
+  <!-- секция срочности: обратный отсчёт до старта (мобайл и десктоп) -->
   <section class="mob-timer" aria-label="До старта потока">
     <div class="mob-bubbles" aria-hidden="true">
       <span></span><span></span><span></span><span></span>
