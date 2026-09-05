@@ -452,6 +452,10 @@
   .plan li.off{color:var(--muted);opacity:.7}
   .plan li.off::before{content:'—';color:var(--muted)}
   .plan .btn{text-align:center;width:100%}
+  .save-note{font-size:12.5px;font-weight:600;color:var(--cyan);margin:2px 0 20px}
+  .plan-gar{font-size:13px;font-weight:600;color:var(--cyan);text-align:center;
+    background:rgba(33,160,255,.10);border:1px solid var(--line);border-radius:12px;
+    padding:10px 14px;margin:-14px 0 16px}
 
   /* ================= блок 5: финал + форма ================= */
   .final{position:relative;overflow:hidden}
@@ -783,7 +787,9 @@
     .plan{padding:20px 16px}
     .plan h3{font-size:18px;margin-bottom:3px}
     .plan .who{font-size:12.5px;margin-bottom:12px}
-    .price{font-size:26px;margin-bottom:14px}
+    .price{font-size:26px;margin-bottom:2px}
+    .save-note{font-size:11.5px;margin:0 0 12px}
+    .plan-gar{font-size:12px;padding:8px 10px;margin:-6px 0 12px}
     .plan ul{gap:7px;margin-bottom:16px}
     .plan li{font-size:13.5px;padding-left:22px}
     .plans-note{font-size:11.5px}
@@ -1169,41 +1175,45 @@
       <div class="plans">
         <div class="card plan reveal">
           <h3>Сам</h3>
-          <p class="who">Двигаюсь сам — нужна база и система</p>
+          <p class="who">Если уже пробовали рекламу — дам базу и систему</p>
           <p class="price">20 000 ₽<s>40 000 ₽</s><span class="save">−50%</span></p>
+          <p class="save-note">Экономия 20 000 ₽ — до 14 сентября</p>
           <ul>
-            <li>24 видеоурока с доступом навсегда</li>
-            <li>Шаблоны: медиаплан, отчёт, креативы</li>
-            <li>Общий чат потока</li>
-            <li class="off">Обратная связь по домашкам</li>
-            <li class="off">Личные разборы запусков</li>
+            <li>24 урока с доступом навсегда — в своём темпе</li>
+            <li>Через 30 дней запускаете рекламу сами</li>
+            <li>Шаблоны, экономящие недели: медиаплан, отчёт, креативы</li>
+            <li class="off">Обратная связь наставника</li>
+            <li class="off">Разборы ваших запусков</li>
           </ul>
           <button class="btn btn-ghost js-open" data-plan="Сам" type="button">Выбрать «Сам»</button>
         </div>
         <div class="card plan featured reveal">
           <h3>С куратором</h3>
-          <p class="who">Веду за руку до уровня специалиста</p>
+          <p class="who">Если начинаете с нуля — выбор 9 из 10 учеников</p>
           <p class="price">40 000 ₽<s>80 000 ₽</s><span class="save">−50%</span></p>
+          <p class="save-note">Экономия 40 000 ₽ — до 14 сентября</p>
           <ul>
             <li>Всё из тарифа «Сам»</li>
-            <li>Куратор разбирает каждую домашку</li>
+            <li>Куратор проверяет каждый шаг — не дадим слить бюджет</li>
             <li>8 живых разборов ваших кампаний</li>
-            <li>2 полноценных кейса в портфолио</li>
+            <li>Выпускаетесь с 2 кейсами в портфолио</li>
             <li>Сертификат специалиста</li>
           </ul>
           <button class="btn btn-primary js-open" data-plan="С куратором" type="button">Выбрать «С куратором»</button>
         </div>
         <div class="card plan reveal">
           <h3>До результата</h3>
-          <p class="who">Не отпускаю до первого клиента</p>
+          <p class="who">Если нужен гарантированный первый клиент</p>
           <p class="price">70 000 ₽<s>140 000 ₽</s><span class="save">−50%</span></p>
+          <p class="save-note">Экономия 70 000 ₽ — до 14 сентября</p>
           <ul>
             <li>Всё из тарифа «С куратором»</li>
-            <li>4 личные стратегические сессии</li>
-            <li>Упаковка профиля под поиск клиентов</li>
-            <li>Вместе доводим первого клиента до оплаты</li>
+            <li>4 личные сессии с наставником один на один</li>
+            <li>Упаковка профиля — клиенты находят вас сами</li>
+            <li>Первого клиента доводим до оплаты вместе</li>
             <li>3 месяца поддержки после выпуска</li>
           </ul>
+          <p class="plan-gar">Не довели до первого клиента — работаем дальше бесплатно</p>
           <button class="btn btn-ghost js-open" data-plan="До результата" type="button">Выбрать «До результата»</button>
         </div>
       </div>
