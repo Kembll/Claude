@@ -396,9 +396,11 @@
   /* ================= блок 3: программа ================= */
   /* программа-таймлайн: неоновая линия-маршрут, карточки в шахматном порядке */
   .prog-line{position:relative;max-width:960px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
-  .prog-line::before{content:'';position:absolute;left:50%;top:6px;bottom:6px;width:2px;
+  .prog-steps{position:relative;display:flex;flex-direction:column;gap:26px}
+  /* линия-маршрут только вдоль карточек, финал она не пересекает */
+  .prog-steps::before{content:'';position:absolute;left:50%;top:6px;bottom:-30px;width:2px;
     transform:translateX(-50%);pointer-events:none;
-    background:linear-gradient(180deg,transparent,rgba(79,195,255,.55) 5%,rgba(79,195,255,.55) 93%,transparent)}
+    background:linear-gradient(180deg,transparent,rgba(79,195,255,.55) 5%,rgba(79,195,255,.55) 90%,transparent)}
   .prog-line .prog{width:calc(50% - 44px)}
   .prog-line .prog:nth-child(odd){align-self:flex-start}
   .prog-line .prog:nth-child(even){align-self:flex-end}
@@ -406,12 +408,14 @@
     background:var(--cyan);box-shadow:0 0 0 4px rgba(33,160,255,.18),0 0 16px var(--glow)}
   .prog-line .prog:nth-child(odd)::before{right:-51px}
   .prog-line .prog:nth-child(even)::before{left:-51px}
-  .prog-finish{position:relative;align-self:center;text-align:center;margin-top:4px;z-index:1}
-  .prog-finish b{display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:600;color:#fff;
-    padding:13px 28px;border-radius:100px;
-    background:linear-gradient(120deg,rgba(33,160,255,.28),rgba(11,111,216,.22));
-    border:1px solid var(--line-strong);box-shadow:0 0 34px -6px var(--glow)}
-  .prog-finish span{display:block;margin-top:9px;font-size:13px;color:var(--muted)}
+  /* финал маршрута: линия упирается в светящуюся точку, итог + кнопка */
+  .prog-finish{position:relative;align-self:center;text-align:center;margin-top:8px;z-index:1;
+    padding-top:38px;display:flex;flex-direction:column;align-items:center}
+  .prog-finish::before{content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);
+    width:16px;height:16px;border-radius:50%;background:var(--cyan);
+    box-shadow:0 0 0 5px rgba(33,160,255,.2),0 0 26px var(--glow)}
+  .prog-finish h3{font-size:23px;font-weight:600;color:#fff;margin-bottom:8px}
+  .prog-finish p{font-size:14.5px;color:var(--muted);margin-bottom:20px;max-width:46ch}
   .prog{padding:28px 26px;border-radius:24px;position:relative;transition:transform .25s,border-color .25s}
   .prog:hover{transform:translateY(-4px);border-color:var(--line-strong)}
   .prog .num{font-family:var(--mono);font-size:12.5px;color:var(--cyan);margin-bottom:10px;display:block}
@@ -605,13 +609,14 @@
     .ci span{white-space:normal}
     .plans,.faq-grid{grid-template-columns:1fr}
     /* таймлайн программы: линия слева, карточки в один столбец */
-    .prog-line::before{left:11px;transform:none}
+    .prog-steps::before{left:11px;transform:none}
     .prog-line .prog,
     .prog-line .prog:nth-child(odd),
     .prog-line .prog:nth-child(even){width:auto;align-self:stretch;margin-left:40px}
     .prog-line .prog:nth-child(odd)::before,
     .prog-line .prog:nth-child(even)::before{left:-36px;right:auto;top:26px}
-    .prog-finish{align-self:stretch;margin-left:40px}
+    .prog-finish{align-self:stretch;margin-left:40px;padding-top:8px}
+    .prog-finish::before{left:-36px;top:14px;transform:none;width:14px;height:14px}
     .faq-cta{position:static}
     .calc{grid-template-columns:1fr;gap:28px;padding:30px 24px}
     .final .panel{grid-template-columns:1fr;padding:56px 36px}
@@ -744,13 +749,15 @@
     .calc-out{padding:22px 20px}
 
     /* компактная программа */
-    .prog-line{gap:14px}
-    .prog-line::before{left:8px}
+    .prog-line,.prog-steps{gap:14px}
+    .prog-steps::before{left:8px}
     .prog-line .prog,.prog-finish{margin-left:30px}
     .prog-line .prog:nth-child(odd)::before,
     .prog-line .prog:nth-child(even)::before{left:-28px;width:11px;height:11px;top:24px}
-    .prog-finish b{font-size:14px;padding:11px 22px}
-    .prog-finish span{font-size:12px}
+    .prog-finish::before{left:-28px;top:12px;width:11px;height:11px}
+    .prog-finish h3{font-size:18px}
+    .prog-finish p{font-size:13px;margin-bottom:14px}
+    .prog-finish .btn{width:100%}
     .prog{padding:20px 18px}
     .prog p{margin-bottom:10px}
     .prog ul{gap:6px;margin-bottom:14px}
@@ -1072,6 +1079,7 @@
         <p>Каждый модуль заканчивается результатом, который остаётся у вас: стратегия, креативы, запуск, кейс.</p>
       </div>
       <div class="prog-line">
+       <div class="prog-steps">
         <div class="card prog reveal" data-n="01">
           <span class="num">Шаг 01 · дни 1–4</span>
           <h3>Профессия и алгоритмы ВК</h3>
@@ -1132,9 +1140,11 @@
           </ul>
           <span class="res">кейс с живыми лидами</span>
         </div>
+       </div>
         <div class="prog-finish reveal">
-          <b>🎯 Финиш — первый клиент</b>
-          <span>через месяц у вас запущенные кампании, кейс в портфолио и все инструменты таргетолога</span>
+          <h3>Через месяц вы — таргетолог с первым кейсом</h3>
+          <p>Запущенные кампании, портфолио и все инструменты для работы с клиентами</p>
+          <button class="btn btn-primary js-open" type="button">Начать свой путь</button>
         </div>
       </div>
     </div>
