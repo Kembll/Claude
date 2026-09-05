@@ -183,6 +183,7 @@
   .ph-label{display:none}   /* мобильный лейбл секции наставника, включается в media */
   .mob-name{display:none}   /* имя наставника на мобильном хиро, включается в media */
   .mob-timer{display:none}  /* секция обратного отсчёта: мобайл в media ≤560, десктоп в media ≥561 */
+  .mt-bridge{display:none}  /* десктопная мост-линия из секции таймера в калькулятор */
   .nav-burger{display:none} /* мобильный бургер оглавления, включается в media */
   /* неоновые пузырьки: включаются в media (мобайл — хиро и акция, десктоп — только акция) */
   .mob-bubbles{display:none;position:absolute;left:0;right:0;bottom:0;height:46%;
@@ -516,18 +517,24 @@
 
   /* ===== секция срочности (таймер + скидка −50%) на десктопе и планшете ===== */
   @media (min-width:561px){
+    /* без overflow:hidden — свечения и мост-линия свободно перетекают в секцию дохода */
     .mob-timer{display:flex;flex-direction:column;justify-content:center;text-align:center;
-      position:relative;overflow:hidden;
+      position:relative;
       min-height:calc(100vh/var(--z,1) - 64px);padding:72px 0 88px}
     .mob-timer::before{content:'';display:block;width:2px;height:56px;margin:0 auto 30px;
       background:linear-gradient(180deg,transparent,var(--cyan))}
-    /* свечения: центральное за таймером + два боковых неоновых */
-    .mob-timer::after{content:'';position:absolute;inset:0;pointer-events:none;
+    /* свечения: центральное за таймером + боковые; низ выходит за границу секции,
+       чтобы не было видимого шва при переходе к калькулятору */
+    .mob-timer::after{content:'';position:absolute;inset:0;bottom:-260px;pointer-events:none;
       background:
-        radial-gradient(circle 480px at 50% 32%,rgba(33,160,255,.16),transparent 62%),
-        radial-gradient(circle 420px at 8% 80%,rgba(43,168,255,.12),transparent 68%),
-        radial-gradient(circle 440px at 93% 18%,rgba(91,200,255,.10),transparent 68%),
-        radial-gradient(circle 300px at 78% 88%,rgba(33,160,255,.08),transparent 70%)}
+        radial-gradient(circle 480px at 50% 26%,rgba(33,160,255,.16),transparent 62%),
+        radial-gradient(circle 420px at 8% 66%,rgba(43,168,255,.12),transparent 68%),
+        radial-gradient(circle 440px at 93% 14%,rgba(91,200,255,.10),transparent 68%),
+        radial-gradient(circle 340px at 78% 92%,rgba(33,160,255,.09),transparent 70%)}
+    /* мост-линия: спускается из секции таймера в секцию дохода */
+    .mt-bridge{display:block;position:absolute;left:50%;bottom:-52px;
+      transform:translateX(-50%);width:2px;height:118px;z-index:1;pointer-events:none;
+      background:linear-gradient(180deg,transparent,var(--cyan) 45%,transparent)}
     .mob-timer .mob-bubbles{display:block;height:52%}
     .mt-t{font-family:var(--mono);font-size:14px;letter-spacing:.24em;
       text-transform:uppercase;color:var(--cyan);margin-bottom:22px}
@@ -969,6 +976,7 @@
       <p class="mt-note">В первом потоке всего 15 мест</p>
       <button class="btn btn-primary js-open" type="button">Занять место со скидкой</button>
     </div>
+    <i class="mt-bridge" aria-hidden="true"></i>
   </section>
 
   <!-- ============ блок 2: что получите + цифры ============ -->
