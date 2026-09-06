@@ -540,6 +540,24 @@
     .modal .form-card{animation:none}
   }
 
+  /* ===== секция болей «узнаёте себя?» (между хиро и акцией) ===== */
+  .pains{position:relative;padding:96px 0 72px;overflow:hidden}
+  .pains::before{content:'';position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
+    width:780px;height:780px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(33,160,255,.09),transparent 62%)}
+  .pains .wrap{position:relative;z-index:1}
+  .pains .sec-head{max-width:760px;margin:0 auto 44px;text-align:center}
+  .pn-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1080px;margin:0 auto}
+  .pn-card{position:relative;padding:26px 24px;border-radius:22px;
+    background:linear-gradient(160deg,rgba(16,42,74,.55),rgba(7,24,44,.7));
+    border:1px solid var(--line);transition:transform .25s,border-color .25s}
+  .pn-card:hover{transform:translateY(-4px);border-color:var(--line-strong)}
+  .pn-card span{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--cyan);
+    display:block;margin-bottom:12px}
+  .pn-card p{font-size:16.5px;line-height:1.55;color:#DCEBFC;font-weight:500}
+  .pn-out{margin:40px auto 0;max-width:640px;text-align:center;font-size:16px;color:var(--muted)}
+  .pn-out b{color:#fff}
+
   /* ===== секция срочности (таймер + скидка −50%) на десктопе и планшете ===== */
   @media (min-width:561px){
     /* без overflow:hidden — свечения и мост-линия свободно перетекают в секцию дохода */
@@ -612,6 +630,7 @@
     .ci+.ci{border-left:none}
     .ci span{white-space:normal}
     .plans,.faq-grid{grid-template-columns:1fr}
+    .pn-cards{grid-template-columns:1fr;max-width:560px}
     /* таймлайн программы: линия слева, карточки в один столбец */
     .prog-steps::before{left:11px;transform:none}
     .prog-line .prog,
@@ -782,6 +801,16 @@
     .form-note{font-size:10.5px;margin-top:10px;line-height:1.45}
     /* пузырьки и в секции акции */
     .mob-timer .mob-bubbles{height:64%}
+    /* секция болей — отдельная «страница» на телефоне */
+    .pains{display:flex;flex-direction:column;justify-content:center;
+      min-height:calc(100lvh/var(--z,1) - 60px);padding:64px 0 36px}
+    .pains .sec-head{margin-bottom:22px}
+    .pains .sec-head h2{font-size:22px}
+    .pn-cards{gap:12px}
+    .pn-card{padding:16px 16px;border-radius:18px}
+    .pn-card span{font-size:11px;margin-bottom:7px}
+    .pn-card p{font-size:14.5px;line-height:1.5}
+    .pn-out{margin-top:22px;font-size:13.5px}
     /* компактные тарифы */
     .plans{gap:14px}
     .plan{padding:20px 16px}
@@ -995,6 +1024,22 @@
       </div>
     </div>
   </div>
+
+  <!-- секция болей: между хиро и акцией, «узнаёте себя?» -->
+  <section class="pains" aria-label="Узнаёте себя?">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="sec-label">Узнаёте себя?</span>
+        <h2>Если хотя бы один пункт про вас — вы по адресу</h2>
+      </div>
+      <div class="pn-cards">
+        <div class="pn-card reveal"><span>01</span><p>«Работаю на нелюбимой работе за 40&nbsp;000&nbsp;₽ — и потолок уже виден»</p></div>
+        <div class="pn-card reveal"><span>02</span><p>«Хочу начать своё, но не знаю, с чего — и где потом брать клиентов»</p></div>
+        <div class="pn-card reveal"><span>03</span><p>«Мечтаю работать удалённо, а не тащиться каждое утро в офис»</p></div>
+      </div>
+      <p class="pn-out reveal">Знакомо? Тогда листайте дальше — <b>таргет ВКонтакте закрывает все три пункта</b>, и вот с чего начать.</p>
+    </div>
+  </section>
 
   <!-- секция срочности: обратный отсчёт до старта (мобайл и десктоп) -->
   <section class="mob-timer" aria-label="До старта потока">
