@@ -542,12 +542,26 @@
 
   /* ===== секция болей «узнаёте себя?» (между хиро и акцией) ===== */
   .pains{position:relative;padding:96px 0 72px;overflow:hidden}
-  .pains::before{content:'';position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);
-    width:780px;height:780px;border-radius:50%;pointer-events:none;
-    background:radial-gradient(circle,rgba(33,160,255,.09),transparent 62%)}
+  /* четыре свечения по углам + центр, чтобы страница не была тёмной */
+  .pains::before{content:'';position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(circle 640px at 16% 18%,rgba(33,160,255,.15),transparent 62%),
+      radial-gradient(circle 580px at 86% 28%,rgba(91,200,255,.13),transparent 65%),
+      radial-gradient(circle 540px at 26% 88%,rgba(43,168,255,.12),transparent 65%),
+      radial-gradient(circle 500px at 88% 84%,rgba(33,160,255,.10),transparent 65%),
+      radial-gradient(circle 700px at 50% 50%,rgba(33,160,255,.07),transparent 60%)}
   .pains .wrap{position:relative;z-index:1}
-  .pains .sec-head{max-width:760px;margin:0 auto 44px;text-align:center}
-  .pn-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1080px;margin:0 auto}
+  .pains .sec-head{max-width:800px;margin:0 auto 44px;text-align:center}
+  .pains .sec-head p{margin-left:auto;margin-right:auto}
+  .pn-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1120px;margin:0 auto}
+  .pn-card.big{grid-column:span 2;padding:28px 26px;
+    background:linear-gradient(160deg,rgba(23,62,108,.72),rgba(9,30,56,.84));
+    border-color:var(--line-strong);
+    box-shadow:0 0 55px -18px rgba(33,160,255,.4),inset 0 0 44px rgba(33,160,255,.05)}
+  .pn-tag{display:inline-block;font-style:normal;margin-top:14px;
+    font-family:var(--mono);font-size:11.5px;color:#7EC1FF;
+    background:rgba(33,160,255,.12);border:1px solid var(--line);
+    border-radius:100px;padding:5px 12px}
   .pn-card{position:relative;padding:26px 24px;border-radius:22px;
     background:linear-gradient(160deg,rgba(16,42,74,.55),rgba(7,24,44,.7));
     border:1px solid var(--line);transition:transform .25s,border-color .25s}
@@ -631,7 +645,8 @@
     .ci+.ci{border-left:none}
     .ci span{white-space:normal}
     .plans,.faq-grid{grid-template-columns:1fr}
-    .pn-cards{grid-template-columns:1fr;max-width:560px}
+    .pn-cards{grid-template-columns:1fr 1fr;max-width:640px}
+    .pn-card.big{grid-column:span 2}
     /* таймлайн программы: линия слева, карточки в один столбец */
     .prog-steps::before{left:11px;transform:none}
     .prog-line .prog,
@@ -807,11 +822,13 @@
       min-height:calc(100lvh/var(--z,1) - 60px);padding:64px 0 36px}
     .pains .sec-head{margin-bottom:22px}
     .pains .sec-head h2{font-size:22px}
-    .pn-cards{gap:12px}
-    .pn-card{padding:16px 16px;border-radius:18px}
-    .pn-card span{font-size:10.5px;margin-bottom:5px}
-    .pn-card b{font-size:15px;margin-bottom:5px}
-    .pn-card p{font-size:13px;line-height:1.5}
+    .pn-cards{gap:10px}
+    .pn-card{padding:14px 14px;border-radius:16px}
+    .pn-card.big{padding:16px 15px}
+    .pn-card span{font-size:10px;margin-bottom:4px}
+    .pn-card b{font-size:14px;margin-bottom:4px}
+    .pn-card p{font-size:12px;line-height:1.45}
+    .pn-tag{margin-top:9px;font-size:9.5px;padding:4px 9px}
     .pn-out{margin-top:22px;font-size:13.5px}
     /* компактные тарифы */
     .plans{gap:14px}
@@ -1033,14 +1050,23 @@
       <div class="sec-head reveal">
         <span class="sec-label">Узнаёте себя?</span>
         <h2>Вставать по будильнику, пахать 5/2 на чужую мечту — и упираться в потолок 50&nbsp;000&nbsp;₽?</h2>
+        <p>Мы посмотрели, что люди ищут в Яндексе про удалёнку. Вот что болит чаще всего.</p>
       </div>
       <div class="pn-cards">
-        <div class="pn-card reveal"><span>01</span><b>Работа в тупике</b>
-          <p>Каждый день одно и то же: офис, задачи, начальник. Зарплата 50&nbsp;000&nbsp;₽, и все понимают — больше здесь не заплатят. Расти некуда, а уходить страшно.</p></div>
-        <div class="pn-card reveal"><span>02</span><b>Не знаешь, с чего начать</b>
-          <p>Хочется своего — но куда податься? Курсов миллион, все обещают золотые горы. И даже если научишься — где брать клиентов, кто заплатит новичку без портфолио?</p></div>
-        <div class="pn-card reveal"><span>03</span><b>Мечта об удалёнке</b>
-          <p>Работать из дома или из кафе, самому решать, когда и сколько. Не вставать по будильнику в 6:30, не ехать час в офис. Кажется, это только для айтишников. Спойлер: нет.</p></div>
+        <div class="pn-card big reveal"><span>01</span><b>Нет опыта и портфолио</b>
+          <p>Кажется, без опыта никому не нужен: в вакансиях требуют кейсы, а кейсов нет. Замкнутый круг — без работы не появится опыт, без опыта не дают работу.</p>
+          <i class="pn-tag">«удалённая работа без опыта» — 62 000 запросов в месяц</i></div>
+        <div class="pn-card reveal"><span>02</span><b>Страх нарваться на развод</b>
+          <p>Каждая вторая «удалёнка» в интернете — лохотрон. Уже обжигались или боитесь обжечься.</p></div>
+        <div class="pn-card reveal"><span>03</span><b>Привязаны к дому</b>
+          <p>Дети, декрет, маленький город без вакансий. Офис физически невозможен — нужен доход из дома.</p></div>
+        <div class="pn-card reveal"><span>04</span><b>Надоело «работать на дядю»</b>
+          <p>Чужой начальник распоряжается вашим временем. И он же решает, сколько вы стоите.</p></div>
+        <div class="pn-card reveal"><span>05</span><b>«Онлайн — это же копейки?»</b>
+          <p>В голове сидит: удалёнка — это 15 тысяч за подработку, а не полноценная зарплата.</p></div>
+        <div class="pn-card big reveal"><span>06</span><b>Не знаете, с чего начать</b>
+          <p>Курсов миллион, все обещают золотые горы. Непонятно, чему учиться, стоит ли платить и где потом брать клиентов. Знаете, куда хотите, — не знаете, откуда стартовать.</p>
+          <i class="pn-tag">«кем можно работать удалённо» — 2 700 запросов в месяц</i></div>
       </div>
       <p class="pn-out reveal">Знакомо? Это решается одной профессией. <b>Таргетолог ВКонтакте работает удалённо, сам выбирает клиентов и зарабатывает от результата</b> — а начать можно с нуля за месяц.</p>
     </div>
