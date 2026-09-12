@@ -553,22 +553,36 @@
   .pains .wrap{position:relative;z-index:1}
   .pains .sec-head{max-width:800px;margin:0 auto 44px;text-align:center}
   .pains .sec-head p{margin-left:auto;margin-right:auto}
-  /* чат «мысли в голове»: серые пузыри-сомнения слева, ответ наставника справа */
-  .chat{max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
-  .ch-day{text-align:center;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;
-    color:var(--muted);margin-bottom:10px}
-  .ch-msg{align-self:flex-start;max-width:78%;padding:13px 18px;
-    border-radius:18px 18px 18px 6px;
-    background:linear-gradient(160deg,rgba(27,45,68,.88),rgba(15,29,48,.92));
-    border:1px solid var(--line);color:#D7E6F7;font-size:15.5px;line-height:1.5}
-  .ch-name{align-self:flex-end;margin:14px 6px 0;font-size:12px;color:var(--muted)}
-  .ch-reply{align-self:flex-end;display:flex;gap:10px;align-items:flex-end;max-width:88%}
-  .ch-ava{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none;
-    border:2px solid var(--cyan);box-shadow:0 0 18px var(--glow)}
-  .ch-bubble{padding:15px 19px;border-radius:18px 18px 6px 18px;
-    background:linear-gradient(135deg,rgba(33,160,255,.34),rgba(11,111,216,.42));
-    border:1px solid var(--line-strong);box-shadow:0 0 44px -10px var(--glow);
-    color:#fff;font-size:15.5px;line-height:1.55}
+  /* «Два пути»: серый путь найма против неонового пути таргета */
+  .ways{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:22px;
+    max-width:980px;margin:0 auto;align-items:stretch}
+  .ways::after{content:'или';position:absolute;left:50%;top:50%;z-index:2;
+    transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--mono);font-size:13px;color:var(--cyan);
+    background:#081729;border:1px solid var(--line-strong);
+    box-shadow:0 0 24px rgba(33,160,255,.35)}
+  .way{padding:30px 28px 28px;border-radius:24px;display:flex;flex-direction:column}
+  .way-t{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
+    margin-bottom:12px}
+  .way h3{font-size:21px;font-weight:600;margin-bottom:16px}
+  .way ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .way li{position:relative;padding-left:26px;font-size:15px;line-height:1.5}
+  .way li::before{position:absolute;left:0;font-weight:600}
+  .way-old{background:linear-gradient(160deg,rgba(25,33,45,.72),rgba(13,19,29,.82));
+    border:1px solid rgba(140,160,185,.16)}
+  .way-old .way-t{color:#7A8CA3}
+  .way-old h3{color:#93A5BB}
+  .way-old li{color:#8598AF}
+  .way-old li::before{content:'—';color:#5E7089}
+  .way-new{background:linear-gradient(160deg,rgba(23,64,112,.68),rgba(9,30,56,.85));
+    border:1px solid var(--line-strong);
+    box-shadow:0 0 60px -18px rgba(33,160,255,.5),inset 0 0 44px rgba(33,160,255,.06)}
+  .way-new .way-t{color:var(--cyan)}
+  .way-new h3{color:#fff}
+  .way-new li{color:#DCEBFC}
+  .way-new li::before{content:'✓';color:var(--cyan)}
+  .way-new .btn{margin-top:22px;align-self:flex-start}
 
   /* ===== секция срочности (таймер + скидка −50%) на десктопе и планшете ===== */
   @media (min-width:561px){
@@ -642,7 +656,8 @@
     .ci+.ci{border-left:none}
     .ci span{white-space:normal}
     .plans,.faq-grid{grid-template-columns:1fr}
-    .chat{max-width:560px}
+    .ways{grid-template-columns:1fr;max-width:560px}
+    .ways::after{display:none}
     /* таймлайн программы: линия слева, карточки в один столбец */
     .prog-steps::before{left:11px;transform:none}
     .prog-line .prog,
@@ -818,12 +833,13 @@
       min-height:calc(100lvh/var(--z,1) - 60px);padding:64px 0 36px}
     .pains .sec-head{margin-bottom:22px}
     .pains .sec-head h2{font-size:22px}
-    .chat{gap:8px}
-    .ch-day{font-size:10.5px;margin-bottom:6px}
-    .ch-msg{max-width:86%;padding:11px 15px;font-size:14px}
-    .ch-name{font-size:11px;margin-top:10px}
-    .ch-ava{width:34px;height:34px}
-    .ch-bubble{padding:12px 15px;font-size:14px}
+    .ways{gap:12px}
+    .way{padding:18px 16px 16px;border-radius:18px}
+    .way-t{font-size:10.5px;margin-bottom:7px}
+    .way h3{font-size:17px;margin-bottom:10px}
+    .way ul{gap:7px}
+    .way li{font-size:13px;padding-left:22px}
+    .way-new .btn{margin-top:14px;align-self:stretch;width:100%}
     /* компактные тарифы */
     .plans{gap:14px}
     .plan{padding:20px 16px}
@@ -1043,18 +1059,29 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-label">Узнаёте себя?</span>
-        <h2>Жизнь по будильнику: офис — дом — офис. Всё?</h2>
+        <h2>Вы уже поняли, что в найме потолок. Дальше что?</h2>
       </div>
-      <div class="chat">
-        <div class="ch-day reveal">мысли перед сном · 23:47</div>
-        <div class="ch-msg reveal">Хочу уйти с нелюбимой работы, но опыта нет — кто мне заплатит?</div>
-        <div class="ch-msg reveal">Курсов миллион, половина — развод. Кому вообще верить?</div>
-        <div class="ch-msg reveal">Удалёнка — это же копейки, а не нормальная зарплата…</div>
-        <div class="ch-msg reveal">Да и с чего вообще начать?</div>
-        <div class="ch-name reveal">Илья · наставник курса</div>
-        <div class="ch-reply reveal">
-          <img class="ch-ava" src="assets/author.jpg" alt="Илья Камбалин">
-          <div class="ch-bubble">Три года назад я думал точно так же. Сегодня таргет ВКонтакте — моя профессия: удалённо, без начальника, доход зависит только от меня. Опыт нарабатывается за месяц — покажу, с чего начать 👇</div>
+      <div class="ways">
+        <div class="way way-old reveal">
+          <span class="way-t">Путь 1</span>
+          <h3>Оставить как есть</h3>
+          <ul>
+            <li>Тот же будильник в 6:30 и офис 5/2</li>
+            <li>Та же зарплата с потолком 50&nbsp;000&nbsp;₽</li>
+            <li>Начальник решает, сколько вы стоите</li>
+            <li>Через год — всё то же, только на год позже</li>
+          </ul>
+        </div>
+        <div class="way way-new reveal">
+          <span class="way-t">Путь 2</span>
+          <h3>Освоить таргет ВКонтакте</h3>
+          <ul>
+            <li>Работа из дома — или откуда захотите</li>
+            <li>Свои клиенты и доход от результата</li>
+            <li>Профессия с нуля за 1 месяц</li>
+            <li>Первый кейс в портфолио уже на курсе</li>
+          </ul>
+          <button class="btn btn-primary js-open" type="button">Выбираю путь 2</button>
         </div>
       </div>
     </div>
