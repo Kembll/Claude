@@ -553,25 +553,22 @@
   .pains .wrap{position:relative;z-index:1}
   .pains .sec-head{max-width:800px;margin:0 auto 44px;text-align:center}
   .pains .sec-head p{margin-left:auto;margin-right:auto}
-  .pn-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1120px;margin:0 auto}
-  .pn-card.big{grid-column:span 2;padding:28px 26px;
-    background:linear-gradient(160deg,rgba(23,62,108,.72),rgba(9,30,56,.84));
-    border-color:var(--line-strong);
-    box-shadow:0 0 55px -18px rgba(33,160,255,.4),inset 0 0 44px rgba(33,160,255,.05)}
-  .pn-tag{display:inline-block;font-style:normal;margin-top:14px;
-    font-family:var(--mono);font-size:11.5px;color:#7EC1FF;
-    background:rgba(33,160,255,.12);border:1px solid var(--line);
-    border-radius:100px;padding:5px 12px}
-  .pn-card{position:relative;padding:26px 24px;border-radius:22px;
-    background:linear-gradient(160deg,rgba(16,42,74,.55),rgba(7,24,44,.7));
-    border:1px solid var(--line);transition:transform .25s,border-color .25s}
-  .pn-card:hover{transform:translateY(-4px);border-color:var(--line-strong)}
-  .pn-card span{font-family:var(--mono);font-size:12px;letter-spacing:.16em;color:var(--cyan);
-    display:block;margin-bottom:10px}
-  .pn-card b{display:block;font-size:17px;font-weight:600;color:#fff;margin-bottom:8px}
-  .pn-card p{font-size:14.5px;line-height:1.6;color:#B9CFE8}
-  .pn-out{margin:40px auto 0;max-width:640px;text-align:center;font-size:16px;color:var(--muted)}
-  .pn-out b{color:#fff}
+  /* чат «мысли в голове»: серые пузыри-сомнения слева, ответ наставника справа */
+  .chat{max-width:660px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+  .ch-day{text-align:center;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;
+    color:var(--muted);margin-bottom:10px}
+  .ch-msg{align-self:flex-start;max-width:78%;padding:13px 18px;
+    border-radius:18px 18px 18px 6px;
+    background:linear-gradient(160deg,rgba(27,45,68,.88),rgba(15,29,48,.92));
+    border:1px solid var(--line);color:#D7E6F7;font-size:15.5px;line-height:1.5}
+  .ch-name{align-self:flex-end;margin:14px 6px 0;font-size:12px;color:var(--muted)}
+  .ch-reply{align-self:flex-end;display:flex;gap:10px;align-items:flex-end;max-width:88%}
+  .ch-ava{width:40px;height:40px;border-radius:50%;object-fit:cover;flex:none;
+    border:2px solid var(--cyan);box-shadow:0 0 18px var(--glow)}
+  .ch-bubble{padding:15px 19px;border-radius:18px 18px 6px 18px;
+    background:linear-gradient(135deg,rgba(33,160,255,.34),rgba(11,111,216,.42));
+    border:1px solid var(--line-strong);box-shadow:0 0 44px -10px var(--glow);
+    color:#fff;font-size:15.5px;line-height:1.55}
 
   /* ===== секция срочности (таймер + скидка −50%) на десктопе и планшете ===== */
   @media (min-width:561px){
@@ -645,8 +642,7 @@
     .ci+.ci{border-left:none}
     .ci span{white-space:normal}
     .plans,.faq-grid{grid-template-columns:1fr}
-    .pn-cards{grid-template-columns:1fr 1fr;max-width:640px}
-    .pn-card.big{grid-column:span 2}
+    .chat{max-width:560px}
     /* таймлайн программы: линия слева, карточки в один столбец */
     .prog-steps::before{left:11px;transform:none}
     .prog-line .prog,
@@ -822,14 +818,12 @@
       min-height:calc(100lvh/var(--z,1) - 60px);padding:64px 0 36px}
     .pains .sec-head{margin-bottom:22px}
     .pains .sec-head h2{font-size:22px}
-    .pn-cards{gap:10px}
-    .pn-card{padding:14px 14px;border-radius:16px}
-    .pn-card.big{padding:16px 15px}
-    .pn-card span{font-size:10px;margin-bottom:4px}
-    .pn-card b{font-size:14px;margin-bottom:4px}
-    .pn-card p{font-size:12px;line-height:1.45}
-    .pn-tag{margin-top:9px;font-size:9.5px;padding:4px 9px}
-    .pn-out{margin-top:22px;font-size:13.5px}
+    .chat{gap:8px}
+    .ch-day{font-size:10.5px;margin-bottom:6px}
+    .ch-msg{max-width:86%;padding:11px 15px;font-size:14px}
+    .ch-name{font-size:11px;margin-top:10px}
+    .ch-ava{width:34px;height:34px}
+    .ch-bubble{padding:12px 15px;font-size:14px}
     /* компактные тарифы */
     .plans{gap:14px}
     .plan{padding:20px 16px}
@@ -1049,25 +1043,20 @@
     <div class="wrap">
       <div class="sec-head reveal">
         <span class="sec-label">Узнаёте себя?</span>
-        <h2>Вставать по будильнику, пахать 5/2 на чужую мечту — и упираться в потолок 50&nbsp;000&nbsp;₽?</h2>
+        <h2>Жизнь по будильнику: офис — дом — офис. Всё?</h2>
       </div>
-      <div class="pn-cards">
-        <div class="pn-card big reveal"><span>01</span><b>Нет опыта и портфолио</b>
-          <p>Кажется, без опыта никому не нужен: в вакансиях требуют кейсы, а кейсов нет. Замкнутый круг — без работы не появится опыт, без опыта не дают работу.</p>
-          <i class="pn-tag">«удалённая работа без опыта» — 62 000 запросов в месяц</i></div>
-        <div class="pn-card reveal"><span>02</span><b>Страх нарваться на развод</b>
-          <p>Каждая вторая «удалёнка» в интернете — лохотрон. Уже обжигались или боитесь обжечься.</p></div>
-        <div class="pn-card reveal"><span>03</span><b>Привязаны к дому</b>
-          <p>Дети, декрет, маленький город без вакансий. Офис физически невозможен — нужен доход из дома.</p></div>
-        <div class="pn-card reveal"><span>04</span><b>Надоело «работать на дядю»</b>
-          <p>Чужой начальник распоряжается вашим временем. И он же решает, сколько вы стоите.</p></div>
-        <div class="pn-card reveal"><span>05</span><b>«Онлайн — это же копейки?»</b>
-          <p>В голове сидит: удалёнка — это 15 тысяч за подработку, а не полноценная зарплата.</p></div>
-        <div class="pn-card big reveal"><span>06</span><b>Не знаете, с чего начать</b>
-          <p>Курсов миллион, все обещают золотые горы. Непонятно, чему учиться, стоит ли платить и где потом брать клиентов. Знаете, куда хотите, — не знаете, откуда стартовать.</p>
-          <i class="pn-tag">«кем можно работать удалённо» — 2 700 запросов в месяц</i></div>
+      <div class="chat">
+        <div class="ch-day reveal">мысли перед сном · 23:47</div>
+        <div class="ch-msg reveal">Хочу уйти с нелюбимой работы, но опыта нет — кто мне заплатит?</div>
+        <div class="ch-msg reveal">Курсов миллион, половина — развод. Кому вообще верить?</div>
+        <div class="ch-msg reveal">Удалёнка — это же копейки, а не нормальная зарплата…</div>
+        <div class="ch-msg reveal">Да и с чего вообще начать?</div>
+        <div class="ch-name reveal">Илья · наставник курса</div>
+        <div class="ch-reply reveal">
+          <img class="ch-ava" src="assets/author.jpg" alt="Илья Камбалин">
+          <div class="ch-bubble">Три года назад я думал точно так же. Сегодня таргет ВКонтакте — моя профессия: удалённо, без начальника, доход зависит только от меня. Опыт нарабатывается за месяц — покажу, с чего начать 👇</div>
+        </div>
       </div>
-      <p class="pn-out reveal">Знакомо? Это решается одной профессией. <b>Таргетолог ВКонтакте работает удалённо, сам выбирает клиентов и зарабатывает от результата</b> — а начать можно с нуля за месяц.</p>
     </div>
   </section>
 
