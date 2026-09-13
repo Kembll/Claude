@@ -595,15 +595,23 @@
   .way-new .day b{color:var(--cyan)}
   .way-old .day li:last-child span{font-style:italic}
   .way-new .day li:last-child span{color:#fff;font-weight:600}
-  /* график-развилка доходов: полка найма против растущей ветки таргета */
-  .fork{max-width:860px;margin:0 auto;text-align:center}
-  .fork svg{width:100%;height:auto;display:block;overflow:visible}
-  .fk-ax{font-family:var(--mono);font-size:13px;fill:#66788F;letter-spacing:.06em}
-  .fk-here{font-family:var(--mono);font-size:13.5px;fill:var(--cyan);letter-spacing:.1em;
-    text-transform:uppercase}
-  .fk-old{font-size:15px;fill:#7A8CA3}
-  .fk-new{font-size:17px;font-weight:600;fill:#EAF4FF}
-  .fork .btn{margin-top:30px}
+  /* тумблер «найм ⇄ таргет»: одна карточка, два состояния */
+  .flip{max-width:560px;margin:0 auto}
+  .flip-tabs{display:flex;gap:4px;width:max-content;margin:0 auto 22px;padding:5px;
+    border-radius:999px;border:1px solid var(--line);
+    background:linear-gradient(160deg,rgba(16,42,74,.55),rgba(7,24,44,.7))}
+  .ft{border:0;cursor:pointer;background:none;padding:11px 24px;border-radius:999px;
+    font:inherit;font-size:14.5px;font-weight:600;color:var(--muted);
+    transition:background .25s,color .25s}
+  .ft[data-v="old"].on{background:rgba(140,160,185,.18);color:#B9C7D8}
+  .ft[data-v="new"].on{background:linear-gradient(100deg,var(--cyan),var(--electric));
+    color:#04203C;box-shadow:0 0 22px rgba(33,160,255,.45)}
+  .flip .flip-card{display:none}
+  .flip .flip-card.on{display:flex;animation:flipin .35s ease}
+  @keyframes flipin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .flip-hint{border:0;background:none;cursor:pointer;margin-top:20px;padding:0;
+    align-self:flex-start;font:inherit;font-size:14.5px;font-weight:600;color:var(--cyan)}
+  .flip-hint:hover{text-decoration:underline}
 
   /* ===== секция срочности (таймер + скидка −50%) на десктопе и планшете ===== */
   @media (min-width:561px){
@@ -862,12 +870,10 @@
     .way li{font-size:13px;padding-left:22px}
     .way .day li{padding:6px 0;gap:10px}
     .way .day b{font-size:11px;flex-basis:38px}
-    /* график на мобиле: подписи крупнее (SVG масштабируется вниз) */
-    .fk-ax{font-size:16px}
-    .fk-here{font-size:16px}
-    .fk-old{font-size:19px}
-    .fk-new{font-size:22px}
-    .fork .btn{margin-top:20px;width:100%}
+    /* тумблер на мобиле: во всю ширину */
+    .flip-tabs{width:100%;margin-bottom:14px}
+    .ft{flex:1;padding:10px 8px;font-size:13px}
+    .flip-hint{margin-top:14px;font-size:13px}
     .way-new .btn{margin-top:14px;align-self:stretch;width:100%}
     /* компактные тарифы */
     .plans{gap:14px}
@@ -1090,49 +1096,33 @@
         <span class="sec-label">Узнаёте себя?</span>
         <h2>Вы уже поняли, что в найме потолок. Дальше что?</h2>
       </div>
-      <div class="fork reveal">
-        <svg viewBox="0 0 720 300" role="img"
-          aria-label="График дохода: в найме потолок 50 000 ₽, в таргете рост до 150 000 ₽ и выше">
-          <defs>
-            <linearGradient id="fk-line" x1="0" y1="1" x2="1" y2="0">
-              <stop offset="0" stop-color="#21A0FF"/><stop offset="1" stop-color="#9FDBFF"/>
-            </linearGradient>
-            <linearGradient id="fk-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="rgba(33,160,255,.30)"/>
-              <stop offset="1" stop-color="rgba(33,160,255,0)"/>
-            </linearGradient>
-            <filter id="fk-glow" x="-40%" y="-40%" width="180%" height="180%">
-              <feGaussianBlur stdDeviation="6"/>
-            </filter>
-          </defs>
-          <!-- сетка: 150к / 50к -->
-          <line x1="95" y1="60"  x2="700" y2="60"  stroke="rgba(126,193,255,.14)" stroke-dasharray="3 6"/>
-          <line x1="95" y1="170" x2="700" y2="170" stroke="rgba(140,160,185,.18)" stroke-dasharray="3 6"/>
-          <text x="85" y="64"  text-anchor="end" class="fk-ax">150 000</text>
-          <text x="85" y="174" text-anchor="end" class="fk-ax">50 000</text>
-          <!-- заливка под растущей веткой -->
-          <path d="M270 170 C420 162,540 118,700 50 L700 262 L270 262 Z" fill="url(#fk-fill)"/>
-          <!-- найм: плоская полка на 50 000 -->
-          <path d="M95 170 L700 170" stroke="#5E7089" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <!-- таргет: ветка вверх (свечение + линия) -->
-          <path d="M270 170 C420 162,540 118,700 50" stroke="rgba(33,160,255,.45)" stroke-width="10"
-            fill="none" filter="url(#fk-glow)"/>
-          <path d="M270 170 C420 162,540 118,700 50" stroke="url(#fk-line)" stroke-width="3.5"
-            fill="none" stroke-linecap="round"/>
-          <!-- точка выбора и конец ветки -->
-          <circle cx="270" cy="170" r="6" fill="#0B1D33" stroke="var(--cyan)" stroke-width="2.5"/>
-          <circle cx="700" cy="50" r="5" fill="#9FDBFF"/>
-          <circle cx="700" cy="50" r="11" fill="rgba(159,219,255,.25)"/>
-          <text x="270" y="200" text-anchor="middle" class="fk-here">вы здесь</text>
-          <!-- подписи веток -->
-          <text x="692" y="190" text-anchor="end" class="fk-old">найм — потолок 50 000 ₽</text>
-          <text x="676" y="36" text-anchor="end" class="fk-new">таргет ВК — 150 000 ₽+</text>
-          <!-- ось времени -->
-          <text x="95" y="292" class="fk-ax">сегодня</text>
-          <text x="420" y="292" text-anchor="middle" class="fk-ax">через 3 мес</text>
-          <text x="700" y="292" text-anchor="end" class="fk-ax">через год</text>
-        </svg>
-        <button class="btn btn-primary js-open" type="button">Выбираю рост дохода</button>
+      <div class="flip reveal">
+        <div class="flip-tabs" role="tablist" aria-label="Найм или таргет">
+          <button class="ft on" data-v="old" type="button">Остаться в найме</button>
+          <button class="ft" data-v="new" type="button">Уйти в таргет</button>
+        </div>
+        <div class="way way-old flip-card on" data-v="old">
+          <span class="way-t">Обычный вторник в найме</span>
+          <ul class="day">
+            <li><b>06:30</b><span>Будильник. Подъём через силу</span></li>
+            <li><b>08:15</b><span>Метро или пробки в час пик</span></li>
+            <li><b>09:00</b><span>Офис до вечера. Задачи ставит начальник</span></li>
+            <li><b>19:30</b><span>Дома. Сил хватает только на сериал</span></li>
+            <li><b>23:00</b><span>«Завтра всё то же самое»</span></li>
+          </ul>
+          <button class="flip-hint" data-v="new" type="button">А как может быть иначе? →</button>
+        </div>
+        <div class="way way-new flip-card" data-v="new">
+          <span class="way-t">Обычный вторник таргетолога</span>
+          <ul class="day">
+            <li><b>06:30</b><span>Вы ещё спите — будильник не нужен</span></li>
+            <li><b>08:15</b><span>Кофе. Проверили рекламные кабинеты с телефона</span></li>
+            <li><b>09:00</b><span>2–3 часа работы — из дома или кафе</span></li>
+            <li><b>19:30</b><span>Зал, семья, свои дела — вечер ваш</span></li>
+            <li><b>23:00</b><span>Уведомление: оплата от клиента на карте</span></li>
+          </ul>
+          <button class="btn btn-primary js-open" type="button">Хочу такой вторник</button>
+        </div>
       </div>
     </div>
   </section>
@@ -1688,6 +1678,19 @@
     document.addEventListener('click',e=>{
       if(hdr.classList.contains('menu-open')&&!e.target.closest('.nav-links'))
         hdr.classList.remove('menu-open');
+    });
+  })();
+
+  // тумблер «найм ⇄ таргет» на второй странице
+  (function(){
+    const flip=document.querySelector('.flip');
+    if(!flip)return;
+    flip.addEventListener('click',e=>{
+      const b=e.target.closest('[data-v]');
+      if(!b)return;
+      const v=b.dataset.v;
+      flip.querySelectorAll('.ft').forEach(t=>t.classList.toggle('on',t.dataset.v===v));
+      flip.querySelectorAll('.flip-card').forEach(c=>c.classList.toggle('on',c.dataset.v===v));
     });
   })();
 
