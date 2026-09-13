@@ -347,6 +347,40 @@
   }
   .slider::-moz-range-thumb:hover{transform:scale(1.12)}
   .calc-scale{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;color:var(--muted);margin-top:10px}
+  /* инфографика: столбики дохода за слайдером */
+  .cbars{display:flex;gap:10px;height:64px;align-items:flex-end;margin-top:16px}
+  .cbars i{flex:1;border-radius:8px 8px 3px 3px;background:rgba(126,193,255,.13);
+    border:1px solid rgba(126,193,255,.10);transition:background .3s,box-shadow .3s}
+  .cbars i:nth-child(1){height:20%}
+  .cbars i:nth-child(2){height:40%}
+  .cbars i:nth-child(3){height:60%}
+  .cbars i:nth-child(4){height:80%}
+  .cbars i:nth-child(5){height:100%}
+  .cbars i.on{background:linear-gradient(180deg,var(--cyan),var(--deep));
+    border-color:transparent;box-shadow:0 0 16px rgba(33,160,255,.35)}
+  /* инфографика: шкала 30 дней в программе */
+  .prog-scale{max-width:760px;margin:-6px auto 46px}
+  .ps-track{display:flex;gap:4px}
+  .ps-seg{position:relative;height:9px;border-radius:99px;
+    background:linear-gradient(90deg,rgba(33,160,255,var(--a)),rgba(79,195,255,var(--a)));
+    box-shadow:0 0 12px rgba(33,160,255,calc(var(--a)*.35))}
+  .ps-seg span{position:absolute;top:14px;left:50%;transform:translateX(-50%);
+    font-family:var(--mono);font-size:10.5px;color:var(--muted);white-space:nowrap}
+  .ps-cap{text-align:center;margin-top:36px;font-size:13px;color:var(--muted)}
+  /* инфографика: «9 из 10» точками в тарифе */
+  .pick10{display:flex;gap:5px;margin:10px 0 2px}
+  .pick10 i{width:14px;height:14px;border-radius:50%;
+    background:rgba(126,193,255,.15);border:1px solid var(--line)}
+  .pick10 i.on{background:linear-gradient(120deg,var(--cyan),var(--electric));
+    border-color:transparent;box-shadow:0 0 10px rgba(33,160,255,.45)}
+  /* инфографика: сетка 15 мест */
+  .seats{display:flex;gap:7px;justify-content:center;margin:0 0 22px;flex-wrap:wrap}
+  .seats i{width:16px;height:16px;border-radius:5px;border:1px solid var(--line-strong);
+    background:linear-gradient(160deg,rgba(33,160,255,.28),rgba(11,60,120,.32));
+    animation:seatpulse 2.4s ease-in-out infinite}
+  @keyframes seatpulse{0%,100%{box-shadow:0 0 0 rgba(33,160,255,0)}
+    50%{box-shadow:0 0 10px rgba(33,160,255,.55)}}
+  .panel .seats{justify-content:flex-start;margin:14px 0 18px}
   .calc-out{
     position:relative;overflow:hidden;
     background:linear-gradient(160deg,rgba(33,160,255,.14),rgba(11,60,120,.18));
@@ -928,6 +962,14 @@
     .ceil-res .btn{margin-top:12px;width:100%}
     /* тест на мобиле */
     .tq{padding:18px 16px 20px;border-radius:18px;margin-top:10px}
+    /* инфографика на мобиле */
+    .cbars{height:46px;gap:6px;margin-top:12px}
+    .ps-seg span{display:none}
+    .ps-cap{margin-top:14px;font-size:11.5px}
+    .prog-scale{margin-bottom:26px}
+    .pick10 i{width:11px;height:11px}
+    .seats{gap:5px;margin-bottom:16px}
+    .seats i{width:13px;height:13px;border-radius:4px}
     .tq-top{margin-bottom:16px;gap:10px}
     .tp-step{font-size:10.5px}
     .ts h3{font-size:16px;margin-bottom:12px}
@@ -1255,6 +1297,7 @@
         <div><span>До результата</span><i></i><s>140 000</s><b>69 990 ₽</b></div>
       </div>
       <p class="mt-note">В первом потоке всего 15 мест</p>
+      <div class="seats" aria-hidden="true"><i style="animation-delay:0.00s"></i><i style="animation-delay:-0.16s"></i><i style="animation-delay:-0.32s"></i><i style="animation-delay:-0.48s"></i><i style="animation-delay:-0.64s"></i><i style="animation-delay:-0.80s"></i><i style="animation-delay:-0.96s"></i><i style="animation-delay:-1.12s"></i><i style="animation-delay:-1.28s"></i><i style="animation-delay:-1.44s"></i><i style="animation-delay:-1.60s"></i><i style="animation-delay:-1.76s"></i><i style="animation-delay:-1.92s"></i><i style="animation-delay:-2.08s"></i><i style="animation-delay:-2.24s"></i></div>
       <button class="btn btn-primary js-open" type="button">Занять место со скидкой</button>
     </div>
     <i class="mt-bridge" aria-hidden="true"></i>
@@ -1286,6 +1329,7 @@
           </div>
           <input class="slider" type="range" id="calc-range" min="1" max="5" step="0.01" value="2" aria-label="Количество клиентов в работе">
           <div class="calc-scale" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+          <div class="cbars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
           <p class="calc-note" id="calc-note">Два клиента — 30 000 ₽ в месяц всего при ≈2 часах работы в день.</p>
           <p class="calc-foot">Расчёт — ориентир по рынку фриланса на тарифе «С куратором», не гарантия дохода</p>
         </div>
@@ -1320,6 +1364,17 @@
         <span class="sec-label">02 · Программа</span>
         <h2>6 шагов от нуля до первых клиентов</h2>
         <p>Каждый модуль заканчивается результатом, который остаётся у вас: стратегия, креативы, запуск, кейс.</p>
+      </div>
+      <div class="prog-scale reveal" aria-hidden="true">
+        <div class="ps-track">
+          <div class="ps-seg" style="width:13.3%;--a:.32"><span>дни 1–4</span></div>
+          <div class="ps-seg" style="width:13.3%;--a:.45"><span>5–8</span></div>
+          <div class="ps-seg" style="width:16.7%;--a:.58"><span>9–13</span></div>
+          <div class="ps-seg" style="width:13.3%;--a:.70"><span>14–17</span></div>
+          <div class="ps-seg" style="width:20%;--a:.85"><span>18–23</span></div>
+          <div class="ps-seg" style="width:23.4%;--a:1"><span>24–30</span></div>
+        </div>
+        <p class="ps-cap">30 дней — от первого урока до кейса с цифрами</p>
       </div>
       <div class="prog-line">
        <div class="prog-steps">
@@ -1427,6 +1482,7 @@
         <div class="card plan featured reveal">
           <h3>С куратором</h3>
           <p class="who">Если начинаете с нуля — выбор 9 из 10 учеников</p>
+          <div class="pick10" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>
           <p class="price">39 990 ₽<s>80 000 ₽</s><span class="save">−50%</span></p>
           <p class="save-note">Экономия 40 000 ₽ — до 29 сентября</p>
           <ul>
@@ -1518,6 +1574,7 @@
         <div>
           <span class="f-label">Поток №1 · старт 30 сентября</span>
           <h2>В потоке всего 15 мест</h2>
+          <div class="seats" aria-hidden="true"><i style="animation-delay:0.00s"></i><i style="animation-delay:-0.16s"></i><i style="animation-delay:-0.32s"></i><i style="animation-delay:-0.48s"></i><i style="animation-delay:-0.64s"></i><i style="animation-delay:-0.80s"></i><i style="animation-delay:-0.96s"></i><i style="animation-delay:-1.12s"></i><i style="animation-delay:-1.28s"></i><i style="animation-delay:-1.44s"></i><i style="animation-delay:-1.60s"></i><i style="animation-delay:-1.76s"></i><i style="animation-delay:-1.92s"></i><i style="animation-delay:-2.08s"></i><i style="animation-delay:-2.24s"></i></div>
           <p class="lead">Оставьте заявку — я перезвоню лично в течение часа, отвечу на вопросы и забронирую за вами место со скидкой.</p>
           <ul>
             <li>Бесплатный вводный урок до старта потока</li>
@@ -1732,6 +1789,7 @@
       tween(inc,k*CHECK,x=>x.toLocaleString('ru-RU')+' ₽');
       tween(hrs,Math.round(k*8/7),x=>'≈'+x+' ч');
       tween(pay,Math.max(1,Math.round(PRICE/(k*CHECK)*4.33)),x=>x+' '+plural(x));
+      document.querySelectorAll('.cbars i').forEach((el,i)=>el.classList.toggle('on',i<k));
       note.style.opacity=0;
       setTimeout(()=>{note.textContent=notes[k];note.style.opacity=1},reduce?0:160);
     }
