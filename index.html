@@ -553,39 +553,23 @@
   .pains .wrap{position:relative;z-index:1}
   .pains .sec-head{max-width:800px;margin:0 auto 44px;text-align:center}
   .pains .sec-head p{margin-left:auto;margin-right:auto}
-  /* чек-лист «узнаёте себя»: тапаешь боли — страница отвечает */
-  .quiz{max-width:760px;margin:0 auto}
-  .quiz-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .q-item{display:flex;gap:13px;align-items:flex-start;text-align:left;cursor:pointer;
-    padding:16px 18px;border-radius:16px;font:inherit;font-size:14.5px;line-height:1.45;
-    color:#AABDD6;background:linear-gradient(160deg,rgba(20,34,52,.62),rgba(10,20,34,.78));
-    border:1px solid var(--line);transition:border-color .2s,box-shadow .2s,color .2s,
-    background .2s,transform .15s}
-  .q-item:active{transform:scale(.98)}
-  .q-item i{flex:0 0 21px;height:21px;margin-top:1px;border-radius:50%;
-    border:1.5px solid rgba(126,193,255,.4);position:relative;transition:all .2s}
-  .q-item i::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;
-    justify-content:center;font-size:12px;font-weight:700;color:#04203C;opacity:0;
-    transform:scale(.4);transition:all .2s}
-  .q-item.sel{color:#EAF4FF;border-color:var(--line-strong);
-    background:linear-gradient(160deg,rgba(23,64,112,.66),rgba(9,30,56,.84));
-    box-shadow:0 0 34px -8px rgba(33,160,255,.45)}
-  .q-item.sel i{background:linear-gradient(120deg,var(--cyan),var(--electric));
-    border-color:transparent;box-shadow:0 0 14px rgba(33,160,255,.6)}
-  .q-item.sel i::after{opacity:1;transform:scale(1)}
-  .quiz-res{margin-top:22px;text-align:center;padding:24px 26px;border-radius:20px;
-    border:1px solid var(--line);background:linear-gradient(160deg,rgba(16,42,74,.5),rgba(7,24,44,.62));
-    transition:border-color .3s,box-shadow .3s}
-  .quiz-res.on{border-color:var(--line-strong);
-    box-shadow:0 0 54px -14px rgba(33,160,255,.5)}
-  .qr-count{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--cyan);margin-bottom:8px;min-height:1em}
-  .qr-count:empty{display:none}
-  .qr-text{font-size:16px;line-height:1.55;color:#C8DCF4;max-width:520px;margin:0 auto}
-  .qr-text b{color:#fff}
-  .quiz-res .qr-btn{margin-top:18px;display:none}
-  .quiz-res.on .qr-btn{display:inline-flex;animation:qrin .35s ease}
-  @keyframes qrin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* счётчик «сколько стоило слово „потом"»: слайдер месяцев → потерянные деньги */
+  .lost{max-width:620px;margin:0 auto;padding:30px 32px 32px;border-radius:24px;
+    border:1px solid var(--line);text-align:center;
+    background:linear-gradient(160deg,rgba(16,42,74,.55),rgba(7,24,44,.7))}
+  .lost-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:18px}
+  .lost-top span{font-size:14.5px;color:var(--muted)}
+  .lost-top b{font-family:var(--mono);font-size:30px;font-weight:500;color:#fff;
+    font-variant-numeric:tabular-nums}
+  .lost-out{margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+  .lo-l{display:block;font-size:14.5px;color:#A9C4E4;margin-bottom:6px}
+  .lo-sum{display:block;font-family:var(--mono);font-size:46px;font-weight:500;
+    font-variant-numeric:tabular-nums;
+    background:linear-gradient(100deg,var(--cyan) 5%,#9FDBFF 45%,var(--electric));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .lo-note{display:block;font-size:13.5px;line-height:1.5;color:var(--muted);
+    max-width:400px;margin:8px auto 0;min-height:2.6em}
+  .lost .btn{margin-top:20px}
 
   /* ===== секция срочности (таймер + скидка −50%) на десктопе и планшете ===== */
   @media (min-width:561px){
@@ -659,8 +643,7 @@
     .ci+.ci{border-left:none}
     .ci span{white-space:normal}
     .plans,.faq-grid{grid-template-columns:1fr}
-    .quiz{max-width:560px}
-    .quiz-grid{grid-template-columns:1fr}
+    .lost{max-width:560px}
     /* таймлайн программы: линия слева, карточки в один столбец */
     .prog-steps::before{left:11px;transform:none}
     .prog-line .prog,
@@ -836,13 +819,15 @@
       min-height:calc(100lvh/var(--z,1) - 60px);padding:64px 0 36px}
     .pains .sec-head{margin-bottom:22px}
     .pains .sec-head h2{font-size:22px}
-    .quiz-grid{gap:8px}
-    .q-item{padding:11px 13px;font-size:12.5px;border-radius:13px;gap:10px}
-    .q-item i{flex-basis:18px;height:18px}
-    .quiz-res{margin-top:12px;padding:16px 16px 18px;border-radius:16px}
-    .qr-count{font-size:11px;margin-bottom:5px}
-    .qr-text{font-size:13.5px}
-    .quiz-res .qr-btn{margin-top:12px;width:100%}
+    .lost{padding:18px 16px 20px;border-radius:18px}
+    .lost-top{margin-bottom:12px}
+    .lost-top span{font-size:12.5px}
+    .lost-top b{font-size:24px}
+    .lost-out{margin-top:16px;padding-top:14px}
+    .lo-l{font-size:12.5px}
+    .lo-sum{font-size:36px}
+    .lo-note{font-size:12px}
+    .lost .btn{margin-top:14px;width:100%}
     .way-new .btn{margin-top:14px;align-self:stretch;width:100%}
     /* компактные тарифы */
     .plans{gap:14px}
@@ -1062,24 +1047,21 @@
   <section class="pains" aria-label="Узнаёте себя?">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="sec-label">Узнаёте себя?</span>
-        <h2>Хотите зарабатывать онлайн — но каждый раз что-то мешает?</h2>
-        <p>Отметьте, что про вас. Честно.</p>
+        <span class="sec-label">Честный вопрос</span>
+        <h2>Слово «потом» уже стоило вам денег. Посчитаем сколько?</h2>
+        <p>Двигайте ползунок: сколько месяцев вы уже думаете о заработке онлайн</p>
       </div>
-      <div class="quiz reveal">
-        <div class="quiz-grid">
-          <button class="q-item" type="button"><i></i><span>Листаю рилсы про заработок онлайн — и остаюсь на той же работе</span></button>
-          <button class="q-item" type="button"><i></i><span>Пробую курсы и марафоны — результата ноль</span></button>
-          <button class="q-item" type="button"><i></i><span>Кажется, что «заработок в интернете» — это всегда развод</span></button>
-          <button class="q-item" type="button"><i></i><span>Завидую тем, кто работает с ноутбуком откуда угодно</span></button>
-          <button class="q-item" type="button"><i></i><span>Зарплаты хватает ровно до следующей зарплаты</span></button>
-          <button class="q-item" type="button"><i></i><span>После работы нет сил начинать что-то новое</span></button>
+      <div class="lost reveal">
+        <div class="lost-top"><span>Думаю уже</span><b id="lost-m">6 мес</b></div>
+        <input class="slider" type="range" id="lost-range" min="1" max="24" step="1" value="6"
+          aria-label="Сколько месяцев вы думаете о заработке онлайн">
+        <div class="calc-scale" aria-hidden="true"><span>месяц</span><span>год</span><span>2 года</span></div>
+        <div class="lost-out" aria-live="polite">
+          <span class="lo-l">За это время новичок в таргете заработал бы</span>
+          <b class="lo-sum" id="lost-sum">225 000 ₽</b>
+          <span class="lo-note" id="lost-note">3 клиента × 15 000 ₽ уже со второго месяца. А слово «потом» принесло 0 ₽.</span>
         </div>
-        <div class="quiz-res">
-          <p class="qr-count" aria-live="polite"></p>
-          <p class="qr-text">Тапните по пунктам выше — посмотрим, что получится.</p>
-          <button class="btn btn-primary js-open qr-btn" type="button">Хочу зарабатывать онлайн</button>
-        </div>
+        <button class="btn btn-primary js-open" type="button">Хватит терять — начать сейчас</button>
       </div>
     </div>
   </section>
@@ -1638,34 +1620,33 @@
     });
   })();
 
-  // чек-лист «узнаёте себя» на второй странице
+  // счётчик «сколько стоило слово „потом"» на второй странице
   (function(){
-    const quiz=document.querySelector('.quiz');
-    if(!quiz)return;
-    const res=quiz.querySelector('.quiz-res');
-    const cnt=quiz.querySelector('.qr-count');
-    const txt=quiz.querySelector('.qr-text');
-    const total=quiz.querySelectorAll('.q-item').length;
-    quiz.addEventListener('click',e=>{
-      const b=e.target.closest('.q-item');
-      if(!b)return;
-      b.classList.toggle('sel');
-      const n=quiz.querySelectorAll('.q-item.sel').length;
-      res.classList.toggle('on',n>0);
-      if(n===0){
-        cnt.textContent='';
-        txt.innerHTML='Тапните по пунктам выше — посмотрим, что получится.';
+    const r=document.getElementById('lost-range');
+    if(!r)return;
+    const mEl=document.getElementById('lost-m');
+    const sumEl=document.getElementById('lost-sum');
+    const noteEl=document.getElementById('lost-note');
+    const PER_MONTH=45000; // 3 клиента × 15 000 ₽
+    function upd(){
+      const m=+r.value;
+      r.style.setProperty('--fill',((m-1)/23*100)+'%');
+      mEl.textContent=m+' мес';
+      // первый месяц ушёл бы на курс, зарабатывать начал бы со второго
+      const sum=Math.max(0,m-1)*PER_MONTH;
+      sumEl.textContent=sum.toLocaleString('ru-RU')+' ₽';
+      if(m===1){
+        noteEl.textContent='Пока потеряно почти ничего. Лучший момент начать — сейчас.';
+      }else if(m<12){
+        noteEl.textContent='3 клиента × 15 000 ₽ уже со второго месяца. А слово «потом» принесло 0 ₽.';
+      }else if(m<20){
+        noteEl.textContent='За год раздумий — минус полмиллиона. Следующий год пройдёт так же, если ничего не поменять.';
       }else{
-        cnt.textContent=n+' из '+total+' — про вас';
-        if(n===1){
-          txt.innerHTML='Уже что-то. Обычно таких пунктов больше — пройдитесь по списку честно.';
-        }else if(n<=3){
-          txt.innerHTML='Знакомая картина. Проблема не в вас — вам просто никто не показал <b>систему</b>. Таргет ВКонтакте — заработок онлайн без вложений в товар и склады: клиенты платят за настройку рекламы.';
-        }else{
-          txt.innerHTML='Всё честно: вы <b>давно готовы</b> зарабатывать онлайн — не хватает только профессии в руках. Ровно это вы получите за 1 месяц на курсе.';
-        }
+        noteEl.textContent='Почти миллион прошёл мимо. Сколько ещё двигать этот ползунок?';
       }
-    });
+    }
+    r.addEventListener('input',upd);
+    upd();
   })();
 
   // модалка
