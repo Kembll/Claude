@@ -567,23 +567,47 @@
   .glass-wrap.shk{animation:ceilshake .25s}
   @keyframes ceilshake{0%,100%{transform:translateX(0)}30%{transform:translateX(-5px)}
     65%{transform:translateX(4px)}}
-  .glass{position:absolute;left:0;right:0;top:24px;height:14px;border-radius:8px;
-    background:linear-gradient(180deg,rgba(190,225,255,.30),rgba(140,190,240,.12) 55%,rgba(190,225,255,.22));
-    border:1px solid rgba(200,230,255,.35);transition:opacity .25s;
-    box-shadow:0 2px 18px rgba(120,180,255,.25),inset 0 1px 0 rgba(255,255,255,.35)}
-  .glass::after{content:'';position:absolute;left:8%;top:2px;width:30%;height:3px;
-    border-radius:99px;background:rgba(255,255,255,.5);filter:blur(1px)}
+  .glass{position:absolute;left:0;right:0;top:21px;height:20px;border-radius:10px;
+    overflow:hidden;transition:opacity .25s;
+    background:linear-gradient(180deg,
+      rgba(232,246,255,.40) 0%,rgba(170,215,255,.16) 30%,
+      rgba(118,172,232,.09) 58%,rgba(190,228,255,.28) 100%);
+    border:1px solid rgba(212,236,255,.5);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.55),inset 0 -1px 0 rgba(150,200,250,.35),
+      0 6px 26px rgba(120,180,255,.28),0 0 46px -6px rgba(33,160,255,.35)}
+  /* верхняя кромка-блик */
+  .glass::after{content:'';position:absolute;left:6px;right:6px;top:2px;height:4px;
+    border-radius:99px;background:linear-gradient(90deg,transparent,
+      rgba(255,255,255,.55) 30%,rgba(255,255,255,.18) 70%,transparent)}
+  /* бегающий отблеск по стеклу */
+  .glass::before{content:'';position:absolute;top:0;bottom:0;left:-30%;width:22%;
+    transform:skewX(-20deg);animation:glasshine 3.4s ease-in-out infinite;
+    background:linear-gradient(100deg,transparent,rgba(255,255,255,.6),transparent)}
+  @keyframes glasshine{0%,55%{left:-30%}90%,100%{left:115%}}
   .cracks{position:absolute;inset:0;width:100%;height:100%}
-  .cracks path,.cracks circle{stroke:rgba(228,243,255,.9);stroke-width:1.6;fill:none;
-    stroke-linecap:round}
+  .cracks path,.cracks circle{stroke:rgba(232,245,255,.92);stroke-width:1.7;fill:none;
+    stroke-linecap:round;stroke-linejoin:round;
+    filter:drop-shadow(0 0 3px rgba(159,219,255,.55))}
+  .cracks .web{stroke-width:1.1;stroke:rgba(210,236,255,.68)}
+  .flash{position:absolute;left:50%;top:31px;width:16px;height:16px;border-radius:50%;
+    pointer-events:none;transform:translate(-50%,-50%) scale(.4);
+    background:radial-gradient(circle,rgba(255,255,255,.95),rgba(159,219,255,.4) 55%,transparent 72%);
+    animation:flashpop .4s ease-out forwards}
+  @keyframes flashpop{from{opacity:1;transform:translate(-50%,-50%) scale(.4)}
+    to{opacity:0;transform:translate(-50%,-50%) scale(3.4)}}
   .cr1,.cr2{opacity:0;transition:opacity .12s}
   .ceil-zone.s1 .cr1{opacity:1}
   .ceil-zone.s2 .cr2{opacity:1}
   .ceil-zone.broken .glass,.ceil-zone.broken .cracks{opacity:0}
   .shard{position:absolute;left:50%;top:31px;width:11px;height:6px;border-radius:2px;
-    background:linear-gradient(180deg,rgba(200,230,255,.85),rgba(140,190,240,.4));
-    animation:shardfly .8s ease-out forwards}
-  @keyframes shardfly{from{opacity:.95;transform:translate(-50%,-50%)}
+    background:linear-gradient(160deg,rgba(235,248,255,.95),rgba(160,205,250,.45) 60%,rgba(120,175,235,.3));
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6);
+    animation:shardfly .9s cubic-bezier(.2,.6,.4,1) forwards}
+  .shard.tri{border-radius:1px;clip-path:polygon(0 0,100% 18%,62% 100%)}
+  .spark{position:absolute;left:50%;top:31px;width:3px;height:3px;border-radius:50%;
+    background:#EAF7FF;box-shadow:0 0 8px rgba(159,219,255,.95);
+    animation:shardfly .7s ease-out forwards}
+  @keyframes shardfly{from{opacity:.98;transform:translate(-50%,-50%)}
     to{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--rot))}}
   .sal{display:block}
   .sal b{display:inline-block;font-family:var(--mono);font-size:42px;font-weight:500;
@@ -889,7 +913,7 @@
     .pains .sec-head h2{font-size:22px}
     .ceil-zone{padding:20px 16px 18px;border-radius:18px}
     .glass-wrap{height:54px}
-    .glass{top:20px;height:12px}
+    .glass{top:17px;height:17px}
     .sal b{font-size:32px}
     .sal-l{font-size:12px}
     .ceil-hint{margin-top:10px;font-size:10.5px}
@@ -1136,11 +1160,22 @@
             <i class="glass" aria-hidden="true"></i>
             <svg class="cracks" viewBox="0 0 400 64" aria-hidden="true">
               <g class="cr1">
-                <path d="M200 31 L163 13"/><path d="M200 31 L238 49"/><path d="M200 31 L187 55"/>
+                <path d="M200 31 l-13 -6 l-13 -8 l-12 -4"/>
+                <path d="M200 31 l12 7 l15 4 l12 8"/>
+                <path d="M200 31 l-3 11 l-9 9"/>
+                <path class="web" d="M186 22 l9 -4 l11 2"/>
               </g>
               <g class="cr2">
-                <path d="M200 31 L118 25"/><path d="M200 31 L270 15"/><path d="M200 31 L298 44"/>
-                <path d="M200 31 L146 52"/><path d="M200 31 L232 8"/><circle cx="200" cy="31" r="7"/>
+                <path d="M200 31 l-23 -2 l-21 5 l-22 -3"/>
+                <path d="M200 31 l17 -9 l21 -5 l25 3"/>
+                <path d="M200 31 l7 12 l17 8 l24 4"/>
+                <path d="M200 31 l-15 11 l-19 6"/>
+                <path d="M200 31 l5 -12 l11 -8"/>
+                <path class="web" d="M177 27 l8 8 l-3 10"/>
+                <path class="web" d="M223 24 l-5 10 l7 9"/>
+                <path class="web" d="M164 20 l6 10 l-6 11"/>
+                <path class="web" d="M244 20 l-4 12 l8 10"/>
+                <circle cx="200" cy="31" r="4.5"/>
               </g>
             </svg>
           </span>
@@ -1761,18 +1796,31 @@
       stage++;
       try{navigator.vibrate&&navigator.vibrate(30)}catch(e){}
       wrap.classList.remove('shk');void wrap.offsetWidth;wrap.classList.add('shk');
+      // вспышка в точке удара
+      const f=document.createElement('i');f.className='flash';
+      wrap.appendChild(f);setTimeout(()=>f.remove(),450);
       if(stage===1){z.classList.add('s1');hint.textContent='пошла трещина — ещё раз';}
       else if(stage===2){z.classList.add('s2');hint.textContent='ещё один тап!';}
       else{
         z.classList.add('broken');
         hint.textContent='';
-        for(let i=0;i<14;i++){
+        // осколки: падают вниз, часть подлетает; треугольные + искры
+        for(let i=0;i<18;i++){
           const s=document.createElement('i');
-          s.className='shard';
-          const a=Math.random()*Math.PI*2,d=44+Math.random()*120;
-          s.style.setProperty('--dx',Math.cos(a)*d+'px');
-          s.style.setProperty('--dy',(Math.sin(a)*d*.6-30)+'px');
-          s.style.setProperty('--rot',(Math.random()*240-120)+'deg');
+          s.className='shard'+(Math.random()<.45?' tri':'');
+          s.style.width=(6+Math.random()*10)+'px';
+          s.style.height=(4+Math.random()*6)+'px';
+          s.style.setProperty('--dx',(Math.random()*280-140)+'px');
+          s.style.setProperty('--dy',(Math.random()<.3?-(20+Math.random()*40):20+Math.random()*120)+'px');
+          s.style.setProperty('--rot',(Math.random()*300-150)+'deg');
+          wrap.appendChild(s);
+        }
+        for(let i=0;i<8;i++){
+          const s=document.createElement('i');
+          s.className='spark';
+          s.style.setProperty('--dx',(Math.random()*220-110)+'px');
+          s.style.setProperty('--dy',(Math.random()*120-60)+'px');
+          s.style.setProperty('--rot','0deg');
           wrap.appendChild(s);
         }
         // цифра растёт: 50 000 → 150 000+
