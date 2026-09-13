@@ -600,19 +600,12 @@
   @keyframes hintpulse{0%,100%{opacity:1}50%{opacity:.45}}
   .ceil-res{max-height:0;overflow:hidden;opacity:0;margin-top:0;
     transition:max-height .5s ease,opacity .5s ease,margin-top .5s ease}
-  .ceil-res.on{max-height:300px;opacity:1;margin-top:18px}
+  .ceil-res.on{max-height:640px;opacity:1;margin-top:18px}
   .ceil-res p{font-size:15.5px;line-height:1.6;color:#C8DCF4}
   .ceil-res .btn{margin-top:16px}
 
-  /* ===== тест «подходит ли вам таргет» (3 вопроса + вердикт) ===== */
-  .ttest{position:relative;padding:88px 0}
-  .ttest::before{content:'';position:absolute;inset:0;pointer-events:none;
-    background:radial-gradient(circle 560px at 70% 30%,rgba(33,160,255,.10),transparent 62%),
-      radial-gradient(circle 480px at 18% 78%,rgba(91,200,255,.08),transparent 65%)}
-  .ttest .wrap{position:relative;z-index:1}
-  .ttest .sec-head{max-width:720px;margin:0 auto 36px;text-align:center}
-  .ttest .sec-head p{margin-left:auto;margin-right:auto}
-  .tq{max-width:560px;margin:0 auto;padding:26px 28px 28px;border-radius:24px;
+  /* ===== тест «подходит ли вам таргет» (появляется после разбитого потолка) ===== */
+  .tq{max-width:560px;margin:16px auto 0;padding:26px 28px 28px;border-radius:24px;
     border:1px solid var(--line);
     background:linear-gradient(160deg,rgba(16,42,74,.55),rgba(7,24,44,.7))}
   .tq-top{display:flex;align-items:center;gap:14px;margin-bottom:22px}
@@ -904,10 +897,7 @@
     .ceil-res p{font-size:13.5px}
     .ceil-res .btn{margin-top:12px;width:100%}
     /* тест на мобиле */
-    .ttest{padding:56px 0 60px}
-    .ttest .sec-head{margin-bottom:20px}
-    .ttest .sec-head h2{font-size:22px}
-    .tq{padding:18px 16px 20px;border-radius:18px}
+    .tq{padding:18px 16px 20px;border-radius:18px;margin-top:10px}
     .tq-top{margin-bottom:16px;gap:10px}
     .tp-step{font-size:10.5px}
     .ts h3{font-size:16px;margin-bottom:12px}
@@ -1161,54 +1151,42 @@
           <span class="ceil-hint" id="ceil-hint">тапните по потолку</span>
         </button>
         <div class="ceil-res" id="ceil-res">
-          <p>В найме потолок не пробить — его высоту решает начальник.<br>
-            В таргете потолка нет: больше клиентов — выше доход.</p>
-          <button class="btn btn-primary js-open" type="button">Выйти из-под потолка</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- тест «подходит ли вам таргет»: 3 вопроса, вердикт, CTA -->
-  <section class="ttest" id="fit-test" aria-label="Тест: подходит ли вам таргет">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <span class="sec-label">Тест · 30 секунд</span>
-        <h2>Подходит ли вам таргет?</h2>
-        <p>Три вопроса — и честный расклад, что вас ждёт</p>
-      </div>
-      <div class="tq reveal">
-        <div class="tq-top">
-          <span class="tp-step">Вопрос 1 из 3</span>
-          <i class="tp-track" aria-hidden="true"><b class="tp-fill"></b></i>
-        </div>
-        <div class="ts on">
-          <h3>Сколько времени сможете уделять в день?</h3>
-          <button class="ta" data-i="0" type="button">1–2 часа после работы</button>
-          <button class="ta" data-i="1" type="button">3–4 часа</button>
-          <button class="ta" data-i="2" type="button">Готов(а) погрузиться полностью</button>
-        </div>
-        <div class="ts">
-          <h3>Есть опыт в рекламе?</h3>
-          <button class="ta" data-i="0" type="button">Нет, полный ноль</button>
-          <button class="ta" data-i="1" type="button">Немного разбираюсь</button>
-          <button class="ta" data-i="2" type="button">Уже пробовал(а) настраивать</button>
-        </div>
-        <div class="ts">
-          <h3>Какой доход нужен через 3 месяца?</h3>
-          <button class="ta" data-i="0" type="button">30–50 тысяч ₽</button>
-          <button class="ta" data-i="1" type="button">50–100 тысяч ₽</button>
-          <button class="ta" data-i="2" type="button">100+ тысяч ₽</button>
-        </div>
-        <div class="t-res">
-          <p class="tr-v">Таргет вам подходит</p>
-          <ul>
-            <li id="tr-time"></li>
-            <li id="tr-exp"></li>
-            <li id="tr-inc"></li>
-          </ul>
-          <button class="btn btn-primary js-open" type="button">Занять место в потоке</button>
-          <span class="tr-note">Поток №1 · старт 30 сентября · 15 мест</span>
+          <p>В найме потолок не пробить — его высоту решает начальник.
+            В таргете потолка нет. Проверим, подходит ли он вам — 3 вопроса:</p>
+          <div class="tq" id="fit-test">
+            <div class="tq-top">
+              <span class="tp-step">Вопрос 1 из 3</span>
+              <i class="tp-track" aria-hidden="true"><b class="tp-fill"></b></i>
+            </div>
+            <div class="ts on">
+              <h3>Сколько времени сможете уделять в день?</h3>
+              <button class="ta" data-i="0" type="button">1–2 часа после работы</button>
+              <button class="ta" data-i="1" type="button">3–4 часа</button>
+              <button class="ta" data-i="2" type="button">Готов(а) погрузиться полностью</button>
+            </div>
+            <div class="ts">
+              <h3>Есть опыт в рекламе?</h3>
+              <button class="ta" data-i="0" type="button">Нет, полный ноль</button>
+              <button class="ta" data-i="1" type="button">Немного разбираюсь</button>
+              <button class="ta" data-i="2" type="button">Уже пробовал(а) настраивать</button>
+            </div>
+            <div class="ts">
+              <h3>Какой доход нужен через 3 месяца?</h3>
+              <button class="ta" data-i="0" type="button">30–50 тысяч ₽</button>
+              <button class="ta" data-i="1" type="button">50–100 тысяч ₽</button>
+              <button class="ta" data-i="2" type="button">100+ тысяч ₽</button>
+            </div>
+            <div class="t-res">
+              <p class="tr-v">Таргет вам подходит</p>
+              <ul>
+                <li id="tr-time"></li>
+                <li id="tr-exp"></li>
+                <li id="tr-inc"></li>
+              </ul>
+              <button class="btn btn-primary js-open" type="button">Занять место в потоке</button>
+              <span class="tr-note">Поток №1 · старт 30 сентября · 15 мест</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
