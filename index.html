@@ -595,6 +595,15 @@
   .way-new .day b{color:var(--cyan)}
   .way-old .day li:last-child span{font-style:italic}
   .way-new .day li:last-child span{color:#fff;font-weight:600}
+  /* график-развилка доходов: полка найма против растущей ветки таргета */
+  .fork{max-width:860px;margin:0 auto;text-align:center}
+  .fork svg{width:100%;height:auto;display:block;overflow:visible}
+  .fk-ax{font-family:var(--mono);font-size:13px;fill:#66788F;letter-spacing:.06em}
+  .fk-here{font-family:var(--mono);font-size:13.5px;fill:var(--cyan);letter-spacing:.1em;
+    text-transform:uppercase}
+  .fk-old{font-size:15px;fill:#7A8CA3}
+  .fk-new{font-size:17px;font-weight:600;fill:#EAF4FF}
+  .fork .btn{margin-top:30px}
 
   /* ===== секция срочности (таймер + скидка −50%) на десктопе и планшете ===== */
   @media (min-width:561px){
@@ -853,6 +862,12 @@
     .way li{font-size:13px;padding-left:22px}
     .way .day li{padding:6px 0;gap:10px}
     .way .day b{font-size:11px;flex-basis:38px}
+    /* график на мобиле: подписи крупнее (SVG масштабируется вниз) */
+    .fk-ax{font-size:16px}
+    .fk-here{font-size:16px}
+    .fk-old{font-size:19px}
+    .fk-new{font-size:22px}
+    .fork .btn{margin-top:20px;width:100%}
     .way-new .btn{margin-top:14px;align-self:stretch;width:100%}
     /* компактные тарифы */
     .plans{gap:14px}
@@ -1075,30 +1090,49 @@
         <span class="sec-label">Узнаёте себя?</span>
         <h2>Вы уже поняли, что в найме потолок. Дальше что?</h2>
       </div>
-      <div class="ways">
-        <div class="way way-old reveal">
-          <span class="way-t">Путь 1 · остаться в найме</span>
-          <h3>Обычный вторник</h3>
-          <ul class="day">
-            <li><b>06:30</b><span>Будильник. Подъём через силу</span></li>
-            <li><b>08:15</b><span>Метро или пробки в час пик</span></li>
-            <li><b>09:00</b><span>Офис до вечера. Задачи ставит начальник</span></li>
-            <li><b>19:30</b><span>Дома. Сил хватает только на сериал</span></li>
-            <li><b>23:00</b><span>«Завтра всё то же самое»</span></li>
-          </ul>
-        </div>
-        <div class="way way-new reveal">
-          <span class="way-t">Путь 2 · таргетолог ВКонтакте</span>
-          <h3>Обычный вторник</h3>
-          <ul class="day">
-            <li><b>06:30</b><span>Вы ещё спите — будильник не нужен</span></li>
-            <li><b>08:15</b><span>Кофе. Проверили рекламные кабинеты с телефона</span></li>
-            <li><b>09:00</b><span>2–3 часа работы — из дома или кафе</span></li>
-            <li><b>19:30</b><span>Зал, семья, свои дела — вечер ваш</span></li>
-            <li><b>23:00</b><span>Уведомление: оплата от клиента на карте</span></li>
-          </ul>
-          <button class="btn btn-primary js-open" type="button">Выбираю путь 2</button>
-        </div>
+      <div class="fork reveal">
+        <svg viewBox="0 0 720 300" role="img"
+          aria-label="График дохода: в найме потолок 50 000 ₽, в таргете рост до 150 000 ₽ и выше">
+          <defs>
+            <linearGradient id="fk-line" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#21A0FF"/><stop offset="1" stop-color="#9FDBFF"/>
+            </linearGradient>
+            <linearGradient id="fk-fill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="rgba(33,160,255,.30)"/>
+              <stop offset="1" stop-color="rgba(33,160,255,0)"/>
+            </linearGradient>
+            <filter id="fk-glow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="6"/>
+            </filter>
+          </defs>
+          <!-- сетка: 150к / 50к -->
+          <line x1="95" y1="60"  x2="700" y2="60"  stroke="rgba(126,193,255,.14)" stroke-dasharray="3 6"/>
+          <line x1="95" y1="170" x2="700" y2="170" stroke="rgba(140,160,185,.18)" stroke-dasharray="3 6"/>
+          <text x="85" y="64"  text-anchor="end" class="fk-ax">150 000</text>
+          <text x="85" y="174" text-anchor="end" class="fk-ax">50 000</text>
+          <!-- заливка под растущей веткой -->
+          <path d="M270 170 C420 162,540 118,700 50 L700 262 L270 262 Z" fill="url(#fk-fill)"/>
+          <!-- найм: плоская полка на 50 000 -->
+          <path d="M95 170 L700 170" stroke="#5E7089" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <!-- таргет: ветка вверх (свечение + линия) -->
+          <path d="M270 170 C420 162,540 118,700 50" stroke="rgba(33,160,255,.45)" stroke-width="10"
+            fill="none" filter="url(#fk-glow)"/>
+          <path d="M270 170 C420 162,540 118,700 50" stroke="url(#fk-line)" stroke-width="3.5"
+            fill="none" stroke-linecap="round"/>
+          <!-- точка выбора и конец ветки -->
+          <circle cx="270" cy="170" r="6" fill="#0B1D33" stroke="var(--cyan)" stroke-width="2.5"/>
+          <circle cx="700" cy="50" r="5" fill="#9FDBFF"/>
+          <circle cx="700" cy="50" r="11" fill="rgba(159,219,255,.25)"/>
+          <text x="270" y="200" text-anchor="middle" class="fk-here">вы здесь</text>
+          <!-- подписи веток -->
+          <text x="692" y="190" text-anchor="end" class="fk-old">найм — потолок 50 000 ₽</text>
+          <text x="676" y="36" text-anchor="end" class="fk-new">таргет ВК — 150 000 ₽+</text>
+          <!-- ось времени -->
+          <text x="95" y="292" class="fk-ax">сегодня</text>
+          <text x="420" y="292" text-anchor="middle" class="fk-ax">через 3 мес</text>
+          <text x="700" y="292" text-anchor="end" class="fk-ax">через год</text>
+        </svg>
+        <button class="btn btn-primary js-open" type="button">Выбираю рост дохода</button>
       </div>
     </div>
   </section>
