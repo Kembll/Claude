@@ -1241,12 +1241,12 @@
         <div><b id="cd-m">—</b><span>минут</span></div>
         <div><b id="cd-s">—</b><span>секунд</span></div>
       </div>
-      <p class="mt-sale">Любой тариф <b>990 ₽</b></p>
-      <p class="mt-deadline">Действует до <b>29 сентября</b> — потом полная цена</p>
+      <p class="mt-sale">Скидка <b>−50%</b> на все тарифы</p>
+      <p class="mt-deadline">Действует до <b>29 сентября</b> — потом цены вырастут вдвое</p>
       <div class="mt-prices">
-        <div><span>Сам</span><i></i><s>40 000</s><b>990 ₽</b></div>
-        <div><span>С куратором</span><i></i><s>80 000</s><b>990 ₽</b></div>
-        <div><span>До результата</span><i></i><s>140 000</s><b>990 ₽</b></div>
+        <div><span>Сам</span><i></i><s>40 000</s><b>19 990 ₽</b></div>
+        <div><span>С куратором</span><i></i><s>80 000</s><b>39 990 ₽</b></div>
+        <div><span>До результата</span><i></i><s>140 000</s><b>69 990 ₽</b></div>
       </div>
       <p class="mt-note">В первом потоке всего 15 мест</p>
       <button class="btn btn-primary js-open" type="button">Занять место со скидкой</button>
@@ -1407,8 +1407,8 @@
         <div class="card plan reveal">
           <h3>Сам</h3>
           <p class="who">Если уже пробовали рекламу — дам базу и систему</p>
-          <p class="price">990 ₽<s>40 000 ₽</s><span class="save">−97%</span></p>
-          <p class="save-note">Экономия 39 000 ₽ — до 29 сентября</p>
+          <p class="price">19 990 ₽<s>40 000 ₽</s><span class="save">−50%</span></p>
+          <p class="save-note">Экономия 20 000 ₽ — до 29 сентября</p>
           <ul>
             <li>24 урока с доступом навсегда — в своём темпе</li>
             <li>Через 30 дней запускаете рекламу сами</li>
@@ -1421,8 +1421,8 @@
         <div class="card plan featured reveal">
           <h3>С куратором</h3>
           <p class="who">Если начинаете с нуля — выбор 9 из 10 учеников</p>
-          <p class="price">990 ₽<s>80 000 ₽</s><span class="save">−98%</span></p>
-          <p class="save-note">Экономия 79 000 ₽ — до 29 сентября</p>
+          <p class="price">39 990 ₽<s>80 000 ₽</s><span class="save">−50%</span></p>
+          <p class="save-note">Экономия 40 000 ₽ — до 29 сентября</p>
           <ul>
             <li>Всё из тарифа «Сам»</li>
             <li>Куратор проверяет каждый шаг — не дадим слить бюджет</li>
@@ -1435,8 +1435,8 @@
         <div class="card plan reveal">
           <h3>До результата</h3>
           <p class="who">Если нужен гарантированный первый клиент</p>
-          <p class="price">990 ₽<s>140 000 ₽</s><span class="save">−99%</span></p>
-          <p class="save-note">Экономия 139 000 ₽ — до 29 сентября</p>
+          <p class="price">69 990 ₽<s>140 000 ₽</s><span class="save">−50%</span></p>
+          <p class="save-note">Экономия 70 000 ₽ — до 29 сентября</p>
           <ul>
             <li>Всё из тарифа «С куратором»</li>
             <li>4 личные сессии с наставником один на один</li>
@@ -1695,9 +1695,9 @@
     const pay=document.getElementById('calc-payback');
     const note=document.getElementById('calc-note');
     const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const PRICE=990, CHECK=15000;
+    const PRICE=39990, CHECK=15000;
     const notes={
-      1:'Один клиент — спокойный старт: курс за 990 ₽ окупается с первой же оплаты.',
+      1:'Один клиент — спокойный старт: курс окупается за первые три месяца.',
       2:'Два клиента — 30 000 ₽ в месяц всего при ≈2 часах работы в день.',
       3:'Три клиента — комфортная загрузка новичка при 3–4 часах в день.',
       4:'Четыре клиента — 60 000 ₽ в месяц, уровень уверенного специалиста.',
