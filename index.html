@@ -508,6 +508,12 @@
   .plan-gar{font-size:13px;font-weight:600;color:var(--cyan);text-align:center;
     background:rgba(33,160,255,.10);border:1px solid var(--line);border-radius:12px;
     padding:10px 14px;margin:-14px 0 16px}
+  /* подарок старшего тарифа — выделен ярче обычной плашки */
+  .plan-gift{font-size:13.5px;font-weight:600;color:#fff;text-align:center;
+    background:linear-gradient(120deg,rgba(33,160,255,.32),rgba(11,111,216,.26));
+    border:1px solid var(--line-strong);border-radius:12px;
+    box-shadow:0 0 30px -10px var(--glow);
+    padding:11px 14px;margin:-8px 0 16px}
 
   /* ================= блок 5: финал + форма ================= */
   .final{position:relative;overflow:hidden}
@@ -997,7 +1003,7 @@
     .plan .who{font-size:12.5px;margin-bottom:12px}
     .price{font-size:26px;margin-bottom:2px}
     .save-note{font-size:11.5px;margin:0 0 12px}
-    .plan-gar{font-size:12px;padding:8px 10px;margin:-6px 0 12px}
+    .plan-gar,.plan-gift{font-size:12px;padding:8px 10px;margin:-6px 0 12px}
     .plan ul{gap:6px;margin-bottom:14px}
     .plan li{font-size:13px;padding-left:21px}
     .plans-note{font-size:11.5px}
@@ -1303,7 +1309,7 @@
       <p class="mt-deadline">Действует до <b>29 сентября</b> — потом цены вырастут вдвое</p>
       <div class="mt-prices">
         <div><span>С куратором</span><i></i><s>80 000</s><b>39 990 ₽</b></div>
-        <div><span>До результата</span><i></i><s>140 000</s><b>69 990 ₽</b></div>
+        <div><span>VIP</span><i></i><s>140 000</s><b>69 990 ₽</b></div>
       </div>
       <p class="mt-note">В первом потоке всего 15 мест</p>
       <div class="seats" aria-hidden="true"><i style="animation-delay:0.00s"></i><i style="animation-delay:-0.16s"></i><i style="animation-delay:-0.32s"></i><i style="animation-delay:-0.48s"></i><i style="animation-delay:-0.64s"></i><i style="animation-delay:-0.80s"></i><i style="animation-delay:-0.96s"></i><i style="animation-delay:-1.12s"></i><i style="animation-delay:-1.28s"></i><i style="animation-delay:-1.44s"></i><i style="animation-delay:-1.60s"></i><i style="animation-delay:-1.76s"></i><i style="animation-delay:-1.92s"></i><i style="animation-delay:-2.08s"></i><i style="animation-delay:-2.24s"></i></div>
@@ -1496,8 +1502,8 @@
           <button class="btn btn-primary js-open" data-plan="С куратором" type="button">Выбрать «С куратором»</button>
         </div>
         <div class="card plan reveal">
-          <h3>До результата</h3>
-          <p class="who">Если нужен гарантированный первый клиент</p>
+          <h3>VIP</h3>
+          <p class="who">Если нужен наставник и после выпуска</p>
           <p class="price">69 990 ₽<s>140 000 ₽</s><span class="save">−50%</span></p>
           <p class="save-note">Экономия 70 000 ₽ — до 29 сентября</p>
           <ul>
@@ -1505,10 +1511,10 @@
             <li>4 личные сессии со мной один на один</li>
             <li>Упаковка профиля — клиенты находят вас сами</li>
             <li>Первого клиента доводим до оплаты вместе</li>
-            <li>3 месяца поддержки после выпуска</li>
+            <li>Разбираю ваши переговоры и помогаю назвать цену</li>
           </ul>
-          <p class="plan-gar">Не довели до первого клиента — работаем дальше бесплатно</p>
-          <button class="btn btn-ghost js-open" data-plan="До результата" type="button">Выбрать «До результата»</button>
+          <p class="plan-gift">+ 2 месяца наставничества после выпуска — в подарок</p>
+          <button class="btn btn-ghost js-open" data-plan="VIP" type="button">Выбрать VIP</button>
         </div>
       </div>
       <p class="plans-note reveal">Оплата после личного созвона · Безопасная оплата · Возврат в течение 14 дней</p>
@@ -1919,7 +1925,7 @@
             'Опыт настройки — ваша фора: останется добрать клиентов и упаковать кейсы.'],
       inc: ['30–50 тысяч — это 2–3 клиента по 15 000 ₽. Реально в первый месяц после курса.',
             '50–100 тысяч — 4–6 клиентов. Рабочая цель на 2–3-й месяц после курса.',
-            '100+ тысяч — уровень, к которому ведёт тариф «До результата»: работаем, пока не выйдете на доход.']
+            '100+ тысяч — уровень, к которому ведёт тариф VIP: веду вас ещё два месяца после курса.']
     };
     t.addEventListener('click',e=>{
       const b=e.target.closest('.ta');
