@@ -508,12 +508,12 @@
   .plan-gar{font-size:13px;font-weight:600;color:var(--cyan);text-align:center;
     background:rgba(33,160,255,.10);border:1px solid var(--line);border-radius:12px;
     padding:10px 14px;margin:-14px 0 16px}
-  /* подарок старшего тарифа — выделен ярче обычной плашки */
-  .plan-gift{font-size:13.5px;font-weight:600;color:#fff;text-align:center;
-    background:linear-gradient(120deg,rgba(33,160,255,.32),rgba(11,111,216,.26));
-    border:1px solid var(--line-strong);border-radius:12px;
-    box-shadow:0 0 30px -10px var(--glow);
-    padding:11px 14px;margin:-8px 0 16px}
+  /* подарок старшего тарифа: текстовый акцент, не похожий на кнопку */
+  .plan-gift{position:relative;text-align:left;font-size:14px;line-height:1.45;
+    font-weight:600;color:#fff;margin:-4px 0 18px;padding-top:15px;
+    border-top:1px dashed rgba(126,193,255,.3)}
+  .plan-gift span{display:block;margin-bottom:5px;font-family:var(--mono);
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan)}
 
   /* ================= блок 5: финал + форма ================= */
   .final{position:relative;overflow:hidden}
@@ -1003,7 +1003,9 @@
     .plan .who{font-size:12.5px;margin-bottom:12px}
     .price{font-size:26px;margin-bottom:2px}
     .save-note{font-size:11.5px;margin:0 0 12px}
-    .plan-gar,.plan-gift{font-size:12px;padding:8px 10px;margin:-6px 0 12px}
+    .plan-gar{font-size:12px;padding:8px 10px;margin:-6px 0 12px}
+    .plan-gift{font-size:13px;padding-top:12px;margin:-2px 0 14px}
+    .plan-gift span{font-size:10px;margin-bottom:4px}
     .plan ul{gap:6px;margin-bottom:14px}
     .plan li{font-size:13px;padding-left:21px}
     .plans-note{font-size:11.5px}
@@ -1513,7 +1515,7 @@
             <li>Первого клиента доводим до оплаты вместе</li>
             <li>Разбираю ваши переговоры и помогаю назвать цену</li>
           </ul>
-          <p class="plan-gift">+ 2 месяца наставничества после выпуска — в подарок</p>
+          <p class="plan-gift"><span>подарок</span>2 месяца наставничества после выпуска</p>
           <button class="btn btn-ghost js-open" data-plan="VIP" type="button">Выбрать VIP</button>
         </div>
       </div>
