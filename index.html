@@ -485,6 +485,25 @@
     font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
     background:linear-gradient(120deg,var(--electric),var(--cyan));color:#fff;padding:5px 14px;border-radius:100px}
   .plan h3{font-family:var(--display);font-weight:500;font-size:19px;margin-bottom:6px;color:#fff}
+  /* VIP — старший тариф: тёплый премиальный акцент, чтобы не спорить с синим «выбором потока» */
+  .plan.vip{position:relative;
+    background:linear-gradient(165deg,rgba(74,58,28,.34),rgba(24,20,14,.30)),
+               linear-gradient(160deg,rgba(16,34,60,.92),rgba(7,20,38,.96));
+    border-color:rgba(226,190,120,.42);
+    box-shadow:0 0 58px -20px rgba(226,190,120,.55),0 30px 70px -30px rgba(0,0,0,.7)}
+  .plan.vip::before{content:'максимум';position:absolute;top:-13px;left:26px;
+    font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    background:linear-gradient(120deg,#C79B52,#F0D49A);color:#22160A;
+    padding:5px 14px;border-radius:100px}
+  .plan.vip h3{background:linear-gradient(100deg,#F0D49A 10%,#E2BE78 60%,#C79B52);
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .plan.vip li::before{color:#E2BE78}
+  .plan.vip .save{color:#F0D49A;background:rgba(226,190,120,.14);border-color:rgba(226,190,120,.35)}
+  .plan.vip .save-note{color:#E2BE78}
+  .plan.vip .plan-gift{border-top-color:rgba(226,190,120,.4)}
+  .plan.vip .plan-gift span{color:#E2BE78}
+  .plan.vip .btn{border-color:rgba(226,190,120,.5);background:rgba(226,190,120,.12)}
+  .plan.vip .btn:hover{background:rgba(226,190,120,.22);box-shadow:0 12px 30px -12px rgba(226,190,120,.5)}
   /* тариф в состоянии «скоро»: программа ещё готовится */
   .plan.soon{position:relative;background:linear-gradient(160deg,rgba(20,32,50,.6),rgba(9,18,32,.72));
     border-style:dashed;border-color:rgba(126,193,255,.22)}
@@ -1503,7 +1522,7 @@
           </ul>
           <button class="btn btn-primary js-open" data-plan="С куратором" type="button">Выбрать «С куратором»</button>
         </div>
-        <div class="card plan reveal">
+        <div class="card plan vip reveal">
           <h3>VIP</h3>
           <p class="who">Если нужен наставник и после выпуска</p>
           <p class="price">69 990 ₽<s>140 000 ₽</s><span class="save">−50%</span></p>
