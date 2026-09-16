@@ -65,7 +65,11 @@
     backdrop-filter:blur(18px);
     border-bottom-color:var(--line);
   }
-  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .nav{position:relative;display:flex;align-items:center;justify-content:space-between;height:74px}
+  /* меню строго по центру страницы, независимо от ширины логотипа и кнопки */
+  @media (min-width:1021px){
+    .nav-links{position:absolute;left:50%;transform:translateX(-50%)}
+  }
   .logo{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:500;font-size:16px;letter-spacing:.02em}
   .logo div{line-height:1.15}
   .logo div span{display:block;margin-top:2px;font-family:var(--body);font-weight:400;
