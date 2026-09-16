@@ -41,6 +41,7 @@ jobs:
             cat index.html
             printf '%s\n' '</html>'
           } > _site/index.html
+          [ -f privacy.html ] && cp privacy.html _site/privacy.html || true
           [ -d assets ] && cp -r assets _site/assets || true
 
       - uses: actions/configure-pages@v5

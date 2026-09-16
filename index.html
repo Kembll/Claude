@@ -601,6 +601,10 @@
 
   footer{padding:42px 0;font-size:13.5px;color:var(--muted);border-top:1px solid var(--line)}
   .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  .f-legal a{color:var(--muted);border-bottom:1px solid rgba(126,193,255,.22);transition:color .2s,border-color .2s}
+  .f-legal a:hover{color:var(--cyan);border-color:var(--cyan)}
+  .form-note a{color:var(--cyan);border-bottom:1px solid rgba(79,195,255,.35)}
+  .form-note a:hover{border-color:var(--cyan)}
 
   /* ---------- модалка ---------- */
   .modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:24px}
@@ -1631,7 +1635,7 @@
             <input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required>
           </div>
           <button class="btn btn-primary" type="submit" style="width:100%">Отправить заявку</button>
-          <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных</p>
+          <p class="form-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a></p>
           <div class="form-ok">
             <div class="ok-ic">✓</div>
             <b>Заявка отправлена!</b>
@@ -1660,9 +1664,9 @@
       <a href="#plans">Тарифы</a>
       <a href="#faq">Вопросы</a>
     </nav>
-    <div>
-      <div>hello@targetologia.ru</div>
-      <div>© 2026 · Оферта · Политика конфиденциальности</div>
+    <div class="f-legal">
+      <div><a href="mailto:kembl.work@mail.ru">kembl.work@mail.ru</a></div>
+      <div>© 2026 · <a href="privacy.html">Политика обработки персональных данных</a></div>
     </div>
   </div>
 </footer>
@@ -1684,7 +1688,7 @@
     </div>
     <input type="hidden" name="plan" class="js-plan">
     <button class="btn btn-primary" type="submit" style="width:100%">Отправить заявку</button>
-    <p class="form-note">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных</p>
+    <p class="form-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a></p>
     <div class="form-ok">
       <div class="ok-ic">✓</div>
       <b>Заявка отправлена!</b>
