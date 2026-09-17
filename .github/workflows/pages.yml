@@ -37,10 +37,13 @@ jobs:
             printf '%s\n' '<meta property="og:title" content="Таргетология — экспресс-курс по таргету ВКонтакте">'
             printf '%s\n' '<meta property="og:description" content="От новичка до специалиста за 1 месяц. Практика с первого дня, лучшим ученикам — первые клиенты.">'
             printf '%s\n' '<meta property="og:type" content="website">'
+            printf '%s\n' '<meta property="og:url" content="https://kembll.ru/">'
+            printf '%s\n' '<link rel="canonical" href="https://kembll.ru/">'
             printf '%s\n' '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">'
             cat index.html
             printf '%s\n' '</html>'
           } > _site/index.html
+          [ -f CNAME ] && cp CNAME _site/CNAME || true
           [ -f privacy.html ] && cp privacy.html _site/privacy.html || true
           [ -f offer.html ] && cp offer.html _site/offer.html || true
           [ -d assets ] && cp -r assets _site/assets || true

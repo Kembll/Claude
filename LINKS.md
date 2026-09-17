@@ -1,7 +1,7 @@
 # «Таргетология» — все ссылки проекта
 
 ## Сайт и код
-- Сайт (публичная ссылка для клиентов): https://kembll.github.io/Claude/
+- Сайт (публичная ссылка для клиентов): https://kembll.ru/
 - Репозиторий с кодом: https://github.com/Kembll/Claude
 - Рабочая ветка: https://github.com/Kembll/Claude/tree/claude/targeting-course-website-7cmbmx
 - Деплои (проверить, что публикация прошла): https://github.com/Kembll/Claude/actions
