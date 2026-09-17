@@ -586,10 +586,19 @@
     background:rgba(234,244,255,.06);border:1.5px solid var(--line);border-radius:100px;padding:13px 20px;
     transition:border-color .2s,background .2s,box-shadow .2s;
   }
-  .field input::placeholder{color:#5F7896}
-  .field input:focus{border-color:var(--cyan);background:rgba(234,244,255,.09);outline:none;
+  .field textarea{
+    width:100%;font-family:var(--body);font-size:15.5px;line-height:1.5;color:#fff;
+    background:rgba(234,244,255,.06);border:1.5px solid var(--line);border-radius:18px;padding:13px 20px;
+    resize:vertical;min-height:88px;
+    transition:border-color .2s,background .2s,box-shadow .2s;
+  }
+  .field input::placeholder,.field textarea::placeholder{color:#5F7896}
+  .field input:focus,.field textarea:focus{border-color:var(--cyan);background:rgba(234,244,255,.09);outline:none;
     box-shadow:0 0 26px -8px var(--glow)}
-  .field input.err{border-color:#FF5C7A}
+  .field input.err,.field textarea.err{border-color:#FF5C7A}
+  /* поле вопроса появляется только когда форму открыли из блока FAQ */
+  .q-field{display:none}
+  .form-card.ask .q-field{display:block}
   .form-note{font-size:12px;color:var(--muted);margin-top:14px}
   .form-ok{display:none;text-align:center;padding:28px 6px}
   .form-ok .ok-ic{width:56px;height:56px;border-radius:50%;margin:0 auto 16px;
@@ -991,6 +1000,7 @@
     .field{margin-bottom:10px}
     .field label{font-size:10.5px;margin-bottom:5px}
     .field input{font-size:14.5px;padding:11px 16px}
+    .field textarea{font-size:14.5px;padding:11px 16px;min-height:76px}
     .form-note{font-size:10.5px;margin-top:10px;line-height:1.45}
     /* пузырьки и в секции акции */
     .mob-timer .mob-bubbles{height:64%}
@@ -1601,7 +1611,7 @@
         </div>
         <h3>Не нашли свой вопрос?</h3>
         <p>Оставьте заявку — созвонимся до старта и разберём вашу ситуацию лично: подойдёт ли вам курс, какой тариф выбрать и с чего начать.</p>
-        <button class="btn btn-primary js-open" type="button">Задать вопрос лично</button>
+        <button class="btn btn-primary js-open" data-mode="question" type="button">Задать вопрос лично</button>
         <p class="fc-note">Это ни к чему не обязывает — просто разговор</p>
       </div>
       </div>
@@ -1686,8 +1696,12 @@
       <label for="m-phone">Телефон</label>
       <input id="m-phone" name="phone" type="tel" autocomplete="tel" placeholder="+7 (___) ___-__-__" required>
     </div>
+    <div class="field q-field">
+      <label for="m-q">Ваш вопрос</label>
+      <textarea id="m-q" name="question" rows="3" placeholder="Например: подойдёт ли курс, если я работаю пять дней в неделю?"></textarea>
+    </div>
     <input type="hidden" name="plan" class="js-plan">
-    <button class="btn btn-primary" type="submit" style="width:100%">Отправить заявку</button>
+    <button class="btn btn-primary js-submit" type="submit" style="width:100%">Отправить заявку</button>
     <p class="form-note">Нажимая кнопку, вы соглашаетесь с <a href="privacy.html" target="_blank" rel="noopener">политикой обработки персональных данных</a></p>
     <div class="form-ok">
       <div class="ok-ic">✓</div>
@@ -1987,13 +2001,36 @@
   // модалка
   (function(){
     const modal=document.getElementById('modal');
+    const form=modal.querySelector('.js-form');
     const planInput=modal.querySelector('.js-plan');
     const planNote=modal.querySelector('.js-plan-note');
+    const title=modal.querySelector('#m-title');
+    const submit=modal.querySelector('.js-submit');
+    const okTitle=modal.querySelector('.form-ok b');
+    const okText=modal.querySelector('.form-ok p');
+    // после отправки поля скрыты и виден экран «готово» — при новом открытии возвращаем форму
+    function revive(){
+      form.querySelectorAll('.field,button[type=submit],.form-note,h3,.fp').forEach(el=>el.style.display='');
+      form.querySelector('.form-ok').style.display='none';
+      form.querySelectorAll('.err').forEach(el=>el.classList.remove('err'));
+    }
     document.querySelectorAll('.js-open').forEach(btn=>{
       btn.addEventListener('click',()=>{
         const plan=btn.dataset.plan||'';
-        planInput.value=plan;
-        planNote.textContent=plan?('Тариф «'+plan+'» — менеджер свяжется с вами сегодня'):'Заполните форму — менеджер свяжется с вами сегодня';
+        // режим вопроса — форму открыли из блока FAQ, добавляется поле «Ваш вопрос»
+        const ask=btn.dataset.mode==='question';
+        revive();
+        form.classList.toggle('ask',ask);
+        planInput.value=ask?'Вопрос из FAQ':plan;
+        title.textContent=ask?'Задать вопрос лично':'Занять место на потоке';
+        submit.textContent=ask?'Отправить вопрос':'Отправить заявку';
+        okTitle.textContent=ask?'Вопрос отправлен!':'Заявка отправлена!';
+        okText.textContent=ask
+          ?'Илья ответит лично в течение дня — позвонит или напишет в Telegram'
+          :'Менеджер позвонит вам в течение часа в рабочее время';
+        planNote.textContent=ask
+          ?'Напишите вопрос и оставьте контакт — отвечу лично, это ни к чему не обязывает'
+          :(plan?('Тариф «'+plan+'» — менеджер свяжется с вами сегодня'):'Заполните форму — менеджер свяжется с вами сегодня');
         modal.classList.add('open');
         document.body.style.overflow='hidden';
         // на телефоне автофокус не ставим — иначе сразу выезжает клавиатура
@@ -2046,13 +2083,25 @@
         [name,phone].forEach(f=>f.classList.remove('err'));
         if(name.value.trim().split(/\s+/).length<2){name.classList.add('err');ok=false}
         if(phone.value.replace(/\D/g,'').length<11){phone.classList.add('err');ok=false}
-        if(!ok)return;
         const plan=form.querySelector('input[name=plan]')||form.querySelector('.js-plan');
+        const ask=form.classList.contains('ask');
+        const qBox=form.querySelector('textarea[name=question]');
+        let question='';
+        if(ask&&qBox){
+          qBox.classList.remove('err');
+          question=qBox.value.trim().slice(0,600);
+          if(question.length<5){qBox.classList.add('err');ok=false}
+        }
+        if(!ok)return;
+        // Метку кладём в plan — её уже умеет показывать скрипт заявок,
+        // поэтому и пометка «вопрос», и сам текст видны в Telegram и в таблице.
+        const label=ask?('Вопрос из FAQ: '+question):(plan?plan.value:'');
         // Успех показываем сразу, заявка уходит в фоне (keepalive довезёт).
         sendLead({
           name:name.value.trim(),
           phone:phone.value,
-          plan:plan?plan.value:''
+          plan:label,
+          question:question
         }).catch(err=>console.warn('lead send failed',err));
         form.querySelectorAll('.field,button[type=submit],.form-note,h3,.fp').forEach(el=>el.style.display='none');
         form.querySelector('.form-ok').style.display='block';
