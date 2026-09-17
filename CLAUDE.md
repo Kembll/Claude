@@ -10,7 +10,10 @@
   `<!doctype html>`, `<html lang="ru">`, meta charset/viewport/og и фавикон 🎯
   добавляет workflow `.github/workflows/pages.yml` при сборке.
 - Пуш в ветку `claude/targeting-course-website-7cmbmx` → GitHub Actions →
-  GitHub Pages: **https://kembll.github.io/Claude/** (обновляется за 1–2 минуты).
+  GitHub Pages: **https://kembll.ru/** (обновляется за 1–2 минуты). Домен куплен
+  в Рег.ру, A-записи на 185.199.108–111.153 + CNAME `www` → `kembll.github.io.`,
+  в репозитории файл `CNAME`, в настройках Pages включён Enforce HTTPS. Старый
+  адрес `kembll.github.io/Claude` редиректит на домен.
 - Фото наставника вшито в `index.html` как base64 data-URI (~400 КБ, строка
   очень длинная — Read этого диапазона строк падает по токенам, работать через
   Grep/Edit). Копия фото: `assets/author.jpg`.
