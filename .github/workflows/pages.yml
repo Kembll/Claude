@@ -39,6 +39,7 @@ jobs:
             printf '%s\n' '<meta property="og:type" content="website">'
             printf '%s\n' '<meta property="og:url" content="https://kembll.ru/">'
             printf '%s\n' '<link rel="canonical" href="https://kembll.ru/">'
+            cat metrika.html
             printf '%s\n' '<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>">'
             cat index.html
             printf '%s\n' '</html>'

@@ -2103,6 +2103,8 @@
           plan:label,
           question:question
         }).catch(err=>console.warn('lead send failed',err));
+        // цель в Метрике: отдельно заявка, отдельно вопрос из FAQ
+        try{if(window.ym)ym(112758226,'reachGoal',ask?'question':'lead')}catch(e){}
         form.querySelectorAll('.field,button[type=submit],.form-note,h3,.fp').forEach(el=>el.style.display='none');
         form.querySelector('.form-ok').style.display='block';
       });
