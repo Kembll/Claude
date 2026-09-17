@@ -1665,7 +1665,7 @@
       <a href="#faq">Вопросы</a>
     </nav>
     <div class="f-legal">
-      <div><a href="mailto:kembl.work@mail.ru">kembl.work@mail.ru</a> · <a href="https://t.me/Kembll" target="_blank" rel="noopener">Telegram</a></div>
+      <div><a href="mailto:kembl.work@mail.ru">kembl.work@mail.ru</a> · <a class="js-tg" data-tg="Kembll" href="https://t.me/Kembll" target="_blank" rel="noopener">Telegram</a></div>
       <div>© 2026 · <a href="offer.html">Оферта</a> · <a href="privacy.html">Политика обработки персональных данных</a></div>
     </div>
   </div>
@@ -2056,6 +2056,29 @@
         }).catch(err=>console.warn('lead send failed',err));
         form.querySelectorAll('.field,button[type=submit],.form-note,h3,.fp').forEach(el=>el.style.display='none');
         form.querySelector('.form-ok').style.display='block';
+      });
+    });
+
+    /* Telegram: сначала пробуем открыть приложение (tg://), а если его нет —
+       уходим на веб-страницу t.me. Иначе на десктопе клик всегда упирался
+       в промежуточную страницу с кнопкой «Отправить сообщение». */
+    document.querySelectorAll('a.js-tg').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const user=a.dataset.tg;
+        if(!user)return;
+        e.preventDefault();
+        const web=a.href;
+        let left=false;
+        const onHide=()=>{if(document.hidden)left=true};
+        document.addEventListener('visibilitychange',onHide);
+        const t=Date.now();
+        window.location.href='tg://resolve?domain='+user;
+        setTimeout(()=>{
+          document.removeEventListener('visibilitychange',onHide);
+          if(left||document.hidden||Date.now()-t>1800)return;
+          const w=window.open(web,'_blank','noopener');
+          if(!w)window.location.href=web;
+        },900);
       });
     });
   })();
