@@ -47,6 +47,7 @@ jobs:
           [ -f CNAME ] && cp CNAME _site/CNAME || true
           [ -f privacy.html ] && cp privacy.html _site/privacy.html || true
           [ -f offer.html ] && cp offer.html _site/offer.html || true
+          [ -f psy.html ] && cp psy.html _site/psy.html || true
           [ -d assets ] && cp -r assets _site/assets || true
 
       - uses: actions/configure-pages@v5
